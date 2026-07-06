@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -37,48 +37,50 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-blush: var(--blush);
+  --color-lavender: var(--lavender);
+  --color-mint: var(--mint);
+  --color-butter: var(--butter);
   --color-ink: var(--ink);
-  --color-cream: var(--cream);
-  --color-ember: var(--ember);
-  --color-clay: var(--clay);
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.9rem;
 
-  /* Editorial warm palette */
-  --cream: oklch(0.965 0.018 82);
-  --ink: oklch(0.18 0.02 40);
-  --ember: oklch(0.62 0.18 40);       /* burnt terracotta */
-  --clay: oklch(0.82 0.06 60);        /* muted clay */
+  /* Soft pastel palette */
+  --blush: oklch(0.9 0.045 20);
+  --lavender: oklch(0.87 0.055 300);
+  --mint: oklch(0.9 0.055 165);
+  --butter: oklch(0.94 0.06 90);
+  --ink: oklch(0.24 0.03 285);
 
-  --background: var(--cream);
+  --background: oklch(0.985 0.008 85);
   --foreground: var(--ink);
-  --card: oklch(0.99 0.01 82);
+  --card: oklch(1 0 0);
   --card-foreground: var(--ink);
-  --popover: var(--cream);
+  --popover: oklch(1 0 0);
   --popover-foreground: var(--ink);
   --primary: var(--ink);
-  --primary-foreground: var(--cream);
-  --secondary: oklch(0.92 0.02 75);
+  --primary-foreground: oklch(0.985 0.008 85);
+  --secondary: oklch(0.955 0.025 320);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.93 0.015 78);
-  --muted-foreground: oklch(0.42 0.02 45);
-  --accent: var(--ember);
-  --accent-foreground: var(--cream);
-  --destructive: oklch(0.55 0.22 27);
-  --destructive-foreground: var(--cream);
-  --border: oklch(0.86 0.02 70);
-  --input: oklch(0.88 0.02 70);
-  --ring: var(--ember);
+  --muted: oklch(0.955 0.015 300);
+  --muted-foreground: oklch(0.5 0.03 285);
+  --accent: oklch(0.72 0.13 340); /* soft rose accent */
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.02 300);
+  --input: oklch(0.9 0.02 300);
+  --ring: var(--accent);
 }
 
 .dark {
-  --background: oklch(0.16 0.015 40);
-  --foreground: var(--cream);
-  --card: oklch(0.22 0.02 40);
-  --card-foreground: var(--cream);
-  --primary: var(--cream);
+  --background: oklch(0.18 0.02 285);
+  --foreground: oklch(0.97 0.01 90);
+  --card: oklch(0.22 0.02 285);
+  --card-foreground: oklch(0.97 0.01 90);
+  --primary: oklch(0.97 0.01 90);
   --primary-foreground: var(--ink);
   --border: oklch(1 0 0 / 12%);
 }
@@ -90,29 +92,14 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: var(--ember); color: var(--cream); }
+  ::selection { background: var(--accent); color: var(--accent-foreground); }
 }
 
 @utility font-display {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
-}
-
-@utility grain {
-  position: relative;
-}
-@utility grain-overlay {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
-  mix-blend-mode: multiply;
 }
 
 @keyframes marquee {
@@ -129,4 +116,27 @@
 }
 @utility animate-rise {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -25px) scale(1.05); }
+}
+@utility animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-25px, 20px) scale(1.08); }
+}
+@utility animate-float-slower {
+  animation: float-slower 18s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@utility animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
 }

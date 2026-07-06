@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from "lucide-react";
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
@@ -15,18 +15,16 @@ const caseStudies = [
   { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
 ];
 
-const process = [
-  { step: "01", label: "Discover", items: ["User Interviews", "Competitive Analysis", "Stakeholder Workshops", "Research"] },
-  { step: "02", label: "Define", items: ["Problem Statements", "Journey Mapping", "Personas", "Information Architecture"] },
-  { step: "03", label: "Ideate", items: ["Crazy 8s", "Brainstorming", "Wireframes", "Concept Validation"] },
-  { step: "04", label: "Design", items: ["UI Design", "Interaction Design", "Design Systems", "Accessibility"] },
-  { step: "05", label: "Validate", items: ["Usability Testing", "Iteration", "Feedback"] },
-  { step: "06", label: "Deliver", items: ["Developer Handoff", "QA", "Continuous Improvement"] },
-];
-
 function Portfolio() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
+      {/* Ambient pastel blobs */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute -top-32 -left-24 h-[520px] w-[520px] rounded-full bg-lavender/60 blur-3xl animate-float-slow" />
+        <div className="absolute top-[30%] -right-32 h-[560px] w-[560px] rounded-full bg-blush/60 blur-3xl animate-float-slower" />
+        <div className="absolute bottom-0 left-1/3 h-[460px] w-[460px] rounded-full bg-mint/50 blur-3xl animate-float-slow" />
+      </div>
+
       <Nav />
       <Hero />
       <Marquee />
@@ -34,7 +32,6 @@ function Portfolio() {
       <Highlights />
       <CaseStudies />
       <Philosophy />
-      <Process />
       <Journey />
       <Contact />
       <Footer />
@@ -44,15 +41,15 @@ function Portfolio() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/75 border-b border-border/60">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-        <a href="#top" className="font-display text-xl tracking-tight">
+        <a href="#top" className="font-display text-2xl tracking-tight">
           Parvathi<span className="text-accent">.</span>
         </a>
         <nav className="hidden md:flex gap-8 text-sm text-muted-foreground">
           <a href="#work" className="hover:text-foreground transition">Work</a>
           <a href="#about" className="hover:text-foreground transition">About</a>
-          <a href="#process" className="hover:text-foreground transition">Process</a>
+          <a href="#journey" className="hover:text-foreground transition">Journey</a>
           <a href="#contact" className="hover:text-foreground transition">Contact</a>
         </nav>
         <a
@@ -76,18 +73,14 @@ function Hero() {
               <span className="h-px w-8 bg-accent" />
               Portfolio · 2026
             </div>
-            <h1 className="font-display font-light text-[clamp(3rem,8vw,7.5rem)] leading-[0.92] tracking-[-0.02em]">
+            <h1 className="font-display font-light text-[clamp(3rem,8.5vw,8rem)] leading-[0.95] tracking-[-0.02em]">
               Designing<br />
               <span className="italic text-accent">what's</span> next.
             </h1>
-            <p className="mt-10 max-w-xl text-lg md:text-xl leading-relaxed text-foreground/80">
-              Hi, I'm <span className="font-medium">Parvathi K</span> — a Senior UX/UI &amp; Product
-              Designer crafting digital experiences that balance user needs, business goals, and
-              technology.
-            </p>
-            <p className="mt-4 max-w-xl text-base text-muted-foreground leading-relaxed">
-              Four years across enterprise platforms, AI-powered solutions, and consumer products —
-              turning complex problems into intuitive, accessible, and impactful experiences.
+            <p className="mt-10 max-w-xl text-lg md:text-xl leading-relaxed text-foreground/85">
+              Hi, I'm <span className="font-medium">Parvathi K</span> — a UX/UI Designer with{" "}
+              <span className="font-medium">4+ years</span> of experience designing user-centered
+              digital products that bridge business goals with human needs.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
@@ -115,14 +108,15 @@ function Hero() {
 
           <div className="lg:col-span-5 animate-rise" style={{ animationDelay: "0.15s" }}>
             <div className="relative">
-              <div className="absolute -inset-4 rounded-[2rem] bg-accent/10 -rotate-2" aria-hidden />
-              <div className="relative rounded-[2rem] overflow-hidden border border-border shadow-[0_30px_80px_-30px_rgba(60,30,10,0.35)]">
+              <div className="absolute -inset-6 rounded-[2.2rem] bg-lavender/70 -rotate-3 animate-float-slow" aria-hidden />
+              <div className="absolute -inset-2 rounded-[2rem] bg-blush/60 rotate-2 animate-float-slower" aria-hidden />
+              <div className="relative rounded-[2rem] overflow-hidden border border-border shadow-[0_30px_80px_-30px_rgba(90,60,120,0.25)]">
                 <img
                   src={parvathi}
                   alt="Portrait of Parvathi Krishnan K"
                   className="w-full aspect-[4/5] object-cover"
                 />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/85 backdrop-blur px-4 py-3 rounded-xl text-sm">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/85 backdrop-blur px-4 py-3 rounded-2xl text-sm">
                   <div>
                     <div className="font-medium">Parvathi Krishnan K</div>
                     <div className="text-muted-foreground text-xs">Coimbatore, India</div>
@@ -143,7 +137,7 @@ function Hero() {
 
 function Marquee() {
   const items = [
-    "Senior UX/UI Designer",
+    "UX/UI Designer",
     "Product Designer",
     "AI-Powered Experiences",
     "Design Systems",
@@ -152,11 +146,11 @@ function Marquee() {
   ];
   const row = [...items, ...items];
   return (
-    <div className="border-y border-border bg-secondary/40 overflow-hidden">
+    <div className="border-y border-border bg-lavender/25 overflow-hidden">
       <div className="flex gap-12 py-5 animate-marquee whitespace-nowrap font-display text-2xl md:text-3xl">
         {row.map((t, i) => (
           <span key={i} className="flex items-center gap-12 text-foreground/80">
-            {t} <span className="text-accent">✳</span>
+            {t} <span className="text-accent inline-block animate-spin-slow">✳</span>
           </span>
         ))}
       </div>
@@ -174,31 +168,25 @@ function About() {
               (About)
             </div>
             <h2 className="font-display font-light text-4xl md:text-5xl leading-[1.05] tracking-tight">
-              More than just <em className="text-accent not-italic">designing</em> screens.
+              More than just <em className="text-accent">designing</em> screens.
             </h2>
           </div>
         </div>
         <div className="lg:col-span-8 space-y-6 text-lg leading-relaxed text-foreground/85">
           <p>
-            Design, for me, is about understanding people before creating solutions. Every project
-            starts with curiosity — asking the right questions, uncovering user needs, and finding
-            opportunities to improve experiences.
+            I believe great design begins with empathy and curiosity. Every project is an
+            opportunity to understand people, simplify complexity, and create experiences that are
+            intuitive, accessible, and meaningful.
           </p>
           <p>
-            Over the years, I've collaborated with product managers, developers, business
-            stakeholders, and users to create digital products that are intuitive, scalable, and
-            accessible.
-          </p>
-          <p>
-            Outside project work, I enjoy mentoring aspiring designers, speaking at design
-            communities, exploring AI-powered workflows, and continuously learning new ways to
-            improve the design process.
+            Beyond product design, I'm passionate about AI in design, mentoring, knowledge sharing,
+            and continuously exploring better ways to solve real-world problems.
           </p>
 
           <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border mt-10">
             {[
               { n: "4+", l: "Years designing" },
-              { n: "20+", l: "Products shipped" },
+              { n: "15", l: "Projects worked" },
               { n: "Top 50", l: "Global UX Awards" },
             ].map((s) => (
               <div key={s.l}>
@@ -281,47 +269,52 @@ function CaseStudies() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-x-8 gap-y-16">
-        {caseStudies.map((c, i) => (
-          <a
-            key={i}
-            href="#"
-            className={`group block ${i % 2 === 1 ? "md:mt-24" : ""}`}
-          >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-secondary border border-border">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    i === 1
-                      ? `url(${talentai})`
-                      : `linear-gradient(135deg, oklch(0.82 0.06 60) 0%, oklch(0.65 0.14 45) 100%)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              <div className="absolute inset-0 flex items-end p-8">
-                <div className="text-background">
-                  <div className="font-mono text-xs mb-2 opacity-80">Case {c.n} · {c.year}</div>
-                  <div className="font-display text-2xl md:text-3xl leading-tight max-w-sm">
-                    {c.title}
+        {caseStudies.map((c, i) => {
+          const gradients = [
+            "linear-gradient(135deg, oklch(0.9 0.06 340) 0%, oklch(0.82 0.09 300) 100%)",
+            "",
+            "linear-gradient(135deg, oklch(0.9 0.06 165) 0%, oklch(0.82 0.09 200) 100%)",
+            "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
+          ];
+          return (
+            <a
+              key={i}
+              href="#"
+              className={`group block ${i % 2 === 1 ? "md:mt-24" : ""}`}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">
+                <div
+                  className="absolute inset-0 transition duration-700 group-hover:scale-105"
+                  style={{
+                    backgroundImage: i === 1 ? `url(${talentai})` : gradients[i],
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <div className="absolute inset-0 flex items-end p-8">
+                  <div className="text-foreground">
+                    <div className="font-mono text-xs mb-2 opacity-70">Case {c.n} · {c.year}</div>
+                    <div className="font-display text-2xl md:text-3xl leading-tight max-w-sm">
+                      {c.title}
+                    </div>
                   </div>
                 </div>
+                <div className="absolute top-6 right-6 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                  <ArrowUpRight className="h-5 w-5" />
+                </div>
               </div>
-              <div className="absolute top-6 right-6 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center group-hover:bg-accent group-hover:text-background transition">
-                <ArrowUpRight className="h-5 w-5" />
+              <div className="mt-5 flex items-center justify-between">
+                <div>
+                  <div className="font-display text-2xl">{c.title}</div>
+                  <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
+                </div>
+                <span className="text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
+                  View case study <ArrowRight className="h-4 w-4" />
+                </span>
               </div>
-            </div>
-            <div className="mt-5 flex items-center justify-between">
-              <div>
-                <div className="font-display text-xl">{c.title}</div>
-                <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
-              </div>
-              <span className="text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
-                View case study <ArrowRight className="h-4 w-4" />
-              </span>
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
     </section>
   );
@@ -329,7 +322,7 @@ function CaseStudies() {
 
 function Philosophy() {
   return (
-    <section className="relative bg-secondary/60 border-y border-border">
+    <section className="relative bg-blush/40 border-y border-border">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-28 md:py-40 text-center">
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
           (Design Philosophy)
@@ -350,48 +343,9 @@ function Philosophy() {
   );
 }
 
-function Process() {
-  return (
-    <section id="process" className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32">
-      <div className="mb-16">
-        <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-          (Design Process)
-        </div>
-        <h2 className="font-display font-light text-4xl md:text-6xl leading-tight tracking-tight max-w-3xl">
-          From curiosity to <em className="not-italic text-accent">craft</em>.
-        </h2>
-      </div>
-
-      <ol className="relative border-l border-dashed border-border/80 ml-2 md:ml-6 space-y-14">
-        {process.map((p) => (
-          <li key={p.step} className="pl-8 md:pl-12 relative group">
-            <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-background border-2 border-accent group-hover:bg-accent transition" />
-            <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-10">
-              <div className="md:w-56 shrink-0">
-                <div className="font-mono text-xs text-muted-foreground">{p.step}</div>
-                <div className="font-display text-3xl md:text-4xl">{p.label}</div>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {p.items.map((it) => (
-                  <span
-                    key={it}
-                    className="px-3.5 py-1.5 text-sm rounded-full border border-border bg-card hover:border-accent hover:text-accent transition"
-                  >
-                    {it}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}
-
 function Journey() {
   return (
-    <section className="mx-auto max-w-[1400px] px-6 md:px-10 pb-24 md:pb-32">
+    <section id="journey" className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32">
       <div className="grid md:grid-cols-2 gap-12 md:gap-20">
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
@@ -415,7 +369,7 @@ function Journey() {
 
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-            (Education)
+            (Education & Certification)
           </div>
           <h3 className="font-display font-light text-3xl md:text-4xl leading-tight mb-8">
             Education
@@ -430,6 +384,20 @@ function Journey() {
             <div className="border-t border-border pt-6">
               <div className="font-display text-xl">B.Sc. Computer Science</div>
               <div className="text-muted-foreground mt-1">Sri Krishna Arts and Science College</div>
+            </div>
+            <div className="border-t border-border pt-6 bg-mint/30 -mx-4 px-4 py-5 rounded-2xl mt-6">
+              <div className="flex items-start gap-3">
+                <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background border border-border shrink-0">
+                  <Award className="h-4 w-4 text-accent" />
+                </span>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                    Certification
+                  </div>
+                  <div className="font-display text-xl">Digital Skills — User Experience</div>
+                  <div className="text-muted-foreground mt-1">Accenture</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -446,7 +414,7 @@ function Contact() {
           (Contact)
         </div>
         <h2 className="font-display font-light text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-tight max-w-5xl">
-          Let's build meaningful <em className="not-italic text-accent">digital experiences</em>{" "}
+          Let's build meaningful <em className="text-accent">digital experiences</em>{" "}
           together.
         </h2>
 
@@ -454,14 +422,9 @@ function Contact() {
           <div>
             <div className="text-sm text-background/60 mb-4">Currently open to</div>
             <div className="flex flex-wrap gap-3">
-              {["Senior UX/UI Designer", "Senior Product Designer"].map((r) => (
-                <span
-                  key={r}
-                  className="px-4 py-2 rounded-full border border-background/30 text-sm"
-                >
-                  {r}
-                </span>
-              ))}
+              <span className="px-4 py-2 rounded-full border border-background/30 text-sm">
+                Senior UX/UI Designer
+              </span>
             </div>
           </div>
 

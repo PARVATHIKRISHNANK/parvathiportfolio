@@ -3,6 +3,7 @@ import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
+import sponsorsphere from "@/assets/sponsorsphere-design.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,

@@ -285,7 +285,7 @@ function CaseStudies() {
                 <div
                   className="absolute inset-0 transition duration-700 group-hover:scale-105"
                   style={{
-                    backgroundImage: i === 1 ? `url(${talentai})` : gradients[i],
+                    backgroundImage: bgImage,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}

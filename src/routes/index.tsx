@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from "lucide-react";
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";

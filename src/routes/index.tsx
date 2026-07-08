@@ -272,11 +272,13 @@ function CaseStudies() {
       <div className="grid md:grid-cols-2 gap-x-8 gap-y-16">
         {caseStudies.map((c, i) => {
           const gradients = [
-            "linear-gradient(135deg, oklch(0.9 0.06 340) 0%, oklch(0.82 0.09 300) 100%)",
+            "",
             "",
             "linear-gradient(135deg, oklch(0.9 0.06 165) 0%, oklch(0.82 0.09 200) 100%)",
             "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
           ];
+          const bgImage =
+            i === 0 ? `url(${sponsorsphere.url})` : i === 1 ? `url(${talentai})` : gradients[i];
           const inner = (
             <>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">

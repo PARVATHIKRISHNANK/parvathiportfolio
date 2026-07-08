@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from "lucide-react";
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 });
 
 const caseStudies = [
-  { n: "01", title: "Enterprise Analytics Console", tag: "B2B SaaS · Design System", year: "2025" },
+  { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
   { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024" },
   { n: "03", title: "Sports Fan Experience", tag: "Consumer · Mobile", year: "2024" },
   { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
@@ -276,12 +276,8 @@ function CaseStudies() {
             "linear-gradient(135deg, oklch(0.9 0.06 165) 0%, oklch(0.82 0.09 200) 100%)",
             "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
           ];
-          return (
-            <a
-              key={i}
-              href="#"
-              className={`group block ${i % 2 === 1 ? "md:mt-24" : ""}`}
-            >
+          const inner = (
+            <>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">
                 <div
                   className="absolute inset-0 transition duration-700 group-hover:scale-105"
@@ -312,7 +308,13 @@ function CaseStudies() {
                   View case study <ArrowRight className="h-4 w-4" />
                 </span>
               </div>
-            </a>
+            </>
+          );
+          const cls = `group block ${i % 2 === 1 ? "md:mt-24" : ""}`;
+          return c.href ? (
+            <Link key={i} to={c.href} className={cls}>{inner}</Link>
+          ) : (
+            <a key={i} href="#" className={cls}>{inner}</a>
           );
         })}
       </div>

@@ -10,33 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudiesSponsorsphereRouteImport } from './routes/case-studies.sponsorsphere'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesSponsorsphereRoute =
+  CaseStudiesSponsorsphereRouteImport.update({
+    id: '/case-studies/sponsorsphere',
+    path: '/case-studies/sponsorsphere',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/case-studies/sponsorsphere'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/case-studies/sponsorsphere'
+  id: '__root__' | '/' | '/case-studies/sponsorsphere'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaseStudiesSponsorsphereRoute: typeof CaseStudiesSponsorsphereRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +59,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/sponsorsphere': {
+      id: '/case-studies/sponsorsphere'
+      path: '/case-studies/sponsorsphere'
+      fullPath: '/case-studies/sponsorsphere'
+      preLoaderRoute: typeof CaseStudiesSponsorsphereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaseStudiesSponsorsphereRoute: CaseStudiesSponsorsphereRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

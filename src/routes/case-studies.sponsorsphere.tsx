@@ -111,18 +111,10 @@ function SponsorSphere() {
             and manage sponsorship opportunities in motorsports.
           </p>
 
-          <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-border pt-8">
+          <div className="mt-10 grid sm:grid-cols-2 gap-6 border-t border-border pt-8">
             <div>
               <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Role</div>
               <div className="font-display text-lg">UX / UI Designer</div>
-            </div>
-            <div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Team</div>
-              <div className="font-display text-lg">Lead UX · Product · Design</div>
-            </div>
-            <div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Duration</div>
-              <div className="font-display text-lg">Jul — Aug 2024</div>
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>

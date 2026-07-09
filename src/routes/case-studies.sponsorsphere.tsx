@@ -353,7 +353,7 @@ function SponsorSphere() {
           flexibility and post-event engagement.
         </p>
 
-        <figure className="rounded-3xl overflow-hidden border border-border bg-white mb-12">
+        <figure className="rounded-3xl overflow-hidden border border-border bg-card mb-12">
           <img src={ideation.url} alt="Ideation and brainstorming mind-map" className="w-full h-auto block" />
           <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border">
             Brainstorming with Ideamap.ai — feature clusters
@@ -390,7 +390,7 @@ function SponsorSphere() {
           interface emphasizing clarity, discoverability and usability.
         </p>
 
-        <figure className="rounded-3xl overflow-hidden border border-border bg-white mb-12">
+        <figure className="rounded-3xl overflow-hidden border border-border bg-card mb-12">
           <img src={design.url} alt="Wireframes and visual design" className="w-full h-auto block" />
           <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border">
             Wireframes (Uizard.io) evolving into hi-fi visual design (Motiff)

@@ -392,9 +392,9 @@ function SponsorSphere() {
           interface emphasizing clarity, discoverability and usability.
         </p>
 
-        <figure className="rounded-3xl overflow-hidden border border-border bg-foreground mb-12">
-          <img src={design.url} alt="Wireframes and visual design" className="w-full h-auto" />
-          <figcaption className="text-xs text-muted-foreground p-4 bg-background">
+        <figure className="rounded-3xl overflow-hidden border border-border bg-white mb-12">
+          <img src={design.url} alt="Wireframes and visual design" className="w-full h-auto block" />
+          <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border">
             Wireframes (Uizard.io) evolving into hi-fi visual design (Motiff)
           </figcaption>
         </figure>

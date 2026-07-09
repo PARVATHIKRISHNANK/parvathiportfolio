@@ -257,16 +257,14 @@ function SponsorSphere() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-12 items-stretch">
+        <div className="grid md:grid-cols-2 gap-6 mt-12 items-start">
           {[
             { src: market.url, alt: "Market analysis", cap: "Market analysis, SWOT, empathy map and 5W1H" },
             { src: research.url, alt: "User research", cap: "Objectives, card sorting, value proposition and personas" },
           ].map((f) => (
-            <figure key={f.alt} className="flex flex-col rounded-3xl overflow-hidden border border-border bg-white">
-              <div className="aspect-[4/3] w-full overflow-hidden bg-white">
-                <img src={f.src} alt={f.alt} className="w-full h-full object-contain" />
-              </div>
-              <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border mt-auto">
+            <figure key={f.alt} className="rounded-3xl overflow-hidden border border-border bg-card">
+              <img src={f.src} alt={f.alt} className="w-full h-auto block" />
+              <figcaption className="text-xs text-muted-foreground p-4 border-t border-border">
                 {f.cap}
               </figcaption>
             </figure>

@@ -4,6 +4,7 @@ import research from "@/assets/sponsorsphere-research.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
 import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
 import market from "@/assets/sponsorsphere-market.png.asset.json";
+import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 
 export const Route = createFileRoute("/case-studies/sponsorsphere")({
   head: () => ({

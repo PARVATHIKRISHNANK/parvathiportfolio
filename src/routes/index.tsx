@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
 
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
-  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024" },
+  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024", href: "/case-studies/talentai" as const },
   { n: "03", title: "Sports Fan Experience", tag: "Consumer · Mobile", year: "2024" },
   { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
 ];

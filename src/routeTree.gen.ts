@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudiesTalentaiRouteImport } from './routes/case-studies.talentai'
 import { Route as CaseStudiesSponsorsphereRouteImport } from './routes/case-studies.sponsorsphere'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesTalentaiRoute = CaseStudiesTalentaiRouteImport.update({
+  id: '/case-studies/talentai',
+  path: '/case-studies/talentai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesSponsorsphereRoute =
@@ -27,27 +33,35 @@ const CaseStudiesSponsorsphereRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
+  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
+  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
+  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/case-studies/sponsorsphere'
+  fullPaths: '/' | '/case-studies/sponsorsphere' | '/case-studies/talentai'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/case-studies/sponsorsphere'
-  id: '__root__' | '/' | '/case-studies/sponsorsphere'
+  to: '/' | '/case-studies/sponsorsphere' | '/case-studies/talentai'
+  id:
+    | '__root__'
+    | '/'
+    | '/case-studies/sponsorsphere'
+    | '/case-studies/talentai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CaseStudiesSponsorsphereRoute: typeof CaseStudiesSponsorsphereRoute
+  CaseStudiesTalentaiRoute: typeof CaseStudiesTalentaiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -57,6 +71,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies/talentai': {
+      id: '/case-studies/talentai'
+      path: '/case-studies/talentai'
+      fullPath: '/case-studies/talentai'
+      preLoaderRoute: typeof CaseStudiesTalentaiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/sponsorsphere': {
@@ -72,17 +93,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CaseStudiesSponsorsphereRoute: CaseStudiesSponsorsphereRoute,
+  CaseStudiesTalentaiRoute: CaseStudiesTalentaiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

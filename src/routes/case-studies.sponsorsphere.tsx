@@ -4,6 +4,7 @@ import research from "@/assets/sponsorsphere-research.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
 import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
 import market from "@/assets/sponsorsphere-market.png.asset.json";
+import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 
 export const Route = createFileRoute("/case-studies/sponsorsphere")({
   head: () => ({
@@ -97,53 +98,73 @@ function SponsorSphere() {
       </header>
 
       {/* Hero */}
-      <section className="relative">
+      <section className="relative overflow-hidden">
         <div className="mx-auto max-w-[1200px] px-6 md:px-10 pt-16 md:pt-24 pb-16 animate-rise">
-          <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-6">
-            Case Study 01 · 2024
-          </div>
-          <h1 className="font-display font-light text-[clamp(2.5rem,7vw,6rem)] leading-[0.98] tracking-[-0.02em]">
-            Sponsor<span className="italic text-accent">Sphere</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg md:text-xl text-foreground/85 leading-relaxed">
-            AI-Powered Sponsorship Platform for Motorsport Events. Designing an
-            AI-assisted platform that simplifies how brands discover, evaluate,
-            and manage sponsorship opportunities in motorsports.
-          </p>
-
-          <div className="mt-10 grid sm:grid-cols-2 gap-6 border-t border-border pt-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Role</div>
-              <div className="font-display text-lg">UX / UI Designer</div>
-            </div>
-            <div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>
-              <div className="font-display text-lg">Mobile-first</div>
-            </div>
-          </div>
+              <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-6">
+                Case Study 01 · 2024
+              </div>
+              <h1 className="font-display font-light text-[clamp(2.5rem,7vw,4.5rem)] leading-[0.98] tracking-[-0.02em]">
+                Sponsor<span className="italic text-accent">Sphere</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-lg md:text-xl text-foreground/85 leading-relaxed">
+                AI-Powered Sponsorship Platform for Motorsport Events. Designing an
+                AI-assisted platform that simplifies how brands discover, evaluate,
+                and manage sponsorship opportunities in motorsports.
+              </p>
 
-          <div className="mt-10 flex flex-wrap gap-2">
-            {[
-              "Product Discovery",
-              "UX Research",
-              "IA",
-              "User Flows",
-              "Wireframing",
-              "Visual Design",
-              "AI-assisted Exploration",
-              "Prototype",
-            ].map((r) => (
-              <Pill key={r}>{r}</Pill>
-            ))}
-          </div>
+              <div className="mt-8 grid sm:grid-cols-2 gap-6 border-t border-border pt-8">
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Role</div>
+                  <div className="font-display text-lg">UX / UI Designer</div>
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>
+                  <div className="font-display text-lg">Mobile-first</div>
+                </div>
+              </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            <span className="text-xs uppercase tracking-widest text-muted-foreground mr-2 self-center">
-              Tools
-            </span>
-            {["Figma", "ChatGPT", "Miro", "Whimsical", "Visily", "Uizard", "Motiff"].map((t) => (
-              <Pill key={t}>{t}</Pill>
-            ))}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {[
+                  "Product Discovery",
+                  "UX Research",
+                  "IA",
+                  "User Flows",
+                  "Wireframing",
+                  "Visual Design",
+                  "AI-assisted Exploration",
+                  "Prototype",
+                ].map((r) => (
+                  <Pill key={r}>{r}</Pill>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="text-xs uppercase tracking-widest text-muted-foreground mr-2 self-center">
+                  Tools
+                </span>
+                {["Figma", "ChatGPT", "Miro", "Whimsical", "Visily", "Uizard", "Motiff"].map((t) => (
+                  <Pill key={t}>{t}</Pill>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative order-first lg:order-last">
+              <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm animate-float-slow">
+                <div
+                  aria-hidden
+                  className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-lavender/20 to-blush/20 blur-2xl opacity-60"
+                />
+                <img
+                  src={heroCar.url}
+                  alt="Formula 1 race car representing motorsport sponsorship opportunities"
+                  width={1200}
+                  height={800}
+                  className="relative w-full h-auto object-cover rounded-3xl"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>

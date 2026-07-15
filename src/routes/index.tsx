@@ -4,6 +4,7 @@ import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
 import sponsorsphere from "@/assets/sponsorsphere-design.png.asset.json";
+import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/")({
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
   { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024", href: "/case-studies/talentai" as const },
-  { n: "03", title: "Sports Fan Experience", tag: "Consumer · Mobile", year: "2024" },
+  { n: "03", title: "T1D Care Transition", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/t1d" as const },
   { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
 ];
 
@@ -278,7 +279,13 @@ function CaseStudies() {
             "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
           ];
           const bgImage =
-            i === 0 ? `url(${sponsorsphere.url})` : i === 1 ? `url(${talentai})` : gradients[i];
+            i === 0
+              ? `url(${sponsorsphere.url})`
+              : i === 1
+                ? `url(${talentai})`
+                : i === 2
+                  ? `url(${t1dHero.url})`
+                  : gradients[i];
           const inner = (
             <>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">

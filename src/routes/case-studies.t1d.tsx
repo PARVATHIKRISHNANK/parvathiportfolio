@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Check } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Check, Bell, Home, MessageCircle, BookOpen, Calendar, User, Sparkles, ChevronRight, Send, TrendingUp, Award } from "lucide-react";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
 
 export const Route = createFileRoute("/case-studies/t1d")({

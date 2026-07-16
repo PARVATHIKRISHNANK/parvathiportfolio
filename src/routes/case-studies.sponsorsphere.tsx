@@ -278,7 +278,7 @@ function SponsorSphere() {
           </div>
         </div>
 
-        <div className="mt-12 space-y-6">
+        <div className="grid md:grid-cols-2 gap-6 mt-12 items-start">
           {[
             { src: market.url, alt: "Market analysis", cap: "Market analysis, SWOT, empathy map and 5W1H" },
             { src: research.url, alt: "User research", cap: "Objectives, card sorting, value proposition and personas" },

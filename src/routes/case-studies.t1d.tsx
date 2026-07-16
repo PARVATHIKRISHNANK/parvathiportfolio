@@ -487,6 +487,9 @@ function T1DCaseStudy() {
         </div>
       </Section>
 
+      {/* App Screens Showcase */}
+      <AppScreensShowcase />
+
       {/* AI Companion */}
       <Section eyebrow="AI Companion" title="Contextual coaching, not just a chatbot." tone="butter">
         <p className="text-lg leading-relaxed text-foreground/85 max-w-3xl mb-8">

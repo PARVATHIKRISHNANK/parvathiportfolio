@@ -88,10 +88,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Four years designing enterprise platforms, AI experiences, and product interfaces that balance user needs with business goals.",
+          "Portfolio of Parvathi Krishnan K, a Senior UX/UI and Product Designer crafting intuitive, accessible, AI-powered digital experiences.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Parvathi K — Senior UX/UI & Product Designer" },
+      { name: "twitter:description", content: "Portfolio of Parvathi Krishnan K, a Senior UX/UI and Product Designer crafting intuitive, accessible, AI-powered digital experiences." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8d26f164-cf0f-488a-a3cd-35c46cb6b99b/id-preview-1046e1c6--e2590285-5a68-4ca5-a367-76686d2d8bd4.lovable.app-1784201390897.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8d26f164-cf0f-488a-a3cd-35c46cb6b99b/id-preview-1046e1c6--e2590285-5a68-4ca5-a367-76686d2d8bd4.lovable.app-1784201390897.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

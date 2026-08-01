@@ -34,6 +34,7 @@ function Portfolio() {
       <CaseStudies />
       <Philosophy />
       <Journey />
+      <Recognitions />
       <Contact />
       <Footer />
     </div>
@@ -42,8 +43,10 @@ function Portfolio() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
+    <header className="fixed top-3 md:top-5 inset-x-0 z-50">
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6">
+        <div className="rounded-full border border-border bg-background/70 backdrop-blur-xl shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)] px-4 md:px-6 h-14 flex items-center justify-between">
+
         <a href="#top" className="font-display text-2xl tracking-tight">
           Parvathi<span className="text-accent">.</span>
         </a>
@@ -381,6 +384,74 @@ function Journey() {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Recognitions() {
+  const awards = [
+    { n: "4×", t: "Star of the Month Award" },
+    { n: "2×", t: "SPOT Award — World-class Execution", s: "Appreciations from Senior VP, Experience Design & Director, Experience Design" },
+    { n: "6×", t: "SPOT Award — Growth Mindset", s: "Appreciations from my project team" },
+  ];
+  return (
+    <section id="recognitions" className="border-t border-border bg-lavender/20">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32">
+        <div className="grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              (Recognitions & Certification)
+            </div>
+            <h2 className="font-display font-light text-4xl md:text-5xl leading-[1.05] tracking-tight">
+              Recognized for <em className="text-accent">craft</em> and impact.
+            </h2>
+
+            <div className="mt-10 rounded-3xl border border-border bg-background/80 backdrop-blur p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-mint/50 border border-border shrink-0">
+                  <Award className="h-5 w-5 text-accent" />
+                </span>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                    Certification
+                  </div>
+                  <div className="font-display text-2xl leading-snug">
+                    Digital Skills — User Experience
+                  </div>
+                  <div className="text-muted-foreground mt-1">Accenture</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6 content-start">
+            {awards.map((a) => (
+              <div
+                key={a.t}
+                className="rounded-3xl border border-border bg-background/70 backdrop-blur p-7 hover:-translate-y-1 transition duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Star className="h-5 w-5 text-accent" />
+                  <span className="font-display text-3xl">{a.n}</span>
+                </div>
+                <div className="font-display text-xl leading-snug">{a.t}</div>
+                {a.s && (
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{a.s}</p>
+                )}
+              </div>
+            ))}
+            <div className="rounded-3xl border border-border bg-butter/40 p-7">
+              <div className="flex items-center gap-3 mb-3">
+                <Sparkles className="h-5 w-5 text-accent" />
+                <span className="font-display text-3xl">Top 50</span>
+              </div>
+              <div className="font-display text-xl leading-snug">UX Design Awards 2025</div>
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                Selected globally from 400+ entries across 49 countries.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

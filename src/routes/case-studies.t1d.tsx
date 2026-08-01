@@ -137,7 +137,7 @@ function T1DCaseStudy() {
                 </div>
                 <div className="rounded-2xl border border-border bg-card/60 backdrop-blur p-4">
                   <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Platform</div>
-                  <div className="font-display text-lg mt-1">Mobile App</div>
+                  <div className="font-display text-lg mt-1">B2C Product · Mobile App</div>
                 </div>
               </div>
 
@@ -891,12 +891,12 @@ function DashboardScreen() {
 
 function ChatScreen() {
   return (
-    <div className="w-full h-full bg-white text-neutral-900 flex flex-col relative">
-      <div className="h-8 flex items-center justify-between px-5 pt-2 text-[9px] text-neutral-500 font-medium">
+    <div className="w-full h-full bg-gradient-to-b from-[#0f1226] to-black text-white flex flex-col relative">
+      <div className="h-8 flex items-center justify-between px-5 pt-2 text-[9px] text-white/50 font-medium">
         <span>9:41</span>
         <span>•••</span>
       </div>
-      <div className="px-4 pb-2 flex items-center gap-2 border-b border-neutral-100">
+      <div className="px-4 pb-2 flex items-center gap-2 border-b border-white/10">
         <div className="h-7 w-7 rounded-full bg-gradient-to-br from-accent to-lavender flex items-center justify-center">
           <Sparkles className="h-3.5 w-3.5 text-white" />
         </div>
@@ -904,19 +904,19 @@ function ChatScreen() {
           <div className="text-[11px] font-semibold">AI Companion</div>
           <div className="text-[8px] text-mint">● Active</div>
         </div>
-        <div className="text-[8px] rounded-full bg-lavender/40 px-2 py-1">📅 Appt. Tomorrow</div>
+        <div className="text-[8px] rounded-full bg-white/10 px-2 py-1">📅 Appt. Tomorrow</div>
       </div>
       <div className="flex-1 px-3 py-3 space-y-2 overflow-hidden">
-        <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-neutral-100 px-3 py-2 text-[10px] leading-snug">
+        <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-white/10 px-3 py-2 text-[10px] leading-snug">
           Hi Alex! Your appointment with Dr. Chen is tomorrow at 2pm. I've been analyzing your patterns.
         </div>
         <div className="max-w-[75%] ml-auto rounded-2xl rounded-tr-sm bg-accent text-accent-foreground px-3 py-2 text-[10px]">
           I'm a bit anxious. What should I bring up?
         </div>
-        <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-neutral-100 px-3 py-2 text-[10px]">
+        <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-white/10 px-3 py-2 text-[10px]">
           Based on your last 2 weeks, I've put together 3 personalized questions:
         </div>
-        <div className="rounded-xl border border-neutral-200 bg-white p-2 space-y-1.5">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-2 space-y-1.5">
           <div className="text-[8px] font-semibold text-accent flex items-center gap-1">
             <Sparkles className="h-2.5 w-2.5" /> 3 SUGGESTED QUESTIONS
           </div>
@@ -927,7 +927,7 @@ function ChatScreen() {
           ].map((q, i) => (
             <div key={q} className="flex items-start gap-1.5 text-[9px] leading-snug">
               <span className="text-accent font-semibold">{i + 1}</span>
-              <span>{q}</span>
+              <span className="text-white/85">{q}</span>
             </div>
           ))}
         </div>
@@ -937,11 +937,11 @@ function ChatScreen() {
       </div>
       <div className="px-3 pb-2 flex gap-1.5">
         {["Save to notes", "Add reminder", "Ask follow-up"].map((c) => (
-          <div key={c} className="text-[8px] rounded-full border border-neutral-200 px-2 py-1">{c}</div>
+          <div key={c} className="text-[8px] rounded-full border border-white/15 text-white/70 px-2 py-1">{c}</div>
         ))}
       </div>
       <div className="px-3 pb-4 flex items-center gap-2">
-        <div className="flex-1 rounded-full bg-neutral-100 px-3 py-2 text-[9px] text-neutral-400">Ask anything...</div>
+        <div className="flex-1 rounded-full bg-white/10 px-3 py-2 text-[9px] text-white/40">Ask anything...</div>
         <button className="h-8 w-8 rounded-full bg-accent flex items-center justify-center">
           <Send className="h-3.5 w-3.5 text-white" />
         </button>

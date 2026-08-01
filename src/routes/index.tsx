@@ -46,22 +46,23 @@ function Nav() {
     <header className="fixed top-3 md:top-5 inset-x-0 z-50">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="rounded-full border border-border bg-background/70 backdrop-blur-xl shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)] px-4 md:px-6 h-14 flex items-center justify-between">
-
-        <a href="#top" className="font-display text-2xl tracking-tight">
-          Parvathi<span className="text-accent">.</span>
-        </a>
-        <nav className="hidden md:flex gap-8 text-sm text-muted-foreground">
-          <a href="#work" className="hover:text-foreground transition">Work</a>
-          <a href="#about" className="hover:text-foreground transition">About</a>
-          <a href="#journey" className="hover:text-foreground transition">Journey</a>
-          <a href="#contact" className="hover:text-foreground transition">Contact</a>
-        </nav>
-        <a
-          href="#contact"
-          className="text-sm inline-flex items-center gap-1.5 border border-foreground/80 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition"
-        >
-          Let's talk <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
+          <a href="#top" className="font-display text-xl tracking-tight">
+            Parvathi<span className="text-accent">.</span>
+          </a>
+          <nav className="hidden md:flex gap-7 text-sm text-muted-foreground">
+            <a href="#work" className="hover:text-foreground transition">Work</a>
+            <a href="#about" className="hover:text-foreground transition">About</a>
+            <a href="#journey" className="hover:text-foreground transition">Journey</a>
+            <a href="#recognitions" className="hover:text-foreground transition">Recognitions</a>
+            <a href="#contact" className="hover:text-foreground transition">Contact</a>
+          </nav>
+          <a
+            href="#contact"
+            className="text-sm inline-flex items-center gap-1.5 border border-foreground/80 rounded-full px-4 py-1.5 hover:bg-foreground hover:text-background transition"
+          >
+            Let's talk <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </header>
   );

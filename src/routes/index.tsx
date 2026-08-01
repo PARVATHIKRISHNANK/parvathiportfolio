@@ -363,7 +363,7 @@ function Journey() {
 
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-            (Education & Certification)
+            (Education)
           </div>
           <h3 className="font-display font-light text-3xl md:text-4xl leading-tight mb-8">
             Education
@@ -379,21 +379,8 @@ function Journey() {
               <div className="font-display text-xl">B.Sc. Computer Science</div>
               <div className="text-muted-foreground mt-1">Sri Krishna Arts and Science College</div>
             </div>
-            <div className="border-t border-border pt-6 bg-mint/30 -mx-4 px-4 py-5 rounded-2xl mt-6">
-              <div className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background border border-border shrink-0">
-                  <Award className="h-4 w-4 text-accent" />
-                </span>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
-                    Certification
-                  </div>
-                  <div className="font-display text-xl">Digital Skills — User Experience</div>
-                  <div className="text-muted-foreground mt-1">Accenture</div>
-                </div>
-              </div>
-            </div>
           </div>
+        </div>
         </div>
       </div>
     </section>

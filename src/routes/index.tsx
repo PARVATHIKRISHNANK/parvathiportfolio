@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from "lucide-react";
+import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award, Star, Sparkles } from "lucide-react";
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
-import sponsorsphere from "@/assets/sponsorsphere-design.png.asset.json";
+import sponsorsphereCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -12,9 +12,8 @@ export const Route = createFileRoute("/")({
 
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
-  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024", href: "/case-studies/talentai" as const },
+  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2025", href: "/case-studies/talentai" as const },
   { n: "03", title: "T1D Care Transition", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/t1d" as const },
-  { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
 ];
 
 function Portfolio() {
@@ -185,10 +184,11 @@ function About() {
             and continuously exploring better ways to solve real-world problems.
           </p>
 
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border mt-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border mt-10">
             {[
               { n: "4+", l: "Years designing" },
-              { n: "15", l: "Projects worked" },
+              { n: "8", l: "Projects worked" },
+              { n: "7", l: "POCs delivered" },
               { n: "Top 50", l: "Global UX Awards" },
             ].map((s) => (
               <div key={s.l}>
@@ -238,12 +238,14 @@ function Highlights() {
               🏆 Global UX Recognition
             </div>
             <h3 className="font-display text-3xl mb-3">
-              TalentAI — Top 50, 150+ countries
+              TalentAI — Top 50 globally
             </h3>
             <p className="text-background/70 leading-relaxed">
-              An AI-powered interview platform combining conversational AI, resume analysis,
-              sentiment analysis, and identity verification for human-like pre-screening. Selected
-              among the top 50 submissions in an international UX competition.
+              Selected among the Top 50 UX Designs globally out of 400+ entries from 49 countries
+              for innovation and impact in AI-integrated design workflows. An AI-powered interview
+              platform combining conversational AI, resume analysis, sentiment analysis, and
+              identity verification for human-like pre-screening. Selected among the top 50
+              submissions in an international UX competition.
             </p>
           </article>
         </div>
@@ -270,24 +272,16 @@ function CaseStudies() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-x-8 gap-y-16">
+      <div className="grid md:grid-cols-3 gap-8">
         {caseStudies.map((c, i) => {
-          const gradients = [
-            "",
-            "",
-            "linear-gradient(135deg, oklch(0.9 0.06 165) 0%, oklch(0.82 0.09 200) 100%)",
-            "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
-          ];
           const bgImage =
             i === 0
-              ? `url(${sponsorsphere.url})`
+              ? `url(${sponsorsphereCar.url})`
               : i === 1
                 ? `url(${talentai})`
-                : i === 2
-                  ? `url(${t1dHero.url})`
-                  : gradients[i];
-          const inner = (
-            <>
+                : `url(${t1dHero.url})`;
+          return (
+            <Link key={i} to={c.href} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">
                 <div
                   className="absolute inset-0 transition duration-700 group-hover:scale-105"
@@ -297,37 +291,25 @@ function CaseStudies() {
                     backgroundPosition: "center",
                   }}
                 />
-                <div className="absolute inset-0 flex items-end p-8">
-                  <div className="text-foreground">
-                    <div className="font-mono text-xs mb-2 opacity-70">Case {c.n} · {c.year}</div>
-                    <div className="font-display text-2xl md:text-3xl leading-tight max-w-sm">
-                      {c.title}
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute top-6 right-6 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                <div className="absolute top-5 right-5 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:bg-accent group-hover:text-accent-foreground transition">
                   <ArrowUpRight className="h-5 w-5" />
                 </div>
               </div>
-              <div className="mt-5 flex items-center justify-between">
-                <div>
-                  <div className="font-display text-2xl">{c.title}</div>
-                  <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
+              <div className="mt-5">
+                <div className="font-mono text-xs text-muted-foreground mb-1">
+                  Case {c.n} · {c.year}
                 </div>
-                <span className="text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
+                <div className="font-display text-2xl">{c.title}</div>
+                <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
+                <span className="mt-3 text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
                   View case study <ArrowRight className="h-4 w-4" />
                 </span>
               </div>
-            </>
-          );
-          const cls = `group block ${i % 2 === 1 ? "md:mt-24" : ""}`;
-          return c.href ? (
-            <Link key={i} to={c.href} className={cls}>{inner}</Link>
-          ) : (
-            <a key={i} href="#" className={cls}>{inner}</a>
+            </Link>
           );
         })}
       </div>
+
     </section>
   );
 }

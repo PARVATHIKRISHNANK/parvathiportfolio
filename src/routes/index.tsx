@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award } from "lucide-react";
+import { ArrowUpRight, Download, Mail, Phone, Linkedin, ArrowRight, Award, Star, Sparkles } from "lucide-react";
 import parvathi from "@/assets/parvathi.jpg";
 import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
-import sponsorsphere from "@/assets/sponsorsphere-design.png.asset.json";
+import sponsorsphereCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -12,9 +12,8 @@ export const Route = createFileRoute("/")({
 
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
-  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2024", href: "/case-studies/talentai" as const },
+  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2025", href: "/case-studies/talentai" as const },
   { n: "03", title: "T1D Care Transition", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/t1d" as const },
-  { n: "04", title: "Professional Services Suite", tag: "Workflow · Web App", year: "2023" },
 ];
 
 function Portfolio() {
@@ -35,6 +34,7 @@ function Portfolio() {
       <CaseStudies />
       <Philosophy />
       <Journey />
+      <Recognitions />
       <Contact />
       <Footer />
     </div>
@@ -43,23 +43,26 @@ function Portfolio() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-        <a href="#top" className="font-display text-2xl tracking-tight">
-          Parvathi<span className="text-accent">.</span>
-        </a>
-        <nav className="hidden md:flex gap-8 text-sm text-muted-foreground">
-          <a href="#work" className="hover:text-foreground transition">Work</a>
-          <a href="#about" className="hover:text-foreground transition">About</a>
-          <a href="#journey" className="hover:text-foreground transition">Journey</a>
-          <a href="#contact" className="hover:text-foreground transition">Contact</a>
-        </nav>
-        <a
-          href="#contact"
-          className="text-sm inline-flex items-center gap-1.5 border border-foreground/80 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition"
-        >
-          Let's talk <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
+    <header className="fixed top-3 md:top-5 inset-x-0 z-50">
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6">
+        <div className="rounded-full border border-border bg-background/70 backdrop-blur-xl shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)] px-4 md:px-6 h-14 flex items-center justify-between">
+          <a href="#top" className="font-display text-xl tracking-tight">
+            Parvathi<span className="text-accent">.</span>
+          </a>
+          <nav className="hidden md:flex gap-7 text-sm text-muted-foreground">
+            <a href="#work" className="hover:text-foreground transition">Work</a>
+            <a href="#about" className="hover:text-foreground transition">About</a>
+            <a href="#journey" className="hover:text-foreground transition">Journey</a>
+            <a href="#recognitions" className="hover:text-foreground transition">Recognitions</a>
+            <a href="#contact" className="hover:text-foreground transition">Contact</a>
+          </nav>
+          <a
+            href="#contact"
+            className="text-sm inline-flex items-center gap-1.5 border border-foreground/80 rounded-full px-4 py-1.5 hover:bg-foreground hover:text-background transition"
+          >
+            Let's talk <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -68,7 +71,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 md:pt-24 pb-20">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-28 md:pt-40 pb-20">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-7 animate-rise">
             <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
@@ -185,10 +188,11 @@ function About() {
             and continuously exploring better ways to solve real-world problems.
           </p>
 
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border mt-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border mt-10">
             {[
               { n: "4+", l: "Years designing" },
-              { n: "15", l: "Projects worked" },
+              { n: "8", l: "Projects worked" },
+              { n: "7", l: "POCs delivered" },
               { n: "Top 50", l: "Global UX Awards" },
             ].map((s) => (
               <div key={s.l}>
@@ -238,12 +242,14 @@ function Highlights() {
               🏆 Global UX Recognition
             </div>
             <h3 className="font-display text-3xl mb-3">
-              TalentAI — Top 50, 150+ countries
+              TalentAI — Top 50 globally
             </h3>
             <p className="text-background/70 leading-relaxed">
-              An AI-powered interview platform combining conversational AI, resume analysis,
-              sentiment analysis, and identity verification for human-like pre-screening. Selected
-              among the top 50 submissions in an international UX competition.
+              Selected among the Top 50 UX Designs globally out of 400+ entries from 49 countries
+              for innovation and impact in AI-integrated design workflows. An AI-powered interview
+              platform combining conversational AI, resume analysis, sentiment analysis, and
+              identity verification for human-like pre-screening. Selected among the top 50
+              submissions in an international UX competition.
             </p>
           </article>
         </div>
@@ -270,24 +276,16 @@ function CaseStudies() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-x-8 gap-y-16">
+      <div className="grid md:grid-cols-3 gap-8">
         {caseStudies.map((c, i) => {
-          const gradients = [
-            "",
-            "",
-            "linear-gradient(135deg, oklch(0.9 0.06 165) 0%, oklch(0.82 0.09 200) 100%)",
-            "linear-gradient(135deg, oklch(0.94 0.06 90) 0%, oklch(0.85 0.09 55) 100%)",
-          ];
           const bgImage =
             i === 0
-              ? `url(${sponsorsphere.url})`
+              ? `url(${sponsorsphereCar.url})`
               : i === 1
                 ? `url(${talentai})`
-                : i === 2
-                  ? `url(${t1dHero.url})`
-                  : gradients[i];
-          const inner = (
-            <>
+                : `url(${t1dHero.url})`;
+          return (
+            <Link key={i} to={c.href} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">
                 <div
                   className="absolute inset-0 transition duration-700 group-hover:scale-105"
@@ -297,37 +295,25 @@ function CaseStudies() {
                     backgroundPosition: "center",
                   }}
                 />
-                <div className="absolute inset-0 flex items-end p-8">
-                  <div className="text-foreground">
-                    <div className="font-mono text-xs mb-2 opacity-70">Case {c.n} · {c.year}</div>
-                    <div className="font-display text-2xl md:text-3xl leading-tight max-w-sm">
-                      {c.title}
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute top-6 right-6 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                <div className="absolute top-5 right-5 h-11 w-11 rounded-full bg-background text-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:bg-accent group-hover:text-accent-foreground transition">
                   <ArrowUpRight className="h-5 w-5" />
                 </div>
               </div>
-              <div className="mt-5 flex items-center justify-between">
-                <div>
-                  <div className="font-display text-2xl">{c.title}</div>
-                  <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
+              <div className="mt-5">
+                <div className="font-mono text-xs text-muted-foreground mb-1">
+                  Case {c.n} · {c.year}
                 </div>
-                <span className="text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
+                <div className="font-display text-2xl">{c.title}</div>
+                <div className="text-sm text-muted-foreground mt-0.5">{c.tag}</div>
+                <span className="mt-3 text-sm inline-flex items-center gap-1 group-hover:text-accent transition">
                   View case study <ArrowRight className="h-4 w-4" />
                 </span>
               </div>
-            </>
-          );
-          const cls = `group block ${i % 2 === 1 ? "md:mt-24" : ""}`;
-          return c.href ? (
-            <Link key={i} to={c.href} className={cls}>{inner}</Link>
-          ) : (
-            <a key={i} href="#" className={cls}>{inner}</a>
+            </Link>
           );
         })}
       </div>
+
     </section>
   );
 }
@@ -381,7 +367,7 @@ function Journey() {
 
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-            (Education & Certification)
+            (Education)
           </div>
           <h3 className="font-display font-light text-3xl md:text-4xl leading-tight mb-8">
             Education
@@ -397,19 +383,74 @@ function Journey() {
               <div className="font-display text-xl">B.Sc. Computer Science</div>
               <div className="text-muted-foreground mt-1">Sri Krishna Arts and Science College</div>
             </div>
-            <div className="border-t border-border pt-6 bg-mint/30 -mx-4 px-4 py-5 rounded-2xl mt-6">
-              <div className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background border border-border shrink-0">
-                  <Award className="h-4 w-4 text-accent" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Recognitions() {
+  const awards = [
+    { n: "4×", t: "Star of the Month Award" },
+    { n: "2×", t: "SPOT Award — World-class Execution", s: "Appreciations from Senior VP, Experience Design & Director, Experience Design" },
+    { n: "6×", t: "SPOT Award — Growth Mindset", s: "Appreciations from my project team" },
+  ];
+  return (
+    <section id="recognitions" className="border-t border-border bg-lavender/20">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32">
+        <div className="grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              (Recognitions & Certification)
+            </div>
+            <h2 className="font-display font-light text-4xl md:text-5xl leading-[1.05] tracking-tight">
+              Recognized for <em className="text-accent">craft</em> and impact.
+            </h2>
+
+            <div className="mt-10 rounded-3xl border border-border bg-background/80 backdrop-blur p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-mint/50 border border-border shrink-0">
+                  <Award className="h-5 w-5 text-accent" />
                 </span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
                     Certification
                   </div>
-                  <div className="font-display text-xl">Digital Skills — User Experience</div>
+                  <div className="font-display text-2xl leading-snug">
+                    Digital Skills — User Experience
+                  </div>
                   <div className="text-muted-foreground mt-1">Accenture</div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6 content-start">
+            {awards.map((a) => (
+              <div
+                key={a.t}
+                className="rounded-3xl border border-border bg-background/70 backdrop-blur p-7 hover:-translate-y-1 transition duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Star className="h-5 w-5 text-accent" />
+                  <span className="font-display text-3xl">{a.n}</span>
+                </div>
+                <div className="font-display text-xl leading-snug">{a.t}</div>
+                {a.s && (
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{a.s}</p>
+                )}
+              </div>
+            ))}
+            <div className="rounded-3xl border border-border bg-butter/40 p-7">
+              <div className="flex items-center gap-3 mb-3">
+                <Sparkles className="h-5 w-5 text-accent" />
+                <span className="font-display text-3xl">Top 50</span>
+              </div>
+              <div className="font-display text-xl leading-snug">UX Design Awards 2025</div>
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                Selected globally from 400+ entries across 49 countries.
+              </p>
             </div>
           </div>
         </div>

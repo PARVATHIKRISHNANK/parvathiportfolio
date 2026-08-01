@@ -121,7 +121,7 @@ function SponsorSphere() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>
-                  <div className="font-display text-lg">Mobile-first</div>
+                  <div className="font-display text-lg">B2B Product · Mobile-first</div>
                 </div>
               </div>
 

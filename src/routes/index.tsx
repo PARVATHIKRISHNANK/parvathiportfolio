@@ -71,7 +71,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 md:pt-24 pb-20">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-28 md:pt-40 pb-20">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-7 animate-rise">
             <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">

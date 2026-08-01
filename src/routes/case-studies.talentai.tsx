@@ -97,7 +97,7 @@ function TalentAI() {
       <section className="relative">
         <div className="mx-auto max-w-[1200px] px-6 md:px-10 pt-16 md:pt-24 pb-16 animate-rise">
           <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-6">
-            Case Study 02 · 2024
+            Case Study 02 · 2025
           </div>
           <h1 className="font-display font-light text-[clamp(2.5rem,7vw,6rem)] leading-[0.98] tracking-[-0.02em]">
             Talent<span className="italic text-accent">AI</span>
@@ -114,7 +114,7 @@ function TalentAI() {
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Timeline</div>
-              <div className="font-display text-lg">6 Weeks</div>
+              <div className="font-display text-lg">3 Weeks</div>
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>
@@ -122,12 +122,6 @@ function TalentAI() {
             </div>
           </div>
 
-          <div className="mt-8">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Team</div>
-            <p className="text-foreground/85">
-              Product Designer · UX Designer · AI Engineer · Developer
-            </p>
-          </div>
 
           <div className="mt-8">
             <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">

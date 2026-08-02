@@ -1,0 +1,348 @@
+export const problemCards = [
+  {
+    icon: "🏎",
+    title: "Racing Teams",
+    tone: "racing",
+    points: [
+      "Weeks spent finding sponsors",
+      "Low response rates",
+      "Generic proposals",
+      "Poor visibility",
+    ],
+  },
+  {
+    icon: "💼",
+    title: "Sponsors",
+    tone: "electric",
+    points: [
+      "Thousands of teams",
+      "Difficult discovery",
+      "No prediction of ROI",
+      "Weak brand alignment",
+    ],
+  },
+  {
+    icon: "🏁",
+    title: "Organizers",
+    tone: "silver",
+    points: ["Manual matchmaking", "Time-consuming negotiations", "Limited analytics"],
+  },
+] as const;
+
+export const visionSignals = [
+  "Brand Values",
+  "Audience",
+  "Budget",
+  "Geography",
+  "Past Success",
+  "Motorsport Category",
+] as const;
+
+export const pitCrew = [
+  {
+    stage: "Discovery",
+    tool: "Perplexity",
+    purpose: "Rapid landscape scanning of motorsport sponsorship models",
+    output: "Domain brief + opportunity map",
+    saved: "~2 days",
+    example: "Sourced sponsorship spend patterns across F1, F2, Formula E and karting.",
+  },
+  {
+    stage: "Research",
+    tool: "ChatGPT",
+    purpose: "Synthesising interview notes and secondary research into themes",
+    output: "Affinity clusters + insight statements",
+    saved: "~3 days",
+    example: "Clustered 60+ raw pain points into 7 themes in a single working session.",
+  },
+  {
+    stage: "Define",
+    tool: "Claude",
+    purpose: "Pressure-testing problem statements and persona logic",
+    output: "Personas, JTBD, journey maps",
+    saved: "~1.5 days",
+    example: "Challenged my persona assumptions until only evidence-backed traits survived.",
+  },
+  {
+    stage: "Ideation",
+    tool: "Miro AI",
+    purpose: "Expanding and clustering feature concepts on the canvas",
+    output: "Feature matrix + prioritisation",
+    saved: "~1 day",
+    example: "Generated adjacent concepts I then filtered against user value and feasibility.",
+  },
+  {
+    stage: "Wireframes",
+    tool: "UX Pilot",
+    purpose: "Fast low-fidelity structure exploration",
+    output: "IA + lo-fi screens",
+    saved: "~2 days",
+    example: "Three dashboard structures explored before committing to a recommendation-first layout.",
+  },
+  {
+    stage: "UI Design",
+    tool: "Galileo AI + Figma AI",
+    purpose: "Accelerating visual exploration and component consistency",
+    output: "Hi-fi UI + design system",
+    saved: "~2.5 days",
+    example: "Seeded layout variants, then rebuilt every screen manually to design-system standards.",
+  },
+  {
+    stage: "Prototype",
+    tool: "Figma AI",
+    purpose: "Wiring flows and writing consistent microcopy at speed",
+    output: "Clickable prototype",
+    saved: "~1 day",
+    example: "Standardised empty states, tooltips and confirmation copy across 20+ screens.",
+  },
+  {
+    stage: "Presentation",
+    tool: "Gamma AI",
+    purpose: "Structuring the case narrative for stakeholders",
+    output: "Case study deck",
+    saved: "~1 day",
+    example: "Drafted the storyline; the argument, evidence and visuals stayed fully human-authored.",
+  },
+] as const;
+
+export const telemetry = [
+  {
+    label: "Competitive Analysis",
+    value: "9 platforms",
+    note: "Benchmarked sponsorship marketplaces, sports CRMs and ad-tech matching tools.",
+    bar: 82,
+  },
+  {
+    label: "Secondary Research",
+    value: "40+ sources",
+    note: "Industry reports, motorsport commercial studies, sponsorship ROI literature.",
+    bar: 74,
+  },
+  {
+    label: "Pain Points",
+    value: "60 → 7 themes",
+    note: "Raw frustrations clustered into seven recurring failure patterns.",
+    bar: 91,
+  },
+  {
+    label: "User Needs",
+    value: "3 personas",
+    note: "Team manager, brand sponsorship lead, event organiser.",
+    bar: 68,
+  },
+  {
+    label: "Market Trends",
+    value: "Data-led deals",
+    note: "Sponsorship decisions shifting from relationships to measurable audience fit.",
+    bar: 77,
+  },
+  {
+    label: "Stakeholder Insights",
+    value: "Trust > volume",
+    note: "Decision-makers wanted fewer, better-explained opportunities.",
+    bar: 88,
+  },
+] as const;
+
+export const decisions = [
+  {
+    id: "01",
+    title: "AI Match Dashboard",
+    hook: "Search-first → recommendation-first",
+    problem:
+      "Racing teams spent significant time manually searching for sponsors, often sending generic proposals with little understanding of sponsor expectations. Sponsors had no efficient way to discover teams aligned with their brand objectives.",
+    decision:
+      "I made the AI Match Dashboard the first experience users see after logging in. Instead of asking users to search manually, the platform immediately presents personalised sponsorship recommendations based on business goals, audience fit, motorsport category, budget and historical partnerships.",
+    reasoning:
+      "Research showed users valued reducing effort more than having more search options. Rather than overwhelming users with filters and long lists, I shifted the experience from search-first to recommendation-first, letting AI surface the most relevant opportunities immediately.",
+    impact: [
+      "Reduced cognitive load",
+      "Faster sponsor discovery",
+      "Personalised recommendations",
+      "Quicker decision-making",
+      "Improved first-time user experience",
+    ],
+  },
+  {
+    id: "02",
+    title: "Sponsor Profile Experience",
+    hook: "A profile that behaves like a decision tool",
+    problem:
+      "Sponsors needed more than a logo and company description to evaluate potential partnerships. They wanted confidence that the collaboration would deliver value.",
+    decision:
+      "Each sponsor profile was designed as a decision-support dashboard rather than a simple company page — company details, audience demographics, sponsorship history, preferred racing categories, investment range and AI-generated compatibility insights in a single view.",
+    reasoning:
+      "Users shouldn't have to navigate across multiple screens to gather essential information. Consolidating critical data into one structured layout makes evaluation faster and better informed.",
+    impact: [
+      "Reduced navigation effort",
+      "Increased information clarity",
+      "Better sponsorship evaluation",
+      "Higher confidence during decision-making",
+    ],
+  },
+  {
+    id: "03",
+    title: "AI Recommendation Cards",
+    hook: "Explainable AI, not a black box",
+    problem:
+      "Users often questioned why certain sponsorship opportunities appeared in their results. Without transparency, recommendations could feel random or unreliable.",
+    decision:
+      "Each recommendation card includes an AI confidence score with contextual explanations highlighting the strongest matching factors: shared audience interests, geographic alignment, previous sponsorship success, budget compatibility and motorsport category relevance.",
+    reasoning:
+      "AI should explain its reasoning rather than operate as a black box. Clear explanations help users understand the recommendation and build trust in the platform.",
+    impact: [
+      "Increased trust in AI",
+      "Greater transparency",
+      "Easier comparison of opportunities",
+      "More confident user decisions",
+    ],
+  },
+  {
+    id: "04",
+    title: "Collaboration Workspace",
+    hook: "One place instead of five tabs",
+    problem:
+      "Most sponsorship discussions happen across emails, spreadsheets and messaging platforms, leading to fragmented communication and lost context.",
+    decision:
+      "I designed a centralised collaboration workspace where teams and sponsors communicate, share documents, track discussions and manage partnership progress in one place.",
+    reasoning:
+      "Reducing context switching improves productivity. Keeping conversations, files and sponsorship details together creates smoother collaboration and less friction.",
+    impact: [
+      "Simplified communication",
+      "Reduced context switching",
+      "Better collaboration",
+      "Improved workflow efficiency",
+    ],
+  },
+  {
+    id: "05",
+    title: "Analytics Dashboard",
+    hook: "Insights over raw data",
+    problem:
+      "Users struggled to determine whether sponsorship efforts were delivering meaningful results. Without clear metrics it was difficult to justify investment or optimise future partnerships.",
+    decision:
+      "The analytics dashboard prioritises actionable insights over raw data. Engagement, audience reach, ROI indicators, partnership performance and AI-generated recommendations are surfaced prominently with simple visualisations.",
+    reasoning:
+      "Decision-makers need insights, not dashboards filled with numbers. The design highlights what needs attention first and lets users explore deeper metrics only when needed.",
+    impact: [
+      "Faster business decisions",
+      "Improved visibility into performance",
+      "Easier ROI evaluation",
+      "More strategic planning",
+    ],
+  },
+  {
+    id: "06",
+    title: "AI Throughout the UX Process",
+    hook: "AI as co-pilot, never the driver",
+    problem:
+      "Traditional UX workflows involve repetitive manual tasks — drafting personas, organising research, writing UX copy, creating multiple design explorations. Essential, but time-intensive.",
+    decision:
+      "Rather than using AI as a replacement for design, I integrated it selectively across the UX process to accelerate repetitive tasks while keeping strategic decisions human-led. AI supported research synthesis, persona generation, ideation, UX writing and early design exploration.",
+    reasoning:
+      "The value of AI lies in accelerating execution, not replacing critical thinking. Automating repetitive activities freed time for solving user problems, validating ideas and refining the experience.",
+    impact: [
+      "Faster research synthesis",
+      "Quicker design iterations",
+      "More exploration in less time",
+      "Consistent UX writing",
+      "Human-centered decisions throughout",
+    ],
+  },
+] as const;
+
+export const screens = [
+  {
+    name: "AI Match Dashboard",
+    note: "Recommendation-first home. The best-fit partnerships lead; search is the fallback, not the default.",
+  },
+  {
+    name: "Smart Recommendations",
+    note: "Confidence scores and matching factors turn a ranked list into an explainable decision.",
+  },
+  {
+    name: "Sponsor Profiles",
+    note: "Everything needed to evaluate a partner consolidated into one scannable decision surface.",
+  },
+  {
+    name: "Team Analytics",
+    note: "Audience reach and performance framed as opportunity signals rather than vanity charts.",
+  },
+  {
+    name: "Communication Workspace",
+    note: "Threads, files and deal status in one room, so context never leaves the partnership.",
+  },
+  {
+    name: "AI Insights Panel",
+    note: "Proactive nudges: what changed, what it means, and the next best action to take.",
+  },
+] as const;
+
+export const strategy = [
+  {
+    flag: "🏁",
+    week: "Week 1",
+    title: "Understanding the Track",
+    phase: "Introduction",
+    items: ["Problem Statement", "Project Goals", "Business Objectives"],
+    deliverables: ["Project Brief", "Problem Statement", "Goals"],
+  },
+  {
+    flag: "🏎",
+    week: "Weeks 2–3",
+    title: "Reading the Track",
+    phase: "Research",
+    items: ["Secondary Research", "Competitive Analysis", "User Research", "Stakeholder Insights", "Pain Point Analysis"],
+    deliverables: ["Research Report", "Competitive Benchmark", "User Needs"],
+  },
+  {
+    flag: "🏁",
+    week: "Week 3",
+    title: "Choosing the Racing Line",
+    phase: "Define & Ideation",
+    items: ["Affinity Mapping", "User Personas", "Journey Maps", "Feature Prioritization", "Information Architecture"],
+    deliverables: ["Personas", "Journey Maps", "IA", "Feature Matrix"],
+  },
+  {
+    flag: "🏎",
+    week: "Weeks 4–5",
+    title: "Building the Machine",
+    phase: "Design Process",
+    items: ["Wireframes", "User Flow", "High Fidelity UI", "Design System", "Prototype", "AI-assisted Iterations"],
+    deliverables: ["Wireframes", "Final UI", "Prototype"],
+  },
+  {
+    flag: "🏁",
+    week: "Week 6",
+    title: "Testing the Machine",
+    phase: "Validation",
+    items: ["Prototype Testing", "Accessibility", "Iteration", "UX Improvements", "Final Polish"],
+    deliverables: ["Validated Prototype", "Accessibility Review", "Final Design"],
+  },
+  {
+    flag: "🏆",
+    week: "Week 7",
+    title: "Crossing the Finish Line",
+    phase: "Outcome",
+    items: ["Final Outcome", "Business Impact", "AI Contribution", "Future Enhancements"],
+    deliverables: ["Case Study", "Prototype", "Presentation"],
+  },
+] as const;
+
+export const gauges = [
+  { label: "Time Saved", read: "High", value: 88 },
+  { label: "Efficiency", read: "Optimized", value: 82 },
+  { label: "Productivity", read: "Accelerated", value: 90 },
+  { label: "Innovation", read: "Improved", value: 78 },
+  { label: "Design Velocity", read: "Human-led", value: 85 },
+] as const;
+
+export const buildStages = [
+  { label: "Information Architecture", note: "Mapping every entity — teams, sponsors, events, deals — before a single pixel." },
+  { label: "User Flow", note: "Login → recommendation → evaluation → conversation → agreement, in the fewest steps." },
+  { label: "Low Fidelity", note: "Three dashboard structures sketched, tested against the recommendation-first bet." },
+  { label: "Mid Fidelity", note: "Density, hierarchy and scan patterns resolved before visual polish." },
+  { label: "High Fidelity", note: "Carbon-dark UI with electric accents; contrast validated for accessibility." },
+  { label: "Design System", note: "Tokens, cards, data viz and AI-explanation patterns as reusable components." },
+  { label: "Prototype", note: "Clickable end-to-end journey used for validation and stakeholder walkthroughs." },
+] as const;

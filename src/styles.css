@@ -43,7 +43,14 @@
   --color-mint: var(--mint);
   --color-butter: var(--butter);
   --color-ink: var(--ink);
+
+  --color-carbon: var(--carbon);
+  --color-gunmetal: var(--gunmetal);
+  --color-silver: var(--silver);
+  --color-racing: var(--racing);
+  --color-electric: var(--electric);
 }
+
 
 :root {
   --radius: 1.25rem;
@@ -76,7 +83,15 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
   --ring: var(--accent);
+
+  /* Luxury motorsport palette */
+  --carbon: oklch(0.11 0.005 260);
+  --gunmetal: oklch(0.28 0.01 255);
+  --silver: oklch(0.82 0.005 260);
+  --racing: oklch(0.58 0.24 27);
+  --electric: oklch(0.68 0.19 245);
 }
+
 
 
 .dark {
@@ -143,4 +158,82 @@
 }
 @utility animate-spin-slow {
   animation: spin-slow 30s linear infinite;
+}
+
+/* ---------- SponsorSphere cinematic utilities ---------- */
+@utility carbon-weave {
+  background-color: var(--carbon);
+  background-image:
+    linear-gradient(27deg, oklch(1 0 0 / 4%) 5%, transparent 5%, transparent 45%, oklch(1 0 0 / 4%) 45%, oklch(1 0 0 / 4%) 55%, transparent 55%),
+    linear-gradient(-27deg, oklch(1 0 0 / 3%) 5%, transparent 5%, transparent 45%, oklch(1 0 0 / 3%) 45%, oklch(1 0 0 / 3%) 55%, transparent 55%);
+  background-size: 8px 8px;
+}
+
+@utility blueprint-grid {
+  background-image:
+    linear-gradient(oklch(0.68 0.19 245 / 12%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.68 0.19 245 / 12%) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes smoke-drift {
+  0%   { transform: translate3d(-6%, 0, 0) scale(1.1); opacity: 0.35; }
+  50%  { transform: translate3d(6%, -4%, 0) scale(1.25); opacity: 0.55; }
+  100% { transform: translate3d(-6%, 0, 0) scale(1.1); opacity: 0.35; }
+}
+@utility animate-smoke {
+  animation: smoke-drift 22s ease-in-out infinite;
+}
+
+@keyframes streak {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateX(320%); opacity: 0; }
+}
+@utility animate-streak {
+  animation: streak 4.5s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-node {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.68 0.19 245 / 45%); }
+  50%      { box-shadow: 0 0 0 14px oklch(0.68 0.19 245 / 0%); }
+}
+@utility animate-node {
+  animation: pulse-node 2.6s ease-out infinite;
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -120; }
+}
+@utility animate-dash {
+  animation: dash-flow 3s linear infinite;
+}
+
+@keyframes caution {
+  0%, 45%  { opacity: 1; }
+  50%, 95% { opacity: 0.15; }
+}
+@utility animate-caution {
+  animation: caution 1.4s steps(1, end) infinite;
+}
+
+@utility glass-panel {
+  background: linear-gradient(150deg, oklch(1 0 0 / 8%), oklch(1 0 0 / 2%));
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid oklch(1 0 0 / 12%);
+}
+
+@utility text-stroke {
+  -webkit-text-stroke: 1px oklch(1 0 0 / 30%);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-smoke, .animate-streak, .animate-node, .animate-dash, .animate-caution {
+    animation: none !important;
+  }
+}
+
+@utility font-hand {
+  font-family: "Caveat", ui-rounded, cursive;
 }

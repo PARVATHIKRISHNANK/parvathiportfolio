@@ -1,520 +1,1150 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, ExternalLink, X } from "lucide-react";
+
+import { useCinematic, scrollToId } from "@/lib/use-cinematic";
+import {
+  problemCards,
+  visionSignals,
+  pitCrew,
+  telemetry,
+  decisions,
+  screens,
+  strategy,
+  gauges,
+  buildStages,
+} from "@/lib/sponsorsphere-data";
+
+import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import research from "@/assets/sponsorsphere-research.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
 import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
 import market from "@/assets/sponsorsphere-market.png.asset.json";
-import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
+import garageImg from "@/assets/ss-garage.jpg";
+import brakesImg from "@/assets/ss-brakes.jpg";
+import trophyImg from "@/assets/ss-trophy.jpg";
+import trackImg from "@/assets/ss-track.jpg";
+
+const BEHANCE = "https://www.behance.net/gallery/212163931/AI-Powered-UX-Case-Study";
 
 export const Route = createFileRoute("/case-studies/sponsorsphere")({
   head: () => ({
     meta: [
-      { title: "SponsorSphere — AI-Powered Sponsorship Platform · Parvathi K" },
+      { title: "SponsorSphere — Designing the Future of Motorsport Sponsorship with AI" },
       {
         name: "description",
         content:
-          "A mobile-first AI-assisted sponsorship platform helping brands discover, evaluate and manage motorsport sponsorships.",
+          "A cinematic UX case study: an AI-powered platform connecting motorsport teams, sponsors and organizers through intelligent recommendations and predictive insights.",
       },
-      { property: "og:title", content: "SponsorSphere — Case Study" },
+      { property: "og:title", content: "SponsorSphere — AI-Powered Motorsport Sponsorship" },
       {
         property: "og:description",
         content:
-          "Designing an AI-assisted platform that simplifies motorsport sponsorship discovery, management and ROI tracking.",
+          "Scroll through the race: problem, research, AI-assisted UX process, design decisions and outcomes behind SponsorSphere.",
+      },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "SponsorSphere — AI-Powered Motorsport Sponsorship" },
+      {
+        name: "twitter:description",
+        content: "A cinematic UX case study on AI-assisted product design for motorsport sponsorship.",
       },
     ],
   }),
   component: SponsorSphere,
 });
 
-function Section({
-  eyebrow,
-  title,
-  children,
-  tone = "default",
-}: {
-  eyebrow?: string;
-  title?: string;
-  children: React.ReactNode;
-  tone?: "default" | "blush" | "mint" | "lavender" | "butter";
-}) {
-  const bg =
-    tone === "blush"
-      ? "bg-blush/30"
-      : tone === "mint"
-        ? "bg-mint/30"
-        : tone === "lavender"
-          ? "bg-lavender/30"
-          : tone === "butter"
-            ? "bg-butter/40"
-            : "";
+/* ------------------------------------------------------------------ */
+/* Shared atoms                                                        */
+/* ------------------------------------------------------------------ */
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <section className={`${bg} border-t border-border`}>
-      <div className="mx-auto max-w-[1200px] px-6 md:px-10 py-20 md:py-28">
-        {eyebrow && (
-          <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-4">
-            ({eyebrow})
-          </div>
-        )}
-        {title && (
-          <h2 className="font-display font-light text-3xl md:text-5xl leading-[1.05] tracking-tight mb-10 max-w-3xl">
-            {title}
-          </h2>
-        )}
-        {children}
-      </div>
+    <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.32em] text-muted-foreground">
+      <span className="inline-block h-px w-8 bg-racing" />
+      {children}
+    </div>
+  );
+}
+
+function Shell({
+  id,
+  children,
+  className = "",
+}: {
+  id?: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <section id={id} className={`relative overflow-hidden ${className}`}>
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-10">{children}</div>
     </section>
   );
 }
 
-function Pill({ children }: { children: React.ReactNode }) {
+function Streaks() {
   return (
-    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs border border-border bg-background/60 backdrop-blur">
-      {children}
-    </span>
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {[18, 42, 71].map((top, i) => (
+        <span
+          key={top}
+          className="absolute h-px w-40 animate-streak bg-gradient-to-r from-transparent via-electric to-transparent"
+          style={{ top: `${top}%`, animationDelay: `${i * 1.6}s` }}
+        />
+      ))}
+    </div>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Page                                                                */
+/* ------------------------------------------------------------------ */
+
 function SponsorSphere() {
+  useCinematic();
+  const [openDecision, setOpenDecision] = useState<string | null>(null);
+  const [explored, setExplored] = useState<string[]>([]);
+  const [activeNode, setActiveNode] = useState(0);
+
+  const openCard = (id: string) => {
+    setOpenDecision(id);
+    setExplored((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  };
+
+  const allExplored = explored.length === decisions.length;
+
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-32 -left-24 h-[520px] w-[520px] rounded-full bg-lavender/50 blur-3xl animate-float-slow" />
-        <div className="absolute top-[40%] -right-32 h-[560px] w-[560px] rounded-full bg-blush/50 blur-3xl animate-float-slower" />
+    <main className="relative bg-carbon text-foreground selection:bg-racing">
+      {/* progress rail */}
+      <div className="fixed inset-x-0 top-0 z-50 h-[3px] bg-white/5">
+        <div
+          data-progress
+          className="h-full origin-left scale-x-0 bg-gradient-to-r from-electric via-silver to-racing"
+        />
       </div>
 
-      {/* Nav */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display text-2xl tracking-tight">
-            Parvathi<span className="text-accent">.</span>
-          </Link>
-          <Link
-            to="/"
-            className="text-sm inline-flex items-center gap-1.5 border border-foreground/80 rounded-full px-4 py-2 hover:bg-foreground hover:text-background transition"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to work
-          </Link>
+      {/* floating back nav */}
+      <div className="fixed left-4 top-5 z-50 md:left-8">
+        <Link
+          to="/"
+          className="group inline-flex items-center gap-2 rounded-full glass-panel px-4 py-2 text-xs font-medium tracking-wide text-foreground/80 transition hover:text-foreground"
+        >
+          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+          Back to portfolio
+        </Link>
+      </div>
+
+      {/* ============ 01 · HERO ============ */}
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden carbon-weave">
+        <div aria-hidden className="absolute inset-0">
+          <img
+            src={trackImg}
+            alt=""
+            width={1600}
+            height={912}
+            className="h-full w-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-carbon/60 via-carbon/85 to-carbon" />
+          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[80vw] -translate-x-1/2 animate-smoke rounded-full bg-electric/10 blur-[120px]" />
+          <div className="absolute bottom-0 left-1/4 h-[40vh] w-[40vw] animate-smoke rounded-full bg-racing/10 blur-[130px]" />
         </div>
-      </header>
+        <Streaks />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-10 pt-16 md:pt-24 pb-16 animate-rise">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-6">
-                Case Study 01 · 2024
-              </div>
-              <h1 className="font-display font-light text-[clamp(2.5rem,7vw,4.5rem)] leading-[0.98] tracking-[-0.02em]">
-                Sponsor<span className="italic text-accent">Sphere</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-lg md:text-xl text-foreground/85 leading-relaxed">
-                AI-Powered Sponsorship Platform for Motorsport Events. Designing an
-                AI-assisted platform that simplifies how brands discover, evaluate,
-                and manage sponsorship opportunities in motorsports.
-              </p>
+        <div className="relative mx-auto grid w-full max-w-[1280px] items-center gap-12 px-6 pb-24 pt-32 md:px-10 lg:grid-cols-[1.05fr_1fr]">
+          <div>
+            <Eyebrow>Case Study 01 · Motorsport × AI</Eyebrow>
+            <h1
+              data-split
+              className="mt-6 font-display text-[clamp(3rem,9vw,7.5rem)] font-black uppercase leading-[0.86] tracking-[-0.04em]"
+            >
+              Sponsor
+              <span className="text-stroke">Sphere</span>
+            </h1>
+            <p className="mt-6 max-w-xl font-display text-xl font-light leading-snug text-silver md:text-2xl">
+              Designing the Future of Motorsport Sponsorship with AI
+            </p>
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+              Finding the right sponsor shouldn't feel like searching the entire paddock before race
+              day. SponsorSphere transforms sponsorship discovery into an AI-powered experience by
+              connecting racing teams, sponsors and organizers through intelligent recommendations
+              and predictive insights.
+            </p>
 
-              <div className="mt-8 grid sm:grid-cols-2 gap-6 border-t border-border pt-8">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Role</div>
-                  <div className="font-display text-lg">UX / UI Designer</div>
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Platform</div>
-                  <div className="font-display text-lg">B2B Product · Mobile-first</div>
-                </div>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-2">
-                {[
-                  "Product Discovery",
-                  "UX Research",
-                  "IA",
-                  "User Flows",
-                  "Wireframing",
-                  "Visual Design",
-                  "AI-assisted Exploration",
-                  "Prototype",
-                ].map((r) => (
-                  <Pill key={r}>{r}</Pill>
-                ))}
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className="text-xs uppercase tracking-widest text-muted-foreground mr-2 self-center">
-                  Tools
-                </span>
-                {["Figma", "ChatGPT", "Miro", "Whimsical", "Visily", "Uizard", "Motiff"].map((t) => (
-                  <Pill key={t}>{t}</Pill>
-                ))}
-              </div>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <button
+                onClick={() => scrollToId("garage")}
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-racing px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-foreground transition-transform duration-300 hover:scale-[1.04]"
+              >
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                Start the Race
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <a
+                href={BEHANCE}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full glass-panel px-6 py-4 text-xs font-medium uppercase tracking-[0.18em] text-silver transition hover:text-foreground"
+              >
+                Full Behance case <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             </div>
 
-            <div className="relative order-first lg:order-last">
-              <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm animate-float-slow">
-                <div
-                  aria-hidden
-                  className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-accent/20 via-lavender/20 to-blush/20 blur-2xl opacity-60"
-                />
-                <img
-                  src={heroCar.url}
-                  alt="Formula 1 race car representing motorsport sponsorship opportunities"
-                  width={1200}
-                  height={800}
-                  className="relative w-full h-auto object-cover rounded-3xl"
-                />
-              </div>
-            </div>
+            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-6">
+              {[
+                ["Role", "End-to-end UX/UI"],
+                ["Platform", "B2B Product"],
+                ["Timeline", "7 weeks"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                    {k}
+                  </dt>
+                  <dd className="mt-1 text-sm text-silver">{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
+
+          <div className="relative">
+            <div aria-hidden className="absolute inset-0 scale-90 rounded-full bg-electric/25 blur-[90px]" />
+            <img
+              src={heroCar.url}
+              alt="Formula-style race car representing the SponsorSphere case study"
+              className="relative w-full animate-float-slow drop-shadow-[0_40px_80px_oklch(0_0_0/0.7)]"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-6 left-1/2 h-6 w-3/4 -translate-x-1/2 rounded-[100%] bg-black/70 blur-2xl"
+            />
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+          <div className="mx-auto h-10 w-px bg-gradient-to-b from-transparent to-silver/60" />
+          <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+            Scroll
+          </span>
         </div>
       </section>
 
-      {/* About */}
-      <Section eyebrow="About the Project" title="A single, intelligent home for the entire sponsorship journey." tone="lavender">
-        <div className="grid md:grid-cols-2 gap-10 text-lg text-foreground/85 leading-relaxed">
-          <p>
-            SponsorSphere is a mobile-first sponsorship platform designed to
-            bridge the gap between sponsors and motorsport teams. Brands can
-            discover racing opportunities, evaluate packages, manage payments,
-            monitor campaign performance and measure sponsorship ROI from one
-            experience.
-          </p>
-          <p>
-            Unlike traditional sponsorship workflows that rely on emails,
-            spreadsheets and manual coordination, SponsorSphere centralizes
-            the complete sponsorship journey into one intelligent platform.
-          </p>
-        </div>
-      </Section>
-
-      {/* Problem */}
-      <Section eyebrow="Problem & Challenge" title="The sponsorship process in motorsports is highly fragmented.">
-        <div className="grid md:grid-cols-2 gap-10">
-          <p className="text-lg text-foreground/85 leading-relaxed">
-            Brands struggle to discover relevant racing events, compare
-            sponsorship opportunities and evaluate expected returns. Racing
-            teams spend significant effort manually finding sponsors,
-            negotiating packages and managing branding logistics. The absence
-            of a centralized ecosystem creates delays, poor communication and
-            limited visibility.
-          </p>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
-              Business Problems
-            </div>
-            <ul className="space-y-3">
-              {[
-                "Difficult for sponsors to discover suitable racing opportunities",
-                "Manual sponsor-team communication",
-                "No transparent ROI tracking",
-                "Complex sponsorship package management",
-                "Disconnected payment workflows",
-              ].map((b) => (
-                <li key={b} className="flex gap-3 text-foreground/85">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* ============ 02 · ENTER THE GARAGE ============ */}
+      <section id="garage" data-garage className="relative isolate overflow-hidden">
+        <div className="relative h-[70svh] overflow-hidden md:h-[86svh]">
+          <img
+            data-garage-car
+            src={garageImg}
+            alt="Race car inside a dark garage as the doors open"
+            loading="lazy"
+            width={1600}
+            height={912}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-carbon/70 via-transparent to-carbon" />
+          {/* garage doors */}
+          <div
+            data-door="top"
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-1/2 bg-[repeating-linear-gradient(180deg,var(--gunmetal)_0_10px,var(--carbon)_10px_20px)]"
+          />
+          <div
+            data-door="bottom"
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 h-1/2 bg-[repeating-linear-gradient(180deg,var(--gunmetal)_0_10px,var(--carbon)_10px_20px)]"
+          />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-14">
-          <div className="rounded-3xl border border-border bg-mint/30 p-8">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-              Design Goal
+        <Shell className="py-20 md:py-28">
+          <Eyebrow>Chapter 01 · The Garage</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-4xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            Every Championship Begins Inside the Garage
+          </h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-2">
+            <div data-reveal className="space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+              <p>
+                Behind every winning race is months of preparation. Behind every successful
+                sponsorship is the same.
+              </p>
+              <p>
+                Yet sponsorship discovery remains fragmented, manual and driven by spreadsheets,
+                personal networks and endless cold outreach.
+              </p>
             </div>
-            <div className="font-display text-xl mb-4">Enable sponsors to</div>
-            <ul className="space-y-2">
-              {[
-                "Discover events",
-                "Select drivers and vehicles",
-                "Customize branding",
-                "Securely manage sponsorship payments",
-                "Track sponsorship performance",
-                "Measure ROI",
-              ].map((g) => (
-                <li key={g} className="flex items-center gap-2 text-foreground/85">
-                  <Check className="h-4 w-4 text-accent" /> {g}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-border bg-butter/40 p-8">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-              Success Criteria
+            <div data-reveal className="space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+              <p>Teams struggle to find relevant sponsors.</p>
+              <p>Sponsors struggle to identify the right teams.</p>
+              <p>Organizers struggle to create meaningful partnerships.</p>
+              <p className="font-display text-xl font-semibold text-foreground md:text-2xl">
+                The opportunity wasn't a lack of sponsors. It was a lack of intelligence.
+              </p>
             </div>
-            <ul className="space-y-3 font-display text-lg leading-snug">
-              <li>Reduce sponsorship onboarding complexity.</li>
-              <li>Improve sponsor confidence through transparency.</li>
-              <li>Enable data-driven sponsorship decisions.</li>
-            </ul>
           </div>
-        </div>
-      </Section>
+        </Shell>
+      </section>
 
-      {/* Research */}
-      <Section eyebrow="Research & Discovery" title="Understanding sponsors, teams and organizers." tone="blush">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <p className="text-lg text-foreground/85 leading-relaxed">
-            Rather than relying on assumptions, I combined secondary research,
-            AI-assisted exploration, empathy mapping, personas and journey
-            mapping to identify recurring pain points across the sponsorship
-            ecosystem.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Secondary Research",
-              "Competitive Analysis",
-              "Empathy Mapping",
-              "Personas",
-              "Journey Mapping",
-              "Card Sorting",
-              "5W1H",
-              "SWOT Analysis",
-            ].map((m) => (
-              <Pill key={m}>{m}</Pill>
+      {/* ============ 03 · RED FLAG ============ */}
+      <section className="relative overflow-hidden border-y border-border">
+        <div aria-hidden className="absolute inset-0">
+          <img
+            src={brakesImg}
+            alt=""
+            loading="lazy"
+            width={1600}
+            height={912}
+            className="h-full w-full object-cover opacity-[0.18]"
+          />
+          <div className="absolute inset-0 bg-carbon/85" />
+        </div>
+
+        <Shell className="py-24 md:py-32">
+          <div className="flex flex-wrap items-center gap-4">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="h-3 w-3 animate-caution rounded-full bg-racing"
+                style={{ animationDelay: `${i * 0.25}s` }}
+              />
+            ))}
+            <Eyebrow>Red Flag · The Challenge</Eyebrow>
+          </div>
+
+          <h2
+            data-split
+            className="mt-6 max-w-3xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            The Race Was Slowing Down
+          </h2>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {problemCards.map((card) => (
+              <article
+                key={card.title}
+                data-reveal
+                className="group relative rounded-3xl glass-panel p-7 transition duration-500 hover:-translate-y-2"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-racing to-transparent opacity-0 transition group-hover:opacity-100"
+                />
+                <div className="text-3xl">{card.icon}</div>
+                <h3 className="mt-5 font-display text-2xl font-semibold">{card.title}</h3>
+                <ul className="mt-5 space-y-3">
+                  {card.points.map((p) => (
+                    <li key={p} className="flex gap-3 text-sm text-muted-foreground">
+                      <span className="mt-2 h-1 w-4 shrink-0 bg-racing/70" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
+
+          <p
+            data-reveal
+            className="mt-14 max-w-3xl font-display text-2xl font-light leading-tight text-silver md:text-4xl"
+          >
+            Great sponsorship opportunities were being lost{" "}
+            <span className="text-racing">before the race even began.</span>
+          </p>
+        </Shell>
+      </section>
+
+      {/* ============ 04 · THE STARTING GRID ============ */}
+      <Shell className="py-24 md:py-32">
+        <div aria-hidden className="absolute inset-x-0 top-0 h-full blueprint-grid opacity-30" />
+        <div className="relative">
+          <Eyebrow>The Starting Grid</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 font-display text-[clamp(2.2rem,6vw,5rem)] font-bold uppercase tracking-[-0.03em]"
+          >
+            The Vision
+          </h2>
+          <p
+            data-reveal
+            className="mt-8 max-w-3xl font-display text-2xl font-light leading-snug text-silver md:text-3xl"
+          >
+            Imagine if sponsorship worked like an AI race engineer.
+          </p>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {visionSignals.map((s, i) => (
+              <div
+                key={s}
+                data-reveal
+                className="flex items-center gap-4 rounded-2xl glass-panel px-6 py-5 transition hover:border-electric/40"
+              >
+                <span className="font-mono text-xs text-electric">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm font-medium tracking-wide">{s}</span>
+              </div>
+            ))}
+          </div>
+
+          <p data-reveal className="mt-12 max-w-2xl text-base text-muted-foreground">
+            …and instantly recommends the perfect partnership.
+          </p>
+          <p data-reveal className="mt-3 font-display text-3xl font-bold uppercase md:text-5xl">
+            That became <span className="text-electric">SponsorSphere.</span>
+          </p>
+        </div>
+      </Shell>
+
+      {/* ============ 05 · THE AI PIT CREW ============ */}
+      <section className="relative overflow-hidden border-y border-border carbon-weave">
+        <Shell className="py-24 md:py-32">
+          <Eyebrow>The AI Pit Crew</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-4xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            Eight Stops. One Human in the Cockpit.
+          </h2>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-[320px_1fr]">
+            {/* node rail */}
+            <div className="relative">
+              <span
+                aria-hidden
+                className="absolute left-[15px] top-3 h-[calc(100%-24px)] w-px bg-gradient-to-b from-electric via-electric/40 to-transparent"
+              />
+              <ul className="space-y-2">
+                {pitCrew.map((node, i) => (
+                  <li key={node.stage}>
+                    <button
+                      onMouseEnter={() => setActiveNode(i)}
+                      onFocus={() => setActiveNode(i)}
+                      onClick={() => setActiveNode(i)}
+                      className={`group flex w-full items-center gap-4 rounded-xl px-2 py-3 text-left transition ${
+                        activeNode === i ? "bg-white/5" : "hover:bg-white/[0.03]"
+                      }`}
+                    >
+                      <span
+                        className={`relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border text-[10px] font-mono transition ${
+                          activeNode === i
+                            ? "animate-node border-electric bg-electric/20 text-foreground"
+                            : "border-border bg-carbon text-muted-foreground"
+                        }`}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={`font-display text-lg font-semibold tracking-tight transition ${
+                          activeNode === i ? "text-foreground" : "text-muted-foreground"
+                        }`}
+                      >
+                        {node.stage}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* detail panel */}
+            <div className="rounded-3xl glass-panel p-8 md:p-10">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <span className="rounded-full border border-electric/40 bg-electric/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-electric">
+                  {pitCrew[activeNode].tool}
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Time saved · {pitCrew[activeNode].saved}
+                </span>
+              </div>
+              <h3 className="mt-6 font-display text-3xl font-bold md:text-4xl">
+                {pitCrew[activeNode].stage}
+              </h3>
+              <div className="mt-8 grid gap-8 sm:grid-cols-2">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                    Purpose
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-silver">
+                    {pitCrew[activeNode].purpose}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                    Output
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-silver">
+                    {pitCrew[activeNode].output}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-8 border-t border-border pt-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                  In practice
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {pitCrew[activeNode].example}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p
+            data-reveal
+            className="mt-14 max-w-4xl rounded-3xl border border-electric/25 bg-electric/[0.06] p-8 font-display text-xl font-light leading-snug text-silver md:text-2xl"
+          >
+            "AI accelerated repetitive tasks while human judgment guided every strategic design
+            decision."
+          </p>
+        </Shell>
+      </section>
+
+      {/* ============ 06 · READING THE TRACK ============ */}
+      <Shell className="py-24 md:py-32">
+        <Eyebrow>Reading the Track · Research</Eyebrow>
+        <h2
+          data-split
+          className="mt-6 max-w-3xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+        >
+          Telemetry Before Tactics
+        </h2>
+
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {telemetry.map((t) => (
+            <article
+              key={t.label}
+              data-reveal
+              className="rounded-2xl glass-panel p-6 transition hover:border-electric/40"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                  {t.label}
+                </p>
+                <span className="h-2 w-2 rounded-full bg-electric" />
+              </div>
+              <p className="mt-4 font-display text-2xl font-bold tracking-tight">{t.value}</p>
+              <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-electric to-racing"
+                  style={{ width: `${t.bar}%` }}
+                />
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t.note}</p>
+            </article>
+          ))}
         </div>
 
-        <div className="mt-12 space-y-6">
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
           {[
-            { src: market.url, alt: "Market analysis", cap: "Market analysis, SWOT, empathy map and 5W1H" },
-            { src: research.url, alt: "User research", cap: "Objectives, card sorting, value proposition and personas" },
-          ].map((f) => (
-            <figure key={f.alt} className="rounded-3xl overflow-hidden border border-border bg-card">
-              <img src={f.src} alt={f.alt} className="w-full h-auto block" />
-              <figcaption className="text-xs text-muted-foreground p-4 border-t border-border">
-                {f.cap}
-              </figcaption>
+            { src: research.url, alt: "User research collage: findings, personas and value propositions" },
+            { src: market.url, alt: "Market analysis: SWOT, empathy maps and research findings" },
+          ].map((img) => (
+            <figure key={img.src} data-reveal className="overflow-hidden rounded-3xl border border-border bg-white">
+              <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
             </figure>
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-12">
-          {[
-            { t: "Sponsors need confidence", d: "They hesitate to invest without clear visibility into expected returns." },
-            { t: "Discovery takes too long", d: "Finding suitable cars, drivers and packages requires extensive manual effort." },
-            { t: "Measuring ROI is difficult", d: "Existing sponsorship models rarely provide meaningful analytics after activation." },
-            { t: "Communication is fragmented", d: "Most discussions happen across emails and calls, making collaboration inefficient." },
-          ].map((i) => (
-            <div key={i.t} className="rounded-2xl border border-border p-6 bg-background/70 backdrop-blur">
-              <div className="font-display text-xl mb-2">{i.t}</div>
-              <div className="text-foreground/75">{i.d}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-14 rounded-3xl bg-foreground text-background p-10 md:p-14">
-          <div className="text-xs uppercase tracking-[0.22em] text-background/60 mb-4">
-            Opportunity Statement
-          </div>
-          <p className="font-display font-light text-2xl md:text-4xl leading-tight">
-            How might we simplify sponsorship discovery while providing
-            sponsors with <em className="text-accent">measurable business value</em>?
-          </p>
-        </div>
-      </Section>
-
-      {/* Defining */}
-      <Section eyebrow="Defining the Experience" title="From insights to product architecture.">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
-              Information Architecture
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {["Home", "Events", "Cars", "Drivers", "Brand Customization", "Payments", "ROI Dashboard", "Community", "Profile"].map((s) => (
-                <Pill key={s}>{s}</Pill>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
-              Sponsor Journey
-            </div>
-            <ol className="space-y-2">
-              {["Discover Event","Select Car","Choose Driver","Customize Branding","Review Package","Payment","Track Campaign","View ROI"].map((s, i) => (
-                <li key={s} className="flex items-center gap-3">
-                  <span className="font-mono text-xs w-6 text-muted-foreground">0{i+1}</span>
-                  <span className="font-display text-lg">{s}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-14">
-          <div className="rounded-3xl border border-border p-8 bg-blush/30">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Pain Points</div>
-            <ul className="space-y-2 text-foreground/85">
-              {["Searching across multiple sources","Unclear sponsorship value","Manual negotiations","Complex payments","No campaign visibility"].map((p) => (
-                <li key={p}>· {p}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-border p-8 bg-mint/30">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">UX Opportunities</div>
-            <ul className="space-y-2 text-foreground/85">
-              {["Personalized recommendations","Simple checkout","Campaign dashboard","Performance analytics","Transparent sponsorship lifecycle"].map((p) => (
-                <li key={p}>· {p}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* Ideation */}
-      <Section eyebrow="Ideation" title="Exploring solutions before pixels." tone="butter">
-        <p className="text-lg text-foreground/85 leading-relaxed max-w-3xl mb-10">
-          Instead of designing immediately, I explored multiple concepts
-          focused on discoverability, transparency and engagement.
-          Brainstorming generated ideas around personalization, branding
-          flexibility and post-event engagement.
+        <p
+          data-reveal
+          className="mt-14 max-w-3xl font-display text-2xl font-light leading-tight text-silver md:text-4xl"
+        >
+          Final insight — <span className="text-foreground">matching</span> was the biggest
+          challenge, not funding.
         </p>
+      </Shell>
 
-        <figure className="rounded-3xl overflow-hidden border border-border bg-card mb-12">
-          <img src={ideation.url} alt="Ideation and brainstorming mind-map" className="w-full h-auto block" />
-          <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border">
-            Brainstorming with Ideamap.ai — feature clusters
-          </figcaption>
-        </figure>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="rounded-2xl border border-border p-6 bg-background/70">
-            <div className="text-xs uppercase tracking-widest text-accent mb-3">High Priority</div>
-            <ul className="space-y-1 text-foreground/85">
-              {["AI event recommendations","Driver selection","Vehicle selection","Brand customization","ROI tracking","Secure payments"].map((f) => <li key={f}>· {f}</li>)}
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-border p-6 bg-background/70">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Medium Priority</div>
-            <ul className="space-y-1 text-foreground/85">
-              {["Community","Forums","Networking","Live event updates","VIP access"].map((f) => <li key={f}>· {f}</li>)}
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-border p-6 bg-background/70">
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Design Principles</div>
-            <ul className="space-y-1 text-foreground/85">
-              {["Reduce cognitive load","Guide step by step","Visual-first decisions","Build trust via transparency","Measure success"].map((f) => <li key={f}>· {f}</li>)}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* Design Solution */}
-      <Section eyebrow="Design Solution" title="From ideas to interfaces." tone="lavender">
-        <p className="text-lg text-foreground/85 leading-relaxed max-w-3xl mb-10">
-          After validating IA, wireframes reduced friction across the
-          sponsorship journey and evolved into a modern mobile-first
-          interface emphasizing clarity, discoverability and usability.
-        </p>
-
-        <figure className="rounded-3xl overflow-hidden border border-border bg-card mb-12">
-          <img src={design.url} alt="Wireframes and visual design" className="w-full h-auto block" />
-          <figcaption className="text-xs text-muted-foreground p-4 bg-background border-t border-border">
-            Wireframes (Uizard.io) evolving into hi-fi visual design (Motiff)
-          </figcaption>
-        </figure>
-
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Key Screens</div>
-            <div className="flex flex-wrap gap-2">
-              {["Home Dashboard","Event Discovery","Car Selection","Driver Selection","Brand Placement","Audience Engagement","Community","Payment Flow","ROI Dashboard","Profile"].map((s) => (
-                <Pill key={s}>{s}</Pill>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Design Decisions</div>
-            <ul className="space-y-2 text-foreground/85">
-              <li>· Large visual cards improve event discovery</li>
-              <li>· Step-based flow reduces complexity</li>
-              <li>· Consistent CTA placement improves navigation</li>
-              <li>· Dashboard analytics increase sponsor confidence</li>
-              <li>· Community features encourage long-term engagement</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* AI across UX */}
-      <Section eyebrow="AI Across the UX Process" title="Designing with AI as a collaborative assistant.">
-        <p className="text-lg text-foreground/85 leading-relaxed max-w-3xl mb-10">
-          One unique aspect of this project was integrating AI throughout the
-          UX lifecycle — not only for content, but as a design partner
-          accelerating exploration.
-        </p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { p: "Discovery", i: ["Problem statements","Ecosystem exploration","Competitive insights"] },
-            { p: "Research", i: ["Personas","Journey maps","Empathy maps","Research summaries"] },
-            { p: "Define", i: ["User flows","Information Architecture","Card sorting","Feature grouping"] },
-            { p: "Ideation", i: ["Brainstorming","Prioritization","UX copy","Naming & branding"] },
-            { p: "Design", i: ["Wireframes","Visual exploration","UI inspiration","Prototype iterations"] },
-            { p: "Reflection", i: ["Accelerated repetitive tasks","More time for strategy","Human-centered decisions remain"] },
-          ].map((s) => (
-            <div key={s.p} className="rounded-2xl border border-border p-6 bg-background/70">
-              <div className="font-display text-xl mb-3">{s.p}</div>
-              <ul className="space-y-1 text-foreground/80 text-sm">
-                {s.i.map((x) => <li key={x}>· {x}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Outcome */}
-      <Section eyebrow="Outcome & Learnings" title="A unified mobile experience for the full sponsorship lifecycle." tone="mint">
-        <div className="grid md:grid-cols-2 gap-10">
-          <p className="text-lg text-foreground/85 leading-relaxed">
-            SponsorSphere evolved into a complete ecosystem that streamlines
-            discovery, onboarding, branding, payments and performance tracking
-            within a unified mobile experience. It also explored how AI can
-            augment the end-to-end UX process — from discovery to high-fidelity
-            design.
-          </p>
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
-              Key Features Delivered
-            </div>
-            <ul className="grid grid-cols-2 gap-2 text-foreground/85">
-              {["Event Discovery","Driver Selection","Car Selection","Brand Customization","Payment Management","ROI Dashboard","Community Engagement","Sponsorship Analytics"].map((k) => (
-                <li key={k} className="flex items-center gap-2"><Check className="h-4 w-4 text-accent" /> {k}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-14 rounded-3xl bg-foreground text-background p-10 md:p-14">
-          <div className="text-xs uppercase tracking-[0.22em] text-background/60 mb-4">
-            What I Learned
-          </div>
-          <p className="font-display font-light text-2xl md:text-3xl leading-snug max-w-4xl">
-            AI is most valuable when it accelerates exploration — freeing
-            designers to spend more time <em className="text-accent">validating ideas, refining interactions
-            and solving meaningful user problems</em>.
-          </p>
-        </div>
-      </Section>
-
-      {/* Footer nav */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-10 py-16 flex flex-wrap items-center justify-between gap-6">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm hover:text-accent transition">
-            <ArrowLeft className="h-4 w-4" /> Back to all work
-          </Link>
-          <Link
-            to="/"
-            hash="contact"
-            className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3.5 rounded-full text-sm font-medium hover:bg-accent transition"
+      {/* ============ 06.5 · WHY I DESIGNED IT THIS WAY ============ */}
+      <section className="relative overflow-hidden border-y border-border">
+        <div aria-hidden className="absolute inset-0 blueprint-grid opacity-25" />
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-1/2 h-[50vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 animate-smoke rounded-full bg-racing/10 blur-[140px]"
+        />
+        <Shell className="py-24 md:py-32">
+          <Eyebrow>🏎 Strategy Room</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-4xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
           >
-            Let's work together <ArrowUpRight className="h-4 w-4" />
-          </Link>
+            Why I Designed It This Way
+          </h2>
+          <p data-reveal className="mt-6 font-display text-xl font-light text-silver md:text-2xl">
+            Every winning move has a strategy.
+          </p>
+          <p data-reveal className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            "Great products aren't built by chance—they're built through thousands of intentional
+            decisions." Throughout SponsorSphere, every screen was designed to solve a specific user
+            problem while balancing business goals, usability and technical feasibility. Explore the
+            key decisions behind the product.
+          </p>
+
+          {/* racing line connecting the hotspots */}
+          <div className="relative mt-14">
+            <svg
+              aria-hidden
+              viewBox="0 0 1200 60"
+              className="absolute -top-8 left-0 hidden h-14 w-full lg:block"
+            >
+              <path
+                data-draw
+                d="M0 40 C 200 0, 400 60, 600 30 S 1000 0, 1200 35"
+                fill="none"
+                stroke="var(--electric)"
+                strokeWidth="1.5"
+                strokeOpacity="0.6"
+              />
+            </svg>
+
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {decisions.map((d) => {
+                const done = explored.includes(d.id);
+                return (
+                  <button
+                    key={d.id}
+                    data-reveal
+                    onClick={() => openCard(d.id)}
+                    className="group relative overflow-hidden rounded-3xl glass-panel p-7 text-left transition duration-500 hover:-translate-y-2 hover:border-electric/50"
+                  >
+                    <span
+                      aria-hidden
+                      className={`absolute right-6 top-6 h-2.5 w-2.5 rounded-full ${
+                        done ? "bg-electric" : "animate-node bg-racing"
+                      }`}
+                    />
+                    <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+                      Decision {d.id}
+                    </p>
+                    <h3 className="mt-4 font-display text-2xl font-semibold leading-tight">
+                      {d.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-muted-foreground">{d.hook}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-electric">
+                      {done ? "Revisit" : "Open"}{" "}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-electric transition-all duration-700"
+                style={{ width: `${(explored.length / decisions.length) * 100}%` }}
+              />
+            </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+              {explored.length}/{decisions.length} decisions explored
+            </span>
+          </div>
+
+          {allExplored && (
+            <div className="mt-12 animate-rise rounded-3xl border border-racing/40 bg-racing/[0.08] p-10 text-center">
+              <p className="mx-auto max-w-3xl font-display text-2xl font-light leading-snug text-silver md:text-3xl">
+                "Every screen you saw wasn't designed because it looked good. It was designed
+                because it solved a real problem."
+              </p>
+              <div className="mt-8 flex items-center justify-center gap-4">
+                <span className="text-3xl">🏎</span>
+                <span className="h-px w-40 bg-gradient-to-r from-racing to-transparent" />
+                <button
+                  onClick={() => scrollToId("machine")}
+                  className="text-xs font-semibold uppercase tracking-[0.24em] text-electric"
+                >
+                  Accelerate to Building the Machine
+                </button>
+              </div>
+            </div>
+          )}
+        </Shell>
+
+        {/* decision modal */}
+        {openDecision && (
+          <div
+            className="fixed inset-0 z-[60] flex items-end justify-center bg-black/80 p-0 backdrop-blur-sm md:items-center md:p-6"
+            onClick={() => setOpenDecision(null)}
+          >
+            {(() => {
+              const d = decisions.find((x) => x.id === openDecision)!;
+              return (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="max-h-[88svh] w-full max-w-3xl animate-rise overflow-y-auto rounded-t-3xl glass-panel p-8 md:rounded-3xl md:p-12"
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-electric">
+                        🎯 Decision {d.id}
+                      </p>
+                      <h3 className="mt-3 font-display text-3xl font-bold md:text-4xl">{d.title}</h3>
+                    </div>
+                    <button
+                      onClick={() => setOpenDecision(null)}
+                      aria-label="Close decision"
+                      className="rounded-full border border-border p-2 text-muted-foreground transition hover:text-foreground"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  <div className="mt-8 space-y-7">
+                    {[
+                      ["🚩 Problem", d.problem],
+                      ["💡 Design Decision", d.decision],
+                      ["🧠 Why This Approach?", d.reasoning],
+                    ].map(([label, body]) => (
+                      <div key={label}>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                          {label}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-silver md:text-base">{body}</p>
+                      </div>
+                    ))}
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                        🚀 Impact
+                      </p>
+                      <ul className="mt-3 flex flex-wrap gap-2">
+                        {d.impact.map((i) => (
+                          <li
+                            key={i}
+                            className="rounded-full border border-electric/30 bg-electric/10 px-4 py-1.5 text-xs text-silver"
+                          >
+                            {i}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+      </section>
+
+      {/* ============ 07 · BUILDING THE MACHINE ============ */}
+      <section id="machine" className="relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 blueprint-grid opacity-40" />
+        <Shell className="py-24 md:py-32">
+          <Eyebrow>Building the Machine</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-3xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            From Blueprint to Bodywork
+          </h2>
+
+          <svg aria-hidden viewBox="0 0 1200 180" className="mt-12 h-32 w-full md:h-44">
+            <path
+              data-draw
+              d="M20 150 H 260 L 320 60 H 620 L 680 150 H 1180"
+              fill="none"
+              stroke="var(--electric)"
+              strokeWidth="1.5"
+              strokeOpacity="0.7"
+            />
+            <path
+              data-draw
+              d="M20 120 C 300 120, 300 30, 600 30 S 900 120, 1180 120"
+              fill="none"
+              stroke="var(--silver)"
+              strokeWidth="1"
+              strokeOpacity="0.35"
+              strokeDasharray="6 8"
+            />
+          </svg>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {buildStages.map((s, i) => (
+              <div
+                key={s.label}
+                data-reveal
+                className="rounded-2xl border border-dashed border-electric/25 bg-carbon/60 p-6 transition hover:border-electric/60"
+              >
+                <span className="font-mono text-[10px] tracking-[0.24em] text-electric">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 font-display text-lg font-semibold">{s.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 grid gap-6">
+            {[
+              { src: ideation.url, alt: "Ideation mind map of SponsorSphere features" },
+              { src: design.url, alt: "Wireframes and high fidelity UI screens for SponsorSphere" },
+            ].map((img) => (
+              <figure
+                key={img.src}
+                data-reveal
+                className="overflow-hidden rounded-3xl border border-border bg-white"
+              >
+                <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
+              </figure>
+            ))}
+          </div>
+        </Shell>
+      </section>
+
+      {/* ============ 08 · FULL THROTTLE UI ============ */}
+      <section data-hwrap className="relative overflow-hidden border-y border-border carbon-weave">
+        <div className="mx-auto max-w-[1280px] px-6 pt-20 md:px-10 md:pt-24">
+          <Eyebrow>Full Throttle UI</Eyebrow>
+          <h2 className="mt-6 font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase tracking-[-0.03em]">
+            The Product at Speed
+          </h2>
+        </div>
+
+        <div className="overflow-x-auto pb-20 pt-12 lg:overflow-visible">
+          <div data-htrack className="flex gap-6 px-6 md:px-10" style={{ willChange: "transform" }}>
+            {screens.map((s, i) => (
+              <article
+                key={s.name}
+                className="group relative w-[78vw] shrink-0 rounded-3xl glass-panel p-6 transition duration-500 hover:-translate-y-2 sm:w-[420px]"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon">
+                  <ScreenMock index={i} />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
+                </div>
+                <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-electric">
+                  Screen {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-semibold">{s.name}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* ============ 09 · THE RACE STRATEGY ============ */}
+      <section data-board className="relative overflow-hidden carbon-weave">
+        <Shell className="py-24 md:py-32">
+          <Eyebrow>The Race Strategy</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-3xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            The Engineer's Board
+          </h2>
+          <p className="mt-4 font-hand text-3xl text-racing">seven weeks. one racing line.</p>
+
+          <div className="relative mt-16">
+            {/* circuit spine */}
+            <span
+              aria-hidden
+              className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-electric via-silver/40 to-racing md:block"
+            />
+            <span
+              data-racecar
+              aria-hidden
+              className="absolute left-0 top-0 hidden text-2xl md:block"
+            >
+              🏎
+            </span>
+
+            <div className="space-y-8 md:pl-16">
+              {strategy.map((s) => (
+                <article
+                  key={s.week}
+                  data-pin-card
+                  className="relative rounded-3xl glass-panel p-8"
+                >
+                  <span
+                    aria-hidden
+                    className="absolute -top-3 left-10 h-6 w-24 rotate-[-4deg] rounded-sm bg-silver/20 backdrop-blur-sm"
+                  />
+                  <div className="flex flex-wrap items-baseline gap-4">
+                    <span className="text-2xl">{s.flag}</span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-electric">
+                      {s.week}
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                      {s.phase}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-hand text-4xl text-foreground">{s.title}</h3>
+                  <div className="mt-6 grid gap-8 md:grid-cols-[1.3fr_1fr]">
+                    <ul className="space-y-2">
+                      {s.items.map((it) => (
+                        <li key={it} className="flex gap-3 text-sm text-muted-foreground">
+                          <span className="mt-2 h-1 w-3 shrink-0 bg-electric/70" />
+                          {it}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="rounded-2xl border border-dashed border-racing/40 p-5">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-racing">
+                        Deliverables
+                      </p>
+                      <ul className="mt-3 space-y-1.5 font-hand text-xl leading-tight text-silver">
+                        {s.deliverables.map((d) => (
+                          <li key={d}>— {d}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </Shell>
+      </section>
+
+      {/* ============ 10 · PERFORMANCE DASHBOARD ============ */}
+      <section className="relative overflow-hidden border-y border-border">
+        <Shell className="py-24 md:py-32">
+          <Eyebrow>Performance Dashboard</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 max-w-3xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            Reading the Gauges
+          </h2>
+
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+            {gauges.map((g) => (
+              <div key={g.label} data-reveal className="text-center">
+                <div className="relative mx-auto h-32 w-32">
+                  <svg viewBox="0 0 100 100" className="h-full w-full -rotate-[0deg]">
+                    <path
+                      d="M15 78 A 45 45 0 1 1 85 78"
+                      fill="none"
+                      stroke="var(--gunmetal)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M15 78 A 45 45 0 1 1 85 78"
+                      fill="none"
+                      stroke="var(--electric)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeDasharray="212"
+                      strokeDashoffset={212 - (g.value / 100) * 212}
+                      opacity="0.85"
+                    />
+                  </svg>
+                  <span
+                    data-needle={g.value}
+                    className="absolute bottom-[30%] left-1/2 h-[34%] w-[2px] origin-bottom -translate-x-1/2 rounded-full bg-racing"
+                  />
+                  <span className="absolute bottom-[27%] left-1/2 h-3 w-3 -translate-x-1/2 translate-y-1/2 rounded-full border border-racing bg-carbon" />
+                </div>
+                <p className="mt-3 font-display text-lg font-semibold">{g.read}</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                  {g.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Shell>
+      </section>
+
+      {/* ============ 11 · VICTORY LANE ============ */}
+      <section className="relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0">
+          <img
+            src={trophyImg}
+            alt=""
+            loading="lazy"
+            width={1600}
+            height={912}
+            data-parallax="12"
+            className="h-[120%] w-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-carbon via-carbon/85 to-carbon" />
+        </div>
+        <Shell className="py-28 md:py-36">
+          <Eyebrow>Victory Lane</Eyebrow>
+          <h2
+            data-split
+            className="mt-6 font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.9] tracking-[-0.04em]"
+          >
+            The Finish Line
+          </h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-2">
+            <p data-reveal className="text-base leading-relaxed text-silver">
+              SponsorSphere demonstrates how AI can enhance—not replace—the product design process.
+              By combining AI with human-centered thinking, the project accelerated research,
+              improved ideation and enabled faster design exploration while maintaining strategic UX
+              decision-making.
+            </p>
+            <p data-reveal className="font-display text-2xl font-light leading-snug text-foreground md:text-3xl">
+              This wasn't about designing another sponsorship platform. It was about reimagining how
+              AI and designers collaborate to build better products.
+            </p>
+          </div>
+        </Shell>
+      </section>
+
+      {/* ============ FINAL ============ */}
+      <section className="relative overflow-hidden border-t border-border carbon-weave">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-24 bg-[repeating-conic-gradient(var(--carbon)_0%_25%,var(--gunmetal)_0%_50%)] bg-[length:48px_48px] opacity-40"
+        />
+        <Shell className="py-28 text-center md:py-40">
+          <h2
+            data-split
+            className="mx-auto max-w-4xl font-display text-[clamp(2rem,5.6vw,4.8rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            Every Great Race Ends. Every Great Product Begins.
+          </h2>
+          <p data-reveal className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            SponsorSphere represents my vision of the future of Product Design—where AI acts as a
+            co-pilot, enabling designers to spend less time on repetitive tasks and more time
+            solving meaningful user problems.
+          </p>
+          <p data-reveal className="mx-auto mt-6 max-w-2xl font-display text-xl text-silver">
+            The finish line of this project is only the starting line for what's next.
+          </p>
+          <p className="mt-10 font-hand text-4xl text-racing">Thank you for taking the ride.</p>
+
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full glass-panel px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] transition hover:border-electric/50"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to portfolio
+            </Link>
+            <Link
+              to="/case-studies/talentai"
+              className="inline-flex items-center gap-2 rounded-full bg-racing px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] transition hover:scale-[1.03]"
+            >
+              Next case study <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </Shell>
+      </section>
+
+      {/* ============ FLOATING BEHANCE FAB ============ */}
+      <a
+        href={BEHANCE}
+        target="_blank"
+        rel="noreferrer"
+        className="group fixed bottom-6 right-6 z-[70] flex items-center gap-3 overflow-hidden rounded-full glass-panel py-4 pl-4 pr-4 shadow-[0_0_40px_oklch(0.68_0.19_245/0.35)] transition-all duration-500 hover:pr-6"
+      >
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-electric/20 text-electric">
+          <BehanceIcon />
+        </span>
+        <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium tracking-wide text-silver transition-all duration-500 group-hover:max-w-[280px]">
+          View the Complete Behance Case Study
+        </span>
+      </a>
+    </main>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Abstract product mockups                                            */
+/* ------------------------------------------------------------------ */
+
+function ScreenMock({ index }: { index: number }) {
+  return (
+    <div className="absolute inset-0 p-5">
+      <div className="flex h-full flex-col gap-3 rounded-xl border border-white/10 bg-carbon/80 p-4">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-racing/80" />
+          <span className="h-2 w-2 rounded-full bg-silver/40" />
+          <span className="h-2 w-2 rounded-full bg-electric/70" />
+          <span className="ml-auto h-2 w-16 rounded-full bg-white/10" />
+        </div>
+
+        {index === 0 && (
+          <div className="grid flex-1 grid-cols-3 gap-2">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04] p-2">
+                <div className="h-1.5 w-8 rounded-full bg-electric/70" />
+                <div className="mt-2 h-1 w-full rounded-full bg-white/15" />
+                <div className="mt-1 h-1 w-2/3 rounded-full bg-white/10" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {index === 1 && (
+          <div className="flex flex-1 flex-col gap-2">
+            {[92, 84, 71].map((v) => (
+              <div key={v} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] p-3">
+                <div className="grid h-9 w-9 place-items-center rounded-full border border-electric/50 font-mono text-[9px] text-electric">
+                  {v}
+                </div>
+                <div className="flex-1">
+                  <div className="h-1.5 w-2/3 rounded-full bg-white/20" />
+                  <div className="mt-1.5 h-1 w-1/2 rounded-full bg-white/10" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {index === 2 && (
+          <div className="grid flex-1 grid-cols-[1fr_1.4fr] gap-2">
+            <div className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
+              <div className="h-8 w-8 rounded-full bg-electric/30" />
+              <div className="mt-3 h-1.5 w-full rounded-full bg-white/20" />
+              <div className="mt-1.5 h-1 w-2/3 rounded-full bg-white/10" />
+            </div>
+            <div className="grid grid-rows-3 gap-2">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04]" />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {index === 3 && (
+          <div className="flex flex-1 items-end gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3">
+            {[40, 65, 30, 82, 55, 70, 48].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-t bg-gradient-to-t from-electric/30 to-electric"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+        )}
+
+        {index === 4 && (
+          <div className="grid flex-1 grid-cols-[1fr_1.6fr] gap-2">
+            <div className="space-y-2">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="h-6 rounded-md border border-white/10 bg-white/[0.04]" />
+              ))}
+            </div>
+            <div className="flex flex-col justify-end gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3">
+              <div className="h-4 w-3/4 self-start rounded-full bg-white/12" />
+              <div className="h-4 w-2/3 self-end rounded-full bg-electric/40" />
+              <div className="h-4 w-1/2 self-start rounded-full bg-white/12" />
+            </div>
+          </div>
+        )}
+
+        {index === 5 && (
+          <div className="flex flex-1 flex-col gap-2 rounded-lg border border-electric/30 bg-electric/[0.07] p-3">
+            <div className="h-1.5 w-1/3 rounded-full bg-electric" />
+            <div className="h-1 w-full rounded-full bg-white/15" />
+            <div className="h-1 w-5/6 rounded-full bg-white/12" />
+            <div className="mt-auto flex gap-2">
+              <div className="h-5 w-20 rounded-full bg-electric/30" />
+              <div className="h-5 w-16 rounded-full bg-white/10" />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
+  );
+}
+
+function BehanceIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
+      <path d="M9.1 5.5c1.1 0 2 .1 2.7.4.7.2 1.3.6 1.7 1 .4.4.7.9.9 1.4.2.6.3 1.2.3 1.9 0 .8-.2 1.4-.5 2-.4.5-.9 1-1.6 1.3.9.3 1.6.8 2 1.5.5.7.7 1.5.7 2.5 0 .8-.2 1.5-.5 2.1-.3.6-.7 1.1-1.2 1.5-.5.4-1.1.7-1.8.8-.7.2-1.4.3-2.1.3H0V5.5h9.1zM8.6 12c.6 0 1.1-.2 1.5-.5.4-.3.6-.8.6-1.4 0-.4-.1-.7-.2-.9-.1-.3-.3-.4-.5-.6-.2-.1-.5-.2-.8-.3-.3 0-.6-.1-1-.1H3.6V12h5zm.2 6.7c.4 0 .7 0 1.1-.1.3-.1.6-.2.8-.4.2-.2.4-.4.6-.7.1-.3.2-.6.2-1.1 0-.8-.2-1.4-.7-1.8-.5-.3-1.1-.5-1.9-.5H3.6v4.6h5.2zM19.2 18.6c.5.5 1.2.7 2.1.7.6 0 1.2-.2 1.7-.5.5-.3.8-.7.9-1h2.6c-.4 1.3-1.1 2.3-2 2.9-.9.6-2 .9-3.3.9-.9 0-1.7-.2-2.4-.4-.7-.3-1.3-.7-1.8-1.3-.5-.5-.9-1.2-1.1-1.9-.3-.8-.4-1.6-.4-2.5 0-.9.1-1.7.4-2.4.3-.8.7-1.4 1.2-1.9.5-.6 1.1-1 1.8-1.3.7-.3 1.5-.5 2.3-.5 1 0 1.8.2 2.5.6.7.4 1.3.9 1.8 1.5.5.6.8 1.4 1 2.2.2.8.3 1.7.2 2.6h-8.4c0 1 .3 1.8.9 2.3zm3.7-6.3c-.4-.4-1-.7-1.9-.7-.5 0-1 .1-1.3.3-.4.2-.6.4-.9.7-.2.3-.4.5-.4.8-.1.3-.1.5-.1.8h5.2c-.2-.9-.4-1.5-.6-1.9zM17.4 6.9h6.5v1.6h-6.5z" />
+    </svg>
   );
 }

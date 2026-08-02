@@ -83,7 +83,15 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
   --ring: var(--accent);
+
+  /* Luxury motorsport palette */
+  --carbon: oklch(0.11 0.005 260);
+  --gunmetal: oklch(0.28 0.01 255);
+  --silver: oklch(0.82 0.005 260);
+  --racing: oklch(0.58 0.24 27);
+  --electric: oklch(0.68 0.19 245);
 }
+
 
 
 .dark {

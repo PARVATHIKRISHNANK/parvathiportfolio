@@ -233,3 +233,7 @@
     animation: none !important;
   }
 }
+
+@utility font-hand {
+  font-family: "Caveat", ui-rounded, cursive;
+}

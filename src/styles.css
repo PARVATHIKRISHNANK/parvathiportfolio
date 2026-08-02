@@ -43,7 +43,14 @@
   --color-mint: var(--mint);
   --color-butter: var(--butter);
   --color-ink: var(--ink);
+
+  --color-carbon: var(--carbon);
+  --color-gunmetal: var(--gunmetal);
+  --color-silver: var(--silver);
+  --color-racing: var(--racing);
+  --color-electric: var(--electric);
 }
+
 
 :root {
   --radius: 1.25rem;

@@ -1,25 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ExternalLink, X } from "lucide-react";
 
 import { useCinematic, scrollToId } from "@/lib/use-cinematic";
+import { AiRaceStrategy } from "@/components/ss/AiRaceStrategy";
+import { ScreenMock } from "@/components/ss/ScreenMock";
 import {
   problemCards,
   visionSignals,
-  pitCrew,
   telemetry,
   decisions,
   screens,
   strategy,
   gauges,
   buildStages,
+  competitiveFindings,
+  designOpportunity,
 } from "@/lib/sponsorsphere-data";
 
 import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
-import research from "@/assets/sponsorsphere-research.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
 import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
-import market from "@/assets/sponsorsphere-market.png.asset.json";
+import competitive from "@/assets/ss-competitive.jpg.asset.json";
 import garageImg from "@/assets/ss-garage.jpg";
 import brakesImg from "@/assets/ss-brakes.jpg";
 import trophyImg from "@/assets/ss-trophy.jpg";

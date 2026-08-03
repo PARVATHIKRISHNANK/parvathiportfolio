@@ -196,7 +196,7 @@ function SponsorSphere() {
               {[
                 ["Role", "End-to-end UX/UI"],
                 ["Platform", "B2B Product"],
-                ["Timeline", "7 weeks"],
+                ["Timeline", "5 weeks"],
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">

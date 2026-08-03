@@ -823,7 +823,7 @@ function SponsorSphere() {
           >
             The Engineer's Board
           </h2>
-          <p className="mt-4 font-hand text-3xl text-racing">seven weeks. one racing line.</p>
+          <p className="mt-4 font-hand text-3xl text-racing">five weeks. one racing line.</p>
 
           <div className="relative mt-16">
             {/* circuit spine */}

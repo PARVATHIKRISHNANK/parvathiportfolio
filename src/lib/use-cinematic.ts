@@ -92,20 +92,34 @@ export function useCinematic() {
         const track = document.querySelector<HTMLElement>("[data-htrack]");
         const hwrap = document.querySelector<HTMLElement>("[data-hwrap]");
         if (track && hwrap && desktop) {
-          const distance = () => track.scrollWidth - window.innerWidth + 96;
+          const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
           gsap.to(track, {
             x: () => -distance(),
             ease: "none",
             scrollTrigger: {
               trigger: hwrap,
               start: "top top",
-              end: () => "+=" + distance(),
+              // 1.6x the travel distance gives each garage stop time to be read
+              end: () => "+=" + distance() * 1.6,
               pin: true,
-              scrub: 0.8,
+              pinSpacing: true,
+              anticipatePin: 1,
+              scrub: 1,
               invalidateOnRefresh: true,
             },
           });
         }
+
+        /* ---- AI race strategy board: car travels the checkpoints ---- */
+        const sboard = document.querySelector<HTMLElement>("[data-strategyboard]");
+        if (sboard) {
+          gsap.to("[data-strategycar]", {
+            top: "94%",
+            ease: "none",
+            scrollTrigger: { trigger: sboard, start: "top 65%", end: "bottom 85%", scrub: 0.5 },
+          });
+        }
+
 
         /* ---- strategy board: race car drives the path ---- */
         const board = document.querySelector<HTMLElement>("[data-board]");

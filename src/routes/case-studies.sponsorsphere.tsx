@@ -1,25 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ExternalLink, X } from "lucide-react";
 
 import { useCinematic, scrollToId } from "@/lib/use-cinematic";
+import { AiRaceStrategy } from "@/components/ss/AiRaceStrategy";
+import { ScreenMock } from "@/components/ss/ScreenMock";
 import {
   problemCards,
   visionSignals,
-  pitCrew,
   telemetry,
   decisions,
   screens,
   strategy,
   gauges,
   buildStages,
+  competitiveFindings,
+  designOpportunity,
 } from "@/lib/sponsorsphere-data";
 
 import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
-import research from "@/assets/sponsorsphere-research.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
 import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
-import market from "@/assets/sponsorsphere-market.png.asset.json";
+import competitive from "@/assets/ss-competitive.jpg.asset.json";
 import garageImg from "@/assets/ss-garage.jpg";
 import brakesImg from "@/assets/ss-brakes.jpg";
 import trophyImg from "@/assets/ss-trophy.jpg";
@@ -105,7 +107,13 @@ function SponsorSphere() {
   useCinematic();
   const [openDecision, setOpenDecision] = useState<string | null>(null);
   const [explored, setExplored] = useState<string[]>([]);
-  const [activeNode, setActiveNode] = useState(0);
+
+  // Always open the case study at the hero, never mid-page.
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
 
   const openCard = (id: string) => {
     setOpenDecision(id);
@@ -194,7 +202,7 @@ function SponsorSphere() {
               {[
                 ["Role", "End-to-end UX/UI"],
                 ["Platform", "B2B Product"],
-                ["Timeline", "7 weeks"],
+                ["Timeline", "5 weeks"],
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
@@ -395,108 +403,9 @@ function SponsorSphere() {
         </div>
       </Shell>
 
-      {/* ============ 05 · THE AI PIT CREW ============ */}
-      <section className="relative overflow-hidden border-y border-border carbon-weave">
-        <Shell className="py-24 md:py-32">
-          <Eyebrow>The AI Pit Crew</Eyebrow>
-          <h2
-            data-split
-            className="mt-6 max-w-4xl font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
-          >
-            Eight Stops. One Human in the Cockpit.
-          </h2>
+      {/* ============ 05 · AI RACE STRATEGY ============ */}
+      <AiRaceStrategy />
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-[320px_1fr]">
-            {/* node rail */}
-            <div className="relative">
-              <span
-                aria-hidden
-                className="absolute left-[15px] top-3 h-[calc(100%-24px)] w-px bg-gradient-to-b from-electric via-electric/40 to-transparent"
-              />
-              <ul className="space-y-2">
-                {pitCrew.map((node, i) => (
-                  <li key={node.stage}>
-                    <button
-                      onMouseEnter={() => setActiveNode(i)}
-                      onFocus={() => setActiveNode(i)}
-                      onClick={() => setActiveNode(i)}
-                      className={`group flex w-full items-center gap-4 rounded-xl px-2 py-3 text-left transition ${
-                        activeNode === i ? "bg-white/5" : "hover:bg-white/[0.03]"
-                      }`}
-                    >
-                      <span
-                        className={`relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border text-[10px] font-mono transition ${
-                          activeNode === i
-                            ? "animate-node border-electric bg-electric/20 text-foreground"
-                            : "border-border bg-carbon text-muted-foreground"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span
-                        className={`font-display text-lg font-semibold tracking-tight transition ${
-                          activeNode === i ? "text-foreground" : "text-muted-foreground"
-                        }`}
-                      >
-                        {node.stage}
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* detail panel */}
-            <div className="rounded-3xl glass-panel p-8 md:p-10">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <span className="rounded-full border border-electric/40 bg-electric/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-electric">
-                  {pitCrew[activeNode].tool}
-                </span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Time saved · {pitCrew[activeNode].saved}
-                </span>
-              </div>
-              <h3 className="mt-6 font-display text-3xl font-bold md:text-4xl">
-                {pitCrew[activeNode].stage}
-              </h3>
-              <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Purpose
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-silver">
-                    {pitCrew[activeNode].purpose}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Output
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-silver">
-                    {pitCrew[activeNode].output}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-8 border-t border-border pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                  In practice
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {pitCrew[activeNode].example}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <p
-            data-reveal
-            className="mt-14 max-w-4xl rounded-3xl border border-electric/25 bg-electric/[0.06] p-8 font-display text-xl font-light leading-snug text-silver md:text-2xl"
-          >
-            "AI accelerated repetitive tasks while human judgment guided every strategic design
-            decision."
-          </p>
-        </Shell>
-      </section>
 
       {/* ============ 06 · READING THE TRACK ============ */}
       <Shell className="py-24 md:py-32">
@@ -533,15 +442,82 @@ function SponsorSphere() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {[
-            { src: research.url, alt: "User research collage: findings, personas and value propositions" },
-            { src: market.url, alt: "Market analysis: SWOT, empathy maps and research findings" },
-          ].map((img) => (
-            <figure key={img.src} data-reveal className="overflow-hidden rounded-3xl border border-border bg-white">
-              <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
-            </figure>
-          ))}
+        {/* ---- Competitive Analysis · the engineer's notebook page ---- */}
+        <div className="relative mt-20">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-racing">
+            Competitive Analysis
+          </p>
+          <h3 data-split className="mt-4 font-hand text-4xl text-foreground md:text-5xl">
+            Nine platforms, one missing lap
+          </h3>
+
+          <figure data-reveal className="relative mx-auto mt-10 max-w-4xl">
+            <div aria-hidden className="absolute -inset-6 blueprint-grid rounded-[2rem] opacity-40" />
+            {/* clipboard clip */}
+            <span
+              aria-hidden
+              className="absolute -top-4 left-1/2 z-20 h-7 w-24 -translate-x-1/2 rounded-md border border-white/20 bg-gunmetal shadow-lg"
+            />
+            {/* racing tape corners */}
+            <span
+              aria-hidden
+              className="absolute -left-4 -top-2 z-20 h-6 w-24 -rotate-[18deg] bg-[repeating-linear-gradient(45deg,var(--racing)_0_7px,transparent_7px_14px)] opacity-70"
+            />
+            <span
+              aria-hidden
+              className="absolute -bottom-2 -right-4 z-20 h-6 w-24 -rotate-[18deg] bg-[repeating-linear-gradient(45deg,var(--racing)_0_7px,transparent_7px_14px)] opacity-70"
+            />
+            <img
+              src={competitive.url}
+              alt="Handwritten competitive analysis comparison sheet from the race engineer's notebook"
+              loading="lazy"
+              width={1408}
+              height={1008}
+              data-parallax="6"
+              className="relative z-10 w-full rotate-[-1.2deg] rounded-lg border border-white/15 shadow-[0_40px_90px_oklch(0_0_0/0.65)]"
+            />
+          </figure>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            <div data-reveal className="rounded-3xl glass-panel p-8">
+              <h4 className="font-display text-2xl font-semibold">Key Findings</h4>
+              <p className="mt-3 text-sm text-muted-foreground">
+                After evaluating nine leading sponsorship and partnership platforms, several
+                patterns emerged.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {competitiveFindings.map((f) => (
+                  <li key={f} className="flex gap-3 text-sm leading-relaxed text-silver">
+                    <span className="mt-0.5 text-electric">✔</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div data-reveal className="rounded-3xl border border-electric/30 bg-electric/[0.06] p-8">
+              <h4 className="font-display text-2xl font-semibold">Design Opportunity</h4>
+              <p className="mt-3 text-sm text-muted-foreground">
+                These insights revealed an opportunity to rethink sponsorship discovery. Instead of
+                another sponsorship management platform, SponsorSphere was designed as an AI-powered
+                sponsorship intelligence platform that combines:
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {designOpportunity.map((o) => (
+                  <li
+                    key={o}
+                    className="rounded-full border border-electric/30 bg-electric/10 px-4 py-1.5 text-xs text-silver"
+                  >
+                    {o}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                By addressing the gaps identified during competitive analysis, SponsorSphere creates
+                a faster, smarter, and more contextual sponsorship experience.
+              </p>
+            </div>
+          </div>
         </div>
 
         <p
@@ -551,6 +527,7 @@ function SponsorSphere() {
           Final insight — <span className="text-foreground">matching</span> was the biggest
           challenge, not funding.
         </p>
+
       </Shell>
 
       {/* ============ 06.5 · WHY I DESIGNED IT THIS WAY ============ */}
@@ -791,35 +768,56 @@ function SponsorSphere() {
       </section>
 
       {/* ============ 08 · FULL THROTTLE UI ============ */}
-      <section data-hwrap className="relative overflow-hidden border-y border-border carbon-weave">
-        <div className="mx-auto max-w-[1280px] px-6 pt-20 md:px-10 md:pt-24">
+      <section
+        data-hwrap
+        className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden border-y border-border carbon-weave"
+      >
+        <div className="mx-auto w-full max-w-[1280px] shrink-0 px-6 pt-16 md:px-10 md:pt-20">
           <Eyebrow>Full Throttle UI</Eyebrow>
-          <h2 className="mt-6 font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase tracking-[-0.03em]">
+          <h2 className="mt-5 font-display text-[clamp(1.8rem,4.6vw,3.6rem)] font-bold uppercase tracking-[-0.03em]">
             The Product at Speed
           </h2>
         </div>
 
-        <div className="overflow-x-auto pb-20 pt-12 lg:overflow-visible">
-          <div data-htrack className="flex gap-6 px-6 md:px-10" style={{ willChange: "transform" }}>
+        <div className="flex flex-1 items-center overflow-x-auto py-10 lg:overflow-visible">
+          <div
+            data-htrack
+            className="flex items-center gap-6 px-6 md:px-10"
+            style={{ willChange: "transform" }}
+          >
             {screens.map((s, i) => (
               <article
                 key={s.name}
-                className="group relative w-[78vw] shrink-0 rounded-3xl glass-panel p-6 transition duration-500 hover:-translate-y-2 sm:w-[420px]"
+                data-hcard
+                className="group relative flex w-[86vw] shrink-0 flex-col rounded-3xl glass-panel p-5 transition duration-500 hover:-translate-y-1.5 sm:w-[560px]"
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon">
+                <div className="relative h-[min(46svh,340px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
                   <ScreenMock index={i} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
                 </div>
-                <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-electric">
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.24em] text-electric">
                   Screen {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-2 font-display text-2xl font-semibold">{s.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+                <h3 className="mt-1.5 font-display text-xl font-semibold md:text-2xl">{s.name}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-silver">
+                    Purpose ·{" "}
+                  </span>
+                  {s.purpose}
+                </p>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-racing">
+                    UX Focus ·{" "}
+                  </span>
+                  {s.focus}
+                </p>
               </article>
             ))}
+            <span aria-hidden className="block w-[8vw] shrink-0 lg:w-[24vw]" />
           </div>
         </div>
       </section>
+
 
       {/* ============ 09 · THE RACE STRATEGY ============ */}
       <section data-board className="relative overflow-hidden carbon-weave">
@@ -831,7 +829,7 @@ function SponsorSphere() {
           >
             The Engineer's Board
           </h2>
-          <p className="mt-4 font-hand text-3xl text-racing">seven weeks. one racing line.</p>
+          <p className="mt-4 font-hand text-3xl text-racing">five weeks. one racing line.</p>
 
           <div className="relative mt-16">
             {/* circuit spine */}
@@ -1040,106 +1038,6 @@ function SponsorSphere() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Abstract product mockups                                            */
-/* ------------------------------------------------------------------ */
-
-function ScreenMock({ index }: { index: number }) {
-  return (
-    <div className="absolute inset-0 p-5">
-      <div className="flex h-full flex-col gap-3 rounded-xl border border-white/10 bg-carbon/80 p-4">
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-racing/80" />
-          <span className="h-2 w-2 rounded-full bg-silver/40" />
-          <span className="h-2 w-2 rounded-full bg-electric/70" />
-          <span className="ml-auto h-2 w-16 rounded-full bg-white/10" />
-        </div>
-
-        {index === 0 && (
-          <div className="grid flex-1 grid-cols-3 gap-2">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04] p-2">
-                <div className="h-1.5 w-8 rounded-full bg-electric/70" />
-                <div className="mt-2 h-1 w-full rounded-full bg-white/15" />
-                <div className="mt-1 h-1 w-2/3 rounded-full bg-white/10" />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {index === 1 && (
-          <div className="flex flex-1 flex-col gap-2">
-            {[92, 84, 71].map((v) => (
-              <div key={v} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] p-3">
-                <div className="grid h-9 w-9 place-items-center rounded-full border border-electric/50 font-mono text-[9px] text-electric">
-                  {v}
-                </div>
-                <div className="flex-1">
-                  <div className="h-1.5 w-2/3 rounded-full bg-white/20" />
-                  <div className="mt-1.5 h-1 w-1/2 rounded-full bg-white/10" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {index === 2 && (
-          <div className="grid flex-1 grid-cols-[1fr_1.4fr] gap-2">
-            <div className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
-              <div className="h-8 w-8 rounded-full bg-electric/30" />
-              <div className="mt-3 h-1.5 w-full rounded-full bg-white/20" />
-              <div className="mt-1.5 h-1 w-2/3 rounded-full bg-white/10" />
-            </div>
-            <div className="grid grid-rows-3 gap-2">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04]" />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {index === 3 && (
-          <div className="flex flex-1 items-end gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3">
-            {[40, 65, 30, 82, 55, 70, 48].map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-t bg-gradient-to-t from-electric/30 to-electric"
-                style={{ height: `${h}%` }}
-              />
-            ))}
-          </div>
-        )}
-
-        {index === 4 && (
-          <div className="grid flex-1 grid-cols-[1fr_1.6fr] gap-2">
-            <div className="space-y-2">
-              {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="h-6 rounded-md border border-white/10 bg-white/[0.04]" />
-              ))}
-            </div>
-            <div className="flex flex-col justify-end gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3">
-              <div className="h-4 w-3/4 self-start rounded-full bg-white/12" />
-              <div className="h-4 w-2/3 self-end rounded-full bg-electric/40" />
-              <div className="h-4 w-1/2 self-start rounded-full bg-white/12" />
-            </div>
-          </div>
-        )}
-
-        {index === 5 && (
-          <div className="flex flex-1 flex-col gap-2 rounded-lg border border-electric/30 bg-electric/[0.07] p-3">
-            <div className="h-1.5 w-1/3 rounded-full bg-electric" />
-            <div className="h-1 w-full rounded-full bg-white/15" />
-            <div className="h-1 w-5/6 rounded-full bg-white/12" />
-            <div className="mt-auto flex gap-2">
-              <div className="h-5 w-20 rounded-full bg-electric/30" />
-              <div className="h-5 w-16 rounded-full bg-white/10" />
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function BehanceIcon() {
   return (

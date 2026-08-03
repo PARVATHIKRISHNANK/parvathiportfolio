@@ -107,7 +107,13 @@ function SponsorSphere() {
   useCinematic();
   const [openDecision, setOpenDecision] = useState<string | null>(null);
   const [explored, setExplored] = useState<string[]>([]);
-  const [activeNode, setActiveNode] = useState(0);
+
+  // Always open the case study at the hero, never mid-page.
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
 
   const openCard = (id: string) => {
     setOpenDecision(id);

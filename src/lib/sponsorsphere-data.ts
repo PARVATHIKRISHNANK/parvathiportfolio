@@ -412,27 +412,39 @@ export const decisions = [
 export const screens = [
   {
     name: "AI Match Dashboard",
-    note: "Recommendation-first home. The best-fit partnerships lead; search is the fallback, not the default.",
+    purpose:
+      "The intelligent starting point for discovering sponsorship opportunities tailored to team goals, audience fit, and partnership potential.",
+    focus: "Reduce manual searching through AI-powered recommendations.",
   },
   {
     name: "Smart Recommendations",
-    note: "Confidence scores and matching factors turn a ranked list into an explainable decision.",
+    purpose:
+      "Rank sponsorship opportunities based on compatibility, confidence, audience alignment, and business objectives.",
+    focus: "Increase trust through explainable AI recommendations.",
   },
   {
     name: "Sponsor Profiles",
-    note: "Everything needed to evaluate a partner consolidated into one scannable decision surface.",
+    purpose:
+      "Present complete sponsor information, including brand values, investment range, audience demographics, and partnership history.",
+    focus: "Enable informed evaluation without navigating across multiple screens.",
   },
   {
     name: "Team Analytics",
-    note: "Audience reach and performance framed as opportunity signals rather than vanity charts.",
+    purpose:
+      "Provide performance metrics, audience insights, and sponsorship history to help sponsors evaluate racing teams.",
+    focus: "Support evidence-based sponsorship decisions.",
   },
   {
     name: "Communication Workspace",
-    note: "Threads, files and deal status in one room, so context never leaves the partnership.",
+    purpose:
+      "Centralize discussions, proposal reviews, approvals, and shared documents throughout the sponsorship lifecycle.",
+    focus: "Reduce context switching and streamline collaboration.",
   },
   {
     name: "AI Insights Panel",
-    note: "Proactive nudges: what changed, what it means, and the next best action to take.",
+    purpose:
+      "Deliver predictive insights, opportunity forecasts, and strategic recommendations powered by AI.",
+    focus: "Help users make proactive sponsorship decisions with confidence.",
   },
 ] as const;
 
@@ -450,7 +462,13 @@ export const strategy = [
     week: "Weeks 2–3",
     title: "Reading the Track",
     phase: "Research",
-    items: ["Secondary Research", "Competitive Analysis", "User Research", "Stakeholder Insights", "Pain Point Analysis"],
+    items: [
+      "Secondary Research",
+      "Competitive Analysis",
+      "User Research",
+      "Stakeholder Interviews",
+      "Pain Point Analysis",
+    ],
     deliverables: ["Research Report", "Competitive Benchmark", "User Needs"],
   },
   {
@@ -458,34 +476,32 @@ export const strategy = [
     week: "Week 3",
     title: "Choosing the Racing Line",
     phase: "Define & Ideation",
-    items: ["Affinity Mapping", "User Personas", "Journey Maps", "Feature Prioritization", "Information Architecture"],
+    items: [
+      "Affinity Mapping",
+      "User Personas",
+      "Journey Maps",
+      "Feature Prioritization",
+      "Information Architecture",
+    ],
     deliverables: ["Personas", "Journey Maps", "IA", "Feature Matrix"],
   },
   {
-    flag: "🏎",
+    flag: "🏆",
     week: "Weeks 4–5",
     title: "Building the Machine",
     phase: "Design Process",
-    items: ["Wireframes", "User Flow", "High Fidelity UI", "Design System", "Prototype", "AI-assisted Iterations"],
-    deliverables: ["Wireframes", "Final UI", "Prototype"],
-  },
-  {
-    flag: "🏁",
-    week: "Week 6",
-    title: "Testing the Machine",
-    phase: "Validation",
-    items: ["Prototype Testing", "Accessibility", "Iteration", "UX Improvements", "Final Polish"],
-    deliverables: ["Validated Prototype", "Accessibility Review", "Final Design"],
-  },
-  {
-    flag: "🏆",
-    week: "Week 7",
-    title: "Crossing the Finish Line",
-    phase: "Outcome",
-    items: ["Final Outcome", "Business Impact", "AI Contribution", "Future Enhancements"],
-    deliverables: ["Case Study", "Prototype", "Presentation"],
+    items: [
+      "Wireframes",
+      "User Flows",
+      "High Fidelity UI",
+      "Design System",
+      "Prototype",
+      "AI-assisted Design",
+    ],
+    deliverables: ["Wireframes", "UI Screens", "Prototype"],
   },
 ] as const;
+
 
 export const gauges = [
   { label: "Time Saved", read: "High", value: 88 },

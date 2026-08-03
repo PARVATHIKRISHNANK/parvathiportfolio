@@ -38,72 +38,230 @@ export const visionSignals = [
   "Motorsport Category",
 ] as const;
 
-export const pitCrew = [
+export type AiTool = {
+  name: string;
+  purpose: string[];
+  output?: string;
+};
+
+export const aiStrategy: {
+  step: string;
+  flag: string;
+  title: string;
+  goal: string;
+  groups: { label?: string; tools: AiTool[] }[];
+  human: string;
+}[] = [
   {
-    stage: "Discovery",
-    tool: "Perplexity",
-    purpose: "Rapid landscape scanning of motorsport sponsorship models",
-    output: "Domain brief + opportunity map",
-    saved: "~2 days",
-    example: "Sourced sponsorship spend patterns across F1, F2, Formula E and karting.",
+    step: "01",
+    flag: "🏁",
+    title: "Introduction",
+    goal: "Building the foundation of the product identity.",
+    groups: [
+      {
+        tools: [
+          {
+            name: "Perplexity AI",
+            purpose: ["Finding the product name"],
+            output: "Generated multiple naming ideas and refined SponsorSphere.",
+          },
+          {
+            name: "ColorMagic",
+            purpose: ["Brand colour exploration"],
+            output: "Generated racing-inspired colour palettes.",
+          },
+          {
+            name: "Logo.com",
+            purpose: ["Logo exploration"],
+            output: "Initial logo concepts and visual directions.",
+          },
+          {
+            name: "UBrand",
+            purpose: ["Brand guidelines"],
+            output: "Typography, colour consistency and branding principles.",
+          },
+        ],
+      },
+    ],
+    human:
+      "Validated the final product name, selected the visual identity, refined branding, and ensured consistency across the experience.",
   },
   {
-    stage: "Research",
-    tool: "ChatGPT",
-    purpose: "Synthesising interview notes and secondary research into themes",
-    output: "Affinity clusters + insight statements",
-    saved: "~3 days",
-    example: "Clustered 60+ raw pain points into 7 themes in a single working session.",
+    step: "02",
+    flag: "🚩",
+    title: "Problem Statement",
+    goal: "Understanding the business problem before designing solutions.",
+    groups: [
+      {
+        tools: [
+          {
+            name: "ChatGPT",
+            purpose: [
+              "Identify business problem",
+              "Understand project context",
+              "Define business goals",
+              "Define target audience",
+            ],
+            output: "Structured problem statement and project objectives.",
+          },
+        ],
+      },
+    ],
+    human:
+      "Validated assumptions, refined scope, and aligned the problem with business needs and user expectations.",
   },
   {
-    stage: "Define",
-    tool: "Claude",
-    purpose: "Pressure-testing problem statements and persona logic",
-    output: "Personas, JTBD, journey maps",
-    saved: "~1.5 days",
-    example: "Challenged my persona assumptions until only evidence-backed traits survived.",
+    step: "03",
+    flag: "🔍",
+    title: "Research",
+    goal: "Listening before deciding — user reality and market reality.",
+    groups: [
+      {
+        label: "User Research",
+        tools: [
+          {
+            name: "ChatGPT",
+            purpose: ["Research objectives", "Qualitative insights", "Value proposition"],
+            output: "Research framework and synthesized findings.",
+          },
+          {
+            name: "FounderPal",
+            purpose: ["Persona creation"],
+            output: "Initial user personas based on research inputs.",
+          },
+        ],
+      },
+      {
+        label: "Market Research",
+        tools: [
+          {
+            name: "Wordkraft",
+            purpose: ["Research objectives"],
+            output: "Structured market research documentation.",
+          },
+          {
+            name: "Instant Personas",
+            purpose: ["Competitive analysis — SWOT analysis"],
+            output: "Generated competitive strengths, weaknesses, opportunities and threats.",
+          },
+          {
+            name: "Miro AI",
+            purpose: ["Affinity mapping"],
+            output: "Grouped research insights and patterns.",
+          },
+          {
+            name: "ChatGPT",
+            purpose: ["Key findings"],
+            output: "Summarized research observations and opportunities.",
+          },
+        ],
+      },
+    ],
+    human:
+      "Validated all findings, identified meaningful patterns, prioritized opportunities, and translated research into actionable UX insights.",
   },
   {
-    stage: "Ideation",
-    tool: "Miro AI",
-    purpose: "Expanding and clustering feature concepts on the canvas",
-    output: "Feature matrix + prioritisation",
-    saved: "~1 day",
-    example: "Generated adjacent concepts I then filtered against user value and feasibility.",
+    step: "04",
+    flag: "🧭",
+    title: "Define",
+    goal: "Structuring the product experience.",
+    groups: [
+      {
+        tools: [
+          { name: "Whimsical", purpose: ["User flow"] },
+          { name: "Visily", purpose: ["Information architecture"] },
+          { name: "Miro", purpose: ["Card sorting"] },
+          { name: "ChatGPT", purpose: ["Journey mapping"] },
+        ],
+      },
+    ],
+    human:
+      "Reviewed information architecture, simplified navigation, optimized user flows, and ensured task completion aligned with user goals.",
   },
   {
-    stage: "Wireframes",
-    tool: "UX Pilot",
-    purpose: "Fast low-fidelity structure exploration",
-    output: "IA + lo-fi screens",
-    saved: "~2 days",
-    example: "Three dashboard structures explored before committing to a recommendation-first layout.",
+    step: "05",
+    flag: "💡",
+    title: "Ideation & Planning",
+    goal: "Expanding the solution space before narrowing it.",
+    groups: [
+      {
+        tools: [
+          {
+            name: "Ideamap AI",
+            purpose: ["Brainstorming", "Feature ideas", "Solution exploration", "Mind mapping"],
+            output: "Multiple solution concepts and feature prioritization.",
+          },
+        ],
+      },
+    ],
+    human:
+      "Selected the strongest concepts, prioritized features based on business value and user impact, and refined the product roadmap.",
   },
   {
-    stage: "UI Design",
-    tool: "Galileo AI + Figma AI",
-    purpose: "Accelerating visual exploration and component consistency",
-    output: "Hi-fi UI + design system",
-    saved: "~2.5 days",
-    example: "Seeded layout variants, then rebuilt every screen manually to design-system standards.",
+    step: "06",
+    flag: "🏎",
+    title: "Design Process",
+    goal: "Turning structure into a product people can feel.",
+    groups: [
+      {
+        tools: [
+          { name: "Uizard", purpose: ["Wireframing"], output: "Rapid low-fidelity wireframes." },
+          {
+            name: "Motiff",
+            purpose: ["Visual design"],
+            output: "Early UI explorations and interface styling.",
+          },
+        ],
+      },
+    ],
+    human:
+      "Designed the final interfaces, interaction patterns, accessibility improvements, visual hierarchy, and prototype validation.",
   },
-  {
-    stage: "Prototype",
-    tool: "Figma AI",
-    purpose: "Wiring flows and writing consistent microcopy at speed",
-    output: "Clickable prototype",
-    saved: "~1 day",
-    example: "Standardised empty states, tooltips and confirmation copy across 20+ screens.",
-  },
-  {
-    stage: "Presentation",
-    tool: "Gamma AI",
-    purpose: "Structuring the case narrative for stakeholders",
-    output: "Case study deck",
-    saved: "~1 day",
-    example: "Drafted the storyline; the argument, evidence and visuals stayed fully human-authored.",
-  },
+];
+
+export const aiAccelerated = [
+  "Research synthesis",
+  "Naming",
+  "Branding",
+  "Personas",
+  "Brainstorming",
+  "Information Architecture",
+  "Journey Mapping",
+  "Wireframing",
+  "Visual exploration",
+  "Documentation",
 ] as const;
+
+export const humanDesigned = [
+  "Product Strategy",
+  "UX Decisions",
+  "Prioritization",
+  "User Empathy",
+  "Interaction Design",
+  "Visual Design",
+  "Accessibility",
+  "Usability",
+  "Product Thinking",
+  "Final Validation",
+] as const;
+
+export const competitiveFindings = [
+  "Most platforms focus on managing sponsorships after partnerships are formed rather than helping users discover the right opportunities.",
+  "AI is primarily used for analytics and reporting, with very limited support for intelligent sponsor–team matching.",
+  "Existing workflows rely heavily on manual searching, filtering, and relationship management.",
+  "Collaboration is often fragmented across multiple tools, creating unnecessary context switching.",
+  "None of the evaluated solutions provide a motorsport-first sponsorship experience powered by AI.",
+] as const;
+
+export const designOpportunity = [
+  "Intelligent sponsor discovery",
+  "AI-powered recommendations",
+  "Predictive partnership insights",
+  "Centralized collaboration",
+  "End-to-end sponsorship lifecycle management",
+  "Motorsport-focused workflows",
+] as const;
+
 
 export const telemetry = [
   {

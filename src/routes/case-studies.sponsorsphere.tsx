@@ -793,35 +793,56 @@ function SponsorSphere() {
       </section>
 
       {/* ============ 08 · FULL THROTTLE UI ============ */}
-      <section data-hwrap className="relative overflow-hidden border-y border-border carbon-weave">
-        <div className="mx-auto max-w-[1280px] px-6 pt-20 md:px-10 md:pt-24">
+      <section
+        data-hwrap
+        className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden border-y border-border carbon-weave"
+      >
+        <div className="mx-auto w-full max-w-[1280px] shrink-0 px-6 pt-16 md:px-10 md:pt-20">
           <Eyebrow>Full Throttle UI</Eyebrow>
-          <h2 className="mt-6 font-display text-[clamp(2rem,5.4vw,4.5rem)] font-bold uppercase tracking-[-0.03em]">
+          <h2 className="mt-5 font-display text-[clamp(1.8rem,4.6vw,3.6rem)] font-bold uppercase tracking-[-0.03em]">
             The Product at Speed
           </h2>
         </div>
 
-        <div className="overflow-x-auto pb-20 pt-12 lg:overflow-visible">
-          <div data-htrack className="flex gap-6 px-6 md:px-10" style={{ willChange: "transform" }}>
+        <div className="flex flex-1 items-center overflow-x-auto py-10 lg:overflow-visible">
+          <div
+            data-htrack
+            className="flex items-center gap-6 px-6 md:px-10"
+            style={{ willChange: "transform" }}
+          >
             {screens.map((s, i) => (
               <article
                 key={s.name}
-                className="group relative w-[78vw] shrink-0 rounded-3xl glass-panel p-6 transition duration-500 hover:-translate-y-2 sm:w-[420px]"
+                data-hcard
+                className="group relative flex w-[86vw] shrink-0 flex-col rounded-3xl glass-panel p-5 transition duration-500 hover:-translate-y-1.5 sm:w-[560px]"
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon">
+                <div className="relative h-[min(46svh,340px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
                   <ScreenMock index={i} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
                 </div>
-                <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-electric">
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.24em] text-electric">
                   Screen {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-2 font-display text-2xl font-semibold">{s.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+                <h3 className="mt-1.5 font-display text-xl font-semibold md:text-2xl">{s.name}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-silver">
+                    Purpose ·{" "}
+                  </span>
+                  {s.purpose}
+                </p>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-racing">
+                    UX Focus ·{" "}
+                  </span>
+                  {s.focus}
+                </p>
               </article>
             ))}
+            <span aria-hidden className="block w-[8vw] shrink-0 lg:w-[24vw]" />
           </div>
         </div>
       </section>
+
 
       {/* ============ 09 · THE RACE STRATEGY ============ */}
       <section data-board className="relative overflow-hidden carbon-weave">

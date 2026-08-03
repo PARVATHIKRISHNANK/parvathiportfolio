@@ -535,15 +535,82 @@ function SponsorSphere() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {[
-            { src: research.url, alt: "User research collage: findings, personas and value propositions" },
-            { src: market.url, alt: "Market analysis: SWOT, empathy maps and research findings" },
-          ].map((img) => (
-            <figure key={img.src} data-reveal className="overflow-hidden rounded-3xl border border-border bg-white">
-              <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
-            </figure>
-          ))}
+        {/* ---- Competitive Analysis · the engineer's notebook page ---- */}
+        <div className="relative mt-20">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-racing">
+            Competitive Analysis
+          </p>
+          <h3 data-split className="mt-4 font-hand text-4xl text-foreground md:text-5xl">
+            Nine platforms, one missing lap
+          </h3>
+
+          <figure data-reveal className="relative mx-auto mt-10 max-w-4xl">
+            <div aria-hidden className="absolute -inset-6 blueprint-grid rounded-[2rem] opacity-40" />
+            {/* clipboard clip */}
+            <span
+              aria-hidden
+              className="absolute -top-4 left-1/2 z-20 h-7 w-24 -translate-x-1/2 rounded-md border border-white/20 bg-gunmetal shadow-lg"
+            />
+            {/* racing tape corners */}
+            <span
+              aria-hidden
+              className="absolute -left-4 -top-2 z-20 h-6 w-24 -rotate-[18deg] bg-[repeating-linear-gradient(45deg,var(--racing)_0_7px,transparent_7px_14px)] opacity-70"
+            />
+            <span
+              aria-hidden
+              className="absolute -bottom-2 -right-4 z-20 h-6 w-24 -rotate-[18deg] bg-[repeating-linear-gradient(45deg,var(--racing)_0_7px,transparent_7px_14px)] opacity-70"
+            />
+            <img
+              src={competitive.url}
+              alt="Handwritten competitive analysis comparison sheet from the race engineer's notebook"
+              loading="lazy"
+              width={1408}
+              height={1008}
+              data-parallax="6"
+              className="relative z-10 w-full rotate-[-1.2deg] rounded-lg border border-white/15 shadow-[0_40px_90px_oklch(0_0_0/0.65)]"
+            />
+          </figure>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            <div data-reveal className="rounded-3xl glass-panel p-8">
+              <h4 className="font-display text-2xl font-semibold">Key Findings</h4>
+              <p className="mt-3 text-sm text-muted-foreground">
+                After evaluating nine leading sponsorship and partnership platforms, several
+                patterns emerged.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {competitiveFindings.map((f) => (
+                  <li key={f} className="flex gap-3 text-sm leading-relaxed text-silver">
+                    <span className="mt-0.5 text-electric">✔</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div data-reveal className="rounded-3xl border border-electric/30 bg-electric/[0.06] p-8">
+              <h4 className="font-display text-2xl font-semibold">Design Opportunity</h4>
+              <p className="mt-3 text-sm text-muted-foreground">
+                These insights revealed an opportunity to rethink sponsorship discovery. Instead of
+                another sponsorship management platform, SponsorSphere was designed as an AI-powered
+                sponsorship intelligence platform that combines:
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {designOpportunity.map((o) => (
+                  <li
+                    key={o}
+                    className="rounded-full border border-electric/30 bg-electric/10 px-4 py-1.5 text-xs text-silver"
+                  >
+                    {o}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                By addressing the gaps identified during competitive analysis, SponsorSphere creates
+                a faster, smarter, and more contextual sponsorship experience.
+              </p>
+            </div>
+          </div>
         </div>
 
         <p
@@ -553,6 +620,7 @@ function SponsorSphere() {
           Final insight — <span className="text-foreground">matching</span> was the biggest
           challenge, not funding.
         </p>
+
       </Shell>
 
       {/* ============ 06.5 · WHY I DESIGNED IT THIS WAY ============ */}

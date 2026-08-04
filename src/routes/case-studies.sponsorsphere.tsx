@@ -20,8 +20,7 @@ import {
 
 import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import design from "@/assets/sponsorsphere-design.png.asset.json";
-import ideation from "@/assets/sponsorsphere-ideation.png.asset.json";
-import competitive from "@/assets/ss-competitive.jpg.asset.json";
+import competitive from "@/assets/ss-competitive-v2.png.asset.json";
 import garageImg from "@/assets/ss-garage.jpg";
 import brakesImg from "@/assets/ss-brakes.jpg";
 import trophyImg from "@/assets/ss-trophy.jpg";

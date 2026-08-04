@@ -88,27 +88,9 @@ export function useCinematic() {
             .fromTo("[data-garage-car]", { scale: 1.05, y: 40 }, { scale: 1.18, y: 0, ease: "none" }, 0);
         }
 
-        /* ---- horizontal UI gallery ---- */
-        const track = document.querySelector<HTMLElement>("[data-htrack]");
-        const hwrap = document.querySelector<HTMLElement>("[data-hwrap]");
-        if (track && hwrap && desktop) {
-          const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
-          gsap.to(track, {
-            x: () => -distance(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: hwrap,
-              start: "top top",
-              // 1.6x the travel distance gives each garage stop time to be read
-              end: () => "+=" + distance() * 1.6,
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-        }
+        /* ---- horizontal UI gallery: native horizontal scroll only.
+               Vertical wheel must never be hijacked, so no pinning here. ---- */
+
 
         /* ---- AI race strategy board: car travels the checkpoints ---- */
         const sboard = document.querySelector<HTMLElement>("[data-strategyboard]");

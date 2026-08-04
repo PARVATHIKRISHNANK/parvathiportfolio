@@ -752,7 +752,6 @@ function SponsorSphere() {
 
           <div className="mt-12 grid gap-6">
             {[
-              { src: ideation.url, alt: "Ideation mind map of SponsorSphere features" },
               { src: design.url, alt: "Wireframes and high fidelity UI screens for SponsorSphere" },
             ].map((img) => (
               <figure
@@ -777,21 +776,26 @@ function SponsorSphere() {
           <h2 className="mt-5 font-display text-[clamp(1.8rem,4.6vw,3.6rem)] font-bold uppercase tracking-[-0.03em]">
             The Product at Speed
           </h2>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+            Scroll horizontally · shift + wheel · swipe
+          </p>
         </div>
 
-        <div className="flex flex-1 items-center overflow-x-auto py-10 lg:overflow-visible">
+        <div
+          data-hscroll
+          className="flex flex-1 items-center overflow-x-auto overflow-y-hidden py-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           <div
             data-htrack
-            className="flex items-center gap-6 px-6 md:px-10"
-            style={{ willChange: "transform" }}
+            className="flex items-stretch gap-6 px-6 md:px-10"
           >
             {screens.map((s, i) => (
               <article
                 key={s.name}
                 data-hcard
-                className="group relative flex w-[86vw] shrink-0 flex-col rounded-3xl glass-panel p-5 transition duration-500 hover:-translate-y-1.5 sm:w-[560px]"
+                className="group relative flex w-[86vw] shrink-0 flex-col rounded-3xl glass-panel p-5 transition duration-500 hover:-translate-y-1.5 sm:w-[420px]"
               >
-                <div className="relative h-[min(46svh,340px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
+                <div className="relative h-[min(38svh,300px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
                   <ScreenMock index={i} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
                 </div>
@@ -813,10 +817,10 @@ function SponsorSphere() {
                 </p>
               </article>
             ))}
-            <span aria-hidden className="block w-[8vw] shrink-0 lg:w-[24vw]" />
           </div>
         </div>
       </section>
+
 
 
       {/* ============ 09 · THE RACE STRATEGY ============ */}

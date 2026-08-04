@@ -25,7 +25,6 @@ export function useCinematic() {
       gsap.registerPlugin(ScrollTrigger);
 
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const desktop = window.matchMedia("(min-width: 1024px)").matches;
 
       let lenis: InstanceType<typeof Lenis> | undefined;
       let rafId = 0;

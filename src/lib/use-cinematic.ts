@@ -160,6 +160,15 @@ export function useCinematic() {
 
       ScrollTrigger.refresh();
 
+      // Always land at the very top of the case study once motion is booted.
+      lenis?.scrollTo(0, { immediate: true, force: true });
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        if (cancelled) return;
+        lenis?.scrollTo(0, { immediate: true, force: true });
+        window.scrollTo(0, 0);
+      });
+
       cleanup = () => {
         ctx.revert();
         cancelAnimationFrame(rafId);

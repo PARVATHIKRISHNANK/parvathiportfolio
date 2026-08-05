@@ -19,7 +19,7 @@ import {
 } from "@/lib/sponsorsphere-data";
 
 import heroCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
-import design from "@/assets/sponsorsphere-design.png.asset.json";
+
 import competitive from "@/assets/ss-competitive-v2.png.asset.json";
 import garageImg from "@/assets/ss-garage.jpg";
 import brakesImg from "@/assets/ss-brakes.jpg";
@@ -782,7 +782,7 @@ function SponsorSphere() {
                 data-hcard
                 className="group relative flex w-[86vw] shrink-0 flex-col rounded-3xl glass-panel p-5 transition duration-500 hover:-translate-y-1.5 sm:w-[420px]"
               >
-                <div className="relative h-[min(38svh,300px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
+                <div className="relative h-[min(46svh,360px)] overflow-hidden rounded-2xl bg-gradient-to-br from-gunmetal/60 to-carbon p-2">
                   <ScreenMock index={i} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
                 </div>

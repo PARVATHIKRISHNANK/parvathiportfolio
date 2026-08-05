@@ -749,19 +749,7 @@ function SponsorSphere() {
             ))}
           </div>
 
-          <div className="mt-12 grid gap-6">
-            {[
-              { src: design.url, alt: "Wireframes and high fidelity UI screens for SponsorSphere" },
-            ].map((img) => (
-              <figure
-                key={img.src}
-                data-reveal
-                className="overflow-hidden rounded-3xl border border-border bg-white"
-              >
-                <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
-              </figure>
-            ))}
-          </div>
+
         </Shell>
       </section>
 

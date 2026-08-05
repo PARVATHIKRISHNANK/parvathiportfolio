@@ -85,7 +85,7 @@ function Phone({
 function Label({ children, tone }: { children: React.ReactNode; tone?: "electric" | "racing" }) {
   return (
     <p
-      className={`truncate text-[4.5px] uppercase tracking-[0.06em] ${
+      className={`truncate text-[4px] uppercase tracking-normal ${
         tone === "electric"
           ? "text-electric"
           : tone === "racing"
@@ -102,8 +102,8 @@ function Stat({ label, value, delta }: { label: string; value: string; delta: st
   return (
     <div className="min-w-0 rounded-[6px] border border-white/10 bg-white/[0.035] p-1.5">
       <Label>{label}</Label>
-      <p className="mt-0.5 truncate text-[8.5px] font-bold leading-none">{value}</p>
-      <p className="mt-[2px] truncate text-[4.5px] text-electric">{delta}</p>
+      <p className="mt-0.5 truncate text-[7.5px] font-bold leading-none">{value}</p>
+      <p className="mt-[2px] truncate text-[4px] text-electric">{delta}</p>
     </div>
   );
 }
@@ -203,10 +203,9 @@ function Dashboard() {
         </div>
       ))}
 
-      <div className="mt-auto rounded-[6px] border border-racing/25 bg-racing/[0.07] p-1.5">
-        <Label tone="racing">Upcoming meeting</Label>
-        <p className="mt-[2px] truncate text-[5.5px] font-semibold">Velocity Energy · Kickoff</p>
-        <p className="truncate text-[4.5px] text-muted-foreground">Today · 4:30 PM</p>
+      <div className="mt-auto flex items-center justify-between rounded-[6px] border border-racing/25 bg-racing/[0.07] p-1.5">
+        <span className="min-w-0 truncate text-[5px] font-semibold">Velocity Energy · Kickoff</span>
+        <span className="shrink-0 text-[4.5px] text-muted-foreground">4:30 PM</span>
       </div>
     </Phone>
   );

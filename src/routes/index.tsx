@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
   { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2025", href: "/case-studies/talentai" as const },
-  { n: "03", title: "T1D Care Transition", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/t1d" as const },
+  { n: "03", title: "Glumate", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/glumate" as const },
 ];
 
 function Portfolio() {

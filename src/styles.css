@@ -303,3 +303,42 @@
   [data-story] { opacity: 1; transform: none; filter: none; transition: none; }
   .animate-heartbeat, .animate-typing, .animate-ping-soft { animation: none !important; }
 }
+
+/* ---------- Ledger case-study scope (enterprise light system) ---------- */
+.ledger-scope {
+  --l-navy: #12213B;
+  --l-cta: #2DD4BF;
+  --l-ai-a: #8B5CF6;
+  --l-ai-b: #EC4899;
+  --l-success: #16A34A;
+  --l-warning: #D97706;
+  --l-danger: #DC2626;
+  --l-bg: #F7F8FA;
+  --l-card: #FFFFFF;
+  --l-border: #E5E7EB;
+  --l-text: #111827;
+  --l-text2: #6B7280;
+  background: var(--l-bg);
+  color: var(--l-text);
+  font-family: var(--font-sans);
+}
+.ledger-scope * { border-color: var(--l-border); }
+.ledger-scope ::selection { background: var(--l-cta); color: var(--l-navy); }
+
+@keyframes l-cursor {
+  0%   { transform: translate(8%, 20%); opacity: 0; }
+  10%  { opacity: 1; }
+  45%  { transform: translate(62%, 42%); }
+  75%  { transform: translate(38%, 78%); }
+  100% { transform: translate(8%, 20%); opacity: 0; }
+}
+@utility animate-l-cursor { animation: l-cursor 9s ease-in-out infinite; }
+
+@keyframes l-flow {
+  to { stroke-dashoffset: -160; }
+}
+@utility animate-l-flow { animation: l-flow 4s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-l-cursor, .animate-l-flow { animation: none !important; }
+}

@@ -29,9 +29,9 @@ export const Route = createFileRoute("/")({
 });
 
 const caseStudies = [
-  { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
-  { n: "02", title: "Ledger", tag: "AI · Professional Services · Compliance", year: "2026", href: "/case-studies/ledger" as const },
-  { n: "03", title: "Glumate", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/glumate" as const },
+  { n: "01", title: "Ledger", tag: "AI · Professional Services · Compliance", year: "2026", href: "/case-studies/ledger" as const, image: ledgerCard.url },
+  { n: "02", title: "Glumate", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/glumate" as const, image: t1dHero.url },
+  { n: "03", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const, image: sponsorsphereCar.url },
 ];
 
 function Portfolio() {
@@ -253,7 +253,12 @@ function Highlights() {
             </p>
           </article>
 
-          <article className="group">
+          <a
+            href="https://ux-design-awards.com/winners/2025-2-talentai-in"
+            target="_blank"
+            rel="noreferrer"
+            className="group block"
+          >
             <div className="rounded-2xl overflow-hidden aspect-[4/3] mb-6 bg-background/10">
               <img src={talentai} alt="TalentAI recognition" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
             </div>
@@ -270,7 +275,10 @@ function Highlights() {
               identity verification for human-like pre-screening. Selected among the top 50
               submissions in an international UX competition.
             </p>
-          </article>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm text-accent">
+              View recognition <ArrowUpRight className="h-4 w-4" />
+            </span>
+          </a>
         </div>
       </div>
     </section>
@@ -296,12 +304,7 @@ function CaseStudies() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {caseStudies.map((c, i) => {
-          const bgImage =
-            i === 0
-              ? `url(${sponsorsphereCar.url})`
-              : i === 1
-                ? `url(${ledgerCard.url})`
-                : `url(${t1dHero.url})`;
+          const bgImage = `url(${c.image})`;
           return (
             <Link key={i} to={c.href} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-secondary border border-border">

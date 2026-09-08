@@ -5,14 +5,32 @@ import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
 import sponsorsphereCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
+import ledgerCard from "@/assets/ledger-card.jpg.asset.json";
+import resume from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Parvathi K — UX/UI & Product Designer" },
+      {
+        name: "description",
+        content: "Portfolio of Parvathi Krishnan K, a UX/UI and Product Designer creating accessible, AI-powered digital experiences.",
+      },
+      { property: "og:title", content: "Parvathi K — UX/UI & Product Designer" },
+      {
+        property: "og:description",
+        content: "Selected product explorations across AI, enterprise, and consumer experiences.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Portfolio,
 });
 
 const caseStudies = [
   { n: "01", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const },
-  { n: "02", title: "TalentAI Interview Platform", tag: "AI · Conversational UX", year: "2025", href: "/case-studies/talentai" as const },
+  { n: "02", title: "Ledger", tag: "AI · Professional Services · Compliance", year: "2026", href: "/case-studies/ledger" as const },
   { n: "03", title: "Glumate", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/glumate" as const },
 ];
 
@@ -97,7 +115,8 @@ function Hero() {
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
               </a>
               <a
-                href="#"
+                href={resume.url}
+                download="Parvathi_Krishnan_Resume.pdf"
                 className="inline-flex items-center gap-2 border border-foreground/80 px-6 py-3.5 rounded-full text-sm font-medium hover:bg-foreground hover:text-background transition"
               >
                 <Download className="h-4 w-4" /> Download Resume
@@ -271,8 +290,7 @@ function CaseStudies() {
           </h2>
         </div>
         <p className="text-muted-foreground max-w-sm">
-          A glimpse into projects across AI, enterprise, and consumer products. Full case studies
-          coming soon.
+          Selected product explorations across AI, enterprise, and consumer experiences.
         </p>
       </div>
 
@@ -282,7 +300,7 @@ function CaseStudies() {
             i === 0
               ? `url(${sponsorsphereCar.url})`
               : i === 1
-                ? `url(${talentai})`
+                ? `url(${ledgerCard.url})`
                 : `url(${t1dHero.url})`;
           return (
             <Link key={i} to={c.href} className="group block">
@@ -490,12 +508,14 @@ function Contact() {
                 href: "mailto:parvathikrishnamohan01@gmail.com",
               },
               { icon: Phone, label: "Phone", value: "+91 93609 82121", href: "tel:+919360982121" },
-              { icon: Linkedin, label: "LinkedIn", value: "Parvathi Krishnan K", href: "#" },
-              { icon: ArrowUpRight, label: "Behance", value: "Parvathi Krishnan K", href: "#" },
+              { icon: Linkedin, label: "LinkedIn", value: "Parvathi Krishnan K", href: "https://www.linkedin.com/in/parvathi-krishnan-k-0ab4b81ba" },
+              { icon: ArrowUpRight, label: "Behance", value: "Parvathi Krishnan K", href: "https://www.behance.net/parvathkrishna" },
             ].map((c) => (
               <a
                 key={c.label}
                 href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+                rel={c.href.startsWith("http") ? "noreferrer" : undefined}
                 className="flex items-center justify-between border-b border-background/20 py-4 group hover:border-accent transition"
               >
                 <div className="flex items-center gap-4">

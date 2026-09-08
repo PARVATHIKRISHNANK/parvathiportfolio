@@ -130,6 +130,14 @@ function LedgerCase() {
         </ul>
       </aside>
 
+      {/* sticky back button */}
+      <Link
+        to="/"
+        className="fixed bottom-5 left-5 z-40 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white/95 px-4 py-2.5 text-xs font-semibold text-[#12213B] shadow-[0_18px_40px_-24px_rgba(18,33,59,0.7)] backdrop-blur hover:border-[#2DD4BF]"
+      >
+        <ArrowLeft className="h-3.5 w-3.5" /> Back to portfolio
+      </Link>
+
       <Hero onExplore={() => goto("context")} onPrinciple={() => goto("principle")} onProduct={() => goto("product")} />
 
       {/* 01 CONTEXT */}
@@ -187,7 +195,7 @@ function LedgerCase() {
                 </span>
               ))}
               <span className="ml-1 rounded-full border border-[#D97706]/40 bg-[#D97706]/15 px-3 py-1.5 text-[#F0B45E]">
-                repeat ×4,750
+                repeat ×9,318
               </span>
             </div>
             <p className="mt-6 text-lg text-white/80">Too much cognitive effort is spent finding what matters.</p>
@@ -248,7 +256,7 @@ function LedgerCase() {
         </h2>
         <BeforeAfter />
         <h3 className="mt-24 font-display text-2xl md:text-3xl" data-story>The workflow becomes a decision journey.</h3>
-        <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,320px)_1fr]">
+        <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
           <ol className="flex gap-2 overflow-x-auto lg:block lg:space-y-2 lg:overflow-visible">
             {journey.map((j, i) => (
               <li key={j.n} className="shrink-0 lg:w-full">
@@ -265,7 +273,7 @@ function LedgerCase() {
               </li>
             ))}
           </ol>
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 lg:sticky lg:top-24">
             <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#6B7280]">
               Stage {journey[stage]!.n} · {journey[stage]!.title}
             </div>
@@ -310,7 +318,7 @@ function LedgerCase() {
           <div className="mt-12 grid gap-4 lg:grid-cols-2">
             <div className="rounded-2xl border border-white/12 bg-white/[0.04] p-6" data-story>
               <div className="grid grid-cols-2 gap-3 text-sm">
-                {[["Recommendation", "Reject"], ["Confidence", "94%"], ["Risk", "High"], ["Impact", "₹2.48 L"]].map(([k, v]) => (
+                {[["Recommendation", "Reject"], ["Confidence", "96%"], ["Risk", "High"], ["Impact", "₹1.86 L"]].map(([k, v]) => (
                   <div key={k} className="rounded-xl border border-white/10 p-3">
                     <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/45">{k}</div>
                     <div className="mt-1 text-lg font-semibold">{v}</div>
@@ -486,7 +494,7 @@ function Hero({ onExplore, onPrinciple, onProduct }: { onExplore: () => void; on
               <span className="rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] px-2 py-0.5 text-[10px] font-semibold text-white">AI</span>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-              {[["Auto-accept", "6,240", "#16A34A"], ["Review", "652", "#D97706"], ["Reject", "306", "#DC2626"]].map(([l, v, c]) => (
+              {[["Auto-accept", "4,180", "#16A34A"], ["Review", "508", "#D97706"], ["Reject", "84", "#DC2626"]].map(([l, v, c]) => (
                 <div key={l} className="rounded-lg border border-[#E5E7EB] p-2">
                   <div className="text-[10px] text-[#6B7280]">{l}</div>
                   <div className="text-sm font-semibold" style={{ color: c }}>{v}</div>
@@ -496,7 +504,7 @@ function Hero({ onExplore, onPrinciple, onProduct }: { onExplore: () => void; on
             <div className="mt-3 rounded-xl border border-[#E5E7EB] p-3">
               <div className="text-[10px] uppercase tracking-[0.14em] text-[#6B7280]">Record Review</div>
               <div className="mt-2 space-y-1.5 text-[11px]">
-                {[["INV-24817", "Reject", "94%", "#DC2626"], ["INV-24902", "Accept", "98%", "#16A34A"], ["CDN-1188", "Review", "71%", "#D97706"]].map(([d, r, c, col]) => (
+                {[["INV-31204", "Reject", "96%", "#DC2626"], ["INV-31288", "Accept", "99%", "#16A34A"], ["CDN-2074", "Review", "74%", "#D97706"]].map(([d, r, c, col]) => (
                   <div key={d} className="flex items-center justify-between rounded-md bg-[#F7F8FA] px-2 py-1.5">
                     <span className="font-mono">{d}</span>
                     <span style={{ color: col }}>{r}</span>
@@ -507,7 +515,7 @@ function Hero({ onExplore, onPrinciple, onProduct }: { onExplore: () => void; on
             </div>
             <div className="mt-3 rounded-xl border border-[#DC2626]/25 bg-[#DC2626]/5 p-3">
               <div className="text-[10px] uppercase tracking-[0.14em] text-[#6B7280]">Business impact at risk</div>
-              <div className="text-lg font-semibold text-[#DC2626]">₹3.8 Cr</div>
+              <div className="text-lg font-semibold text-[#DC2626]">₹2.4 Cr</div>
             </div>
             <MousePointer2 aria-hidden className="pointer-events-none absolute left-0 top-0 h-4 w-4 text-[#12213B] animate-l-cursor" />
           </div>
@@ -579,7 +587,7 @@ function Principle() {
   }, []);
 
   const stages = [
-    ["Input", "4,750 records"],
+    ["Input", "9,318 records"],
     ["AI analyses", "Match status · Risk · Historical patterns · Vendor · Tax values"],
     ["AI output", "Recommendation · Confidence · Rationale · Potential exposure"],
     ["Human action", "Accept · Reject · Pending"],
@@ -729,27 +737,27 @@ function Impact() {
       </div>
 
       <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        <Kpi target={80} suffix="%" label="Faster exception resolution" />
-        <Kpi target={90} suffix="%" label="Reduction in clicks" />
-        <Kpi target={50} suffix="%" label="Less invoice review effort" />
-        <Kpi target={70} suffix="%" label="Reduction in manual decision making" />
+        <Kpi target={75} suffix="%" label="Faster exception resolution" />
+        <Kpi target={85} suffix="%" label="Reduction in clicks" />
+        <Kpi target={55} suffix="%" label="Less invoice review effort" />
+        <Kpi target={65} suffix="%" label="Reduction in manual decision making" />
         <div className="rounded-2xl border border-[#E5E7EB] bg-[#12213B] p-6 text-white">
-          <div className="font-display text-4xl md:text-5xl tracking-tight">₹9.6L+</div>
+          <div className="font-display text-4xl md:text-5xl tracking-tight">₹14.2 L+</div>
           <div className="mt-2 text-sm text-white/60">Annual operational savings</div>
         </div>
       </div>
       <p className="mt-4 text-xs text-[#6B7280]">
-        Illustrative POC impact targets based on the proposed workflow and a 500 batches/month scenario — not measured
+        Illustrative POC impact targets based on the proposed workflow and a 380 batches/month scenario — not measured
         production results.
       </p>
 
       <h3 className="mt-20 font-display text-2xl md:text-3xl" data-story>How the design creates each number.</h3>
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {[
-          ["80% faster exception resolution", ["AI prioritisation", "Root-cause suggestions", "Guided fixes"], "Less time spent searching for the problem → faster resolution."],
-          ["90% reduction in clicks", ["Progressive disclosure", "Contextual actions", "Bulk workflows"], "Fewer navigation steps between deciding and acting."],
-          ["50% less invoice review effort", ["AI recommendation", "Confidence", "Rationale"], "Less manual inspection per record."],
-          ["70% less manual decision making", ["AI categorisation", "Risk prioritisation", "Batch recommendations"], "The analyst focuses only on genuine exceptions."],
+          ["75% faster exception resolution", ["AI prioritisation", "Root-cause suggestions", "Guided fixes"], "Less time spent searching for the problem → faster resolution."],
+          ["85% reduction in clicks", ["Progressive disclosure", "Contextual actions", "Bulk workflows"], "Fewer navigation steps between deciding and acting."],
+          ["55% less invoice review effort", ["AI recommendation", "Confidence", "Rationale"], "Less manual inspection per record."],
+          ["65% less manual decision making", ["AI categorisation", "Risk prioritisation", "Batch recommendations"], "The analyst focuses only on genuine exceptions."],
         ].map(([t, chips, out], i) => (
           <div key={String(t)} data-story data-story-delay={i * 90} className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
             <div className="text-lg font-semibold">{t}</div>

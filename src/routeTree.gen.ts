@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CaseStudiesTalentaiRouteImport } from './routes/case-studies.talentai'
 import { Route as CaseStudiesSponsorsphereRouteImport } from './routes/case-studies.sponsorsphere'
 import { Route as CaseStudiesLedgerRouteImport } from './routes/case-studies.ledger'
 import { Route as CaseStudiesGlumateRouteImport } from './routes/case-studies.glumate'
@@ -18,11 +17,6 @@ import { Route as CaseStudiesGlumateRouteImport } from './routes/case-studies.gl
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudiesTalentaiRoute = CaseStudiesTalentaiRouteImport.update({
-  id: '/case-studies/talentai',
-  path: '/case-studies/talentai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesSponsorsphereRoute =
@@ -47,14 +41,12 @@ export interface FileRoutesByFullPath {
   '/case-studies/glumate': typeof CaseStudiesGlumateRoute
   '/case-studies/ledger': typeof CaseStudiesLedgerRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
-  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/case-studies/glumate': typeof CaseStudiesGlumateRoute
   '/case-studies/ledger': typeof CaseStudiesLedgerRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
-  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,7 +54,6 @@ export interface FileRoutesById {
   '/case-studies/glumate': typeof CaseStudiesGlumateRoute
   '/case-studies/ledger': typeof CaseStudiesLedgerRoute
   '/case-studies/sponsorsphere': typeof CaseStudiesSponsorsphereRoute
-  '/case-studies/talentai': typeof CaseStudiesTalentaiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,21 +62,18 @@ export interface FileRouteTypes {
     | '/case-studies/glumate'
     | '/case-studies/ledger'
     | '/case-studies/sponsorsphere'
-    | '/case-studies/talentai'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/case-studies/glumate'
     | '/case-studies/ledger'
     | '/case-studies/sponsorsphere'
-    | '/case-studies/talentai'
   id:
     | '__root__'
     | '/'
     | '/case-studies/glumate'
     | '/case-studies/ledger'
     | '/case-studies/sponsorsphere'
-    | '/case-studies/talentai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,7 +81,6 @@ export interface RootRouteChildren {
   CaseStudiesGlumateRoute: typeof CaseStudiesGlumateRoute
   CaseStudiesLedgerRoute: typeof CaseStudiesLedgerRoute
   CaseStudiesSponsorsphereRoute: typeof CaseStudiesSponsorsphereRoute
-  CaseStudiesTalentaiRoute: typeof CaseStudiesTalentaiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -103,13 +90,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/case-studies/talentai': {
-      id: '/case-studies/talentai'
-      path: '/case-studies/talentai'
-      fullPath: '/case-studies/talentai'
-      preLoaderRoute: typeof CaseStudiesTalentaiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/sponsorsphere': {
@@ -141,7 +121,6 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesGlumateRoute: CaseStudiesGlumateRoute,
   CaseStudiesLedgerRoute: CaseStudiesLedgerRoute,
   CaseStudiesSponsorsphereRoute: CaseStudiesSponsorsphereRoute,
-  CaseStudiesTalentaiRoute: CaseStudiesTalentaiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

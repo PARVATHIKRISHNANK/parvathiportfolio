@@ -1002,7 +1002,7 @@ function SponsorSphere() {
               <ArrowLeft className="h-4 w-4" /> Back to portfolio
             </Link>
             <Link
-              to="/case-studies/talentai"
+              to="/case-studies/ledger"
               className="inline-flex items-center gap-2 rounded-full bg-racing px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] transition hover:scale-[1.03]"
             >
               Next case study <ArrowRight className="h-4 w-4" />

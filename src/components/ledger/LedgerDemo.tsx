@@ -170,10 +170,10 @@ export function LedgerDemo({
                 <p className="text-sm text-[#6B7280]">Here's what needs you today.</p>
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <Stat label="Total Records" value="12,452" />
-                <Stat label="Matched" value="8,621" tone="#16A34A" />
-                <Stat label="Pending" value="2,873" tone="#D97706" />
-                <Stat label="Exceptions" value="958" tone="#DC2626" />
+                <Stat label="Total Records" value="9,318" />
+                <Stat label="Matched" value="6,742" tone="#16A34A" />
+                <Stat label="Pending" value="1,984" tone="#D97706" />
+                <Stat label="Exceptions" value="592" tone="#DC2626" />
               </div>
 
               <div className="rounded-xl border bg-white p-4">
@@ -182,13 +182,13 @@ export function LedgerDemo({
                     <Sparkles className="h-3.5 w-3.5" />
                   </span>
                   <div className="text-sm font-semibold">AI Priority Insights</div>
-                  <Pill tone="ai">958 records need attention</Pill>
+                  <Pill tone="ai">592 records need attention</Pill>
                 </div>
                 <div className="mt-4 grid sm:grid-cols-3 gap-3">
                   {[
-                    ["Auto-Accept Candidates", "6,240", "#16A34A"],
-                    ["Review Required", "652", "#D97706"],
-                    ["Likely Reject", "306", "#DC2626"],
+                    ["Auto-Accept Candidates", "4,180", "#16A34A"],
+                    ["Review Required", "508", "#D97706"],
+                    ["Likely Reject", "84", "#DC2626"],
                   ].map(([l, v, c]) => (
                     <div key={l} className="rounded-lg border bg-[#F7F8FA] p-3">
                       <div className="text-[11px] text-[#6B7280]">{l}</div>
@@ -200,8 +200,8 @@ export function LedgerDemo({
                   <div className="text-[11px] uppercase tracking-[0.14em] text-[#6B7280]">
                     AI Insight · Potential Credit Impact
                   </div>
-                  <div className="text-xl font-semibold text-[#DC2626]">₹3.8 Cr</div>
-                  <div className="text-xs text-[#6B7280]">At risk across 306 high-risk exception records.</div>
+                  <div className="text-xl font-semibold text-[#DC2626]">₹2.4 Cr</div>
+                  <div className="text-xs text-[#6B7280]">At risk across 84 high-risk exception records.</div>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <button
@@ -223,11 +223,11 @@ export function LedgerDemo({
                 <div className="border-b px-4 py-3 text-sm font-semibold">This Month's Active Tasks</div>
                 <ul className="divide-y text-xs">
                   {[
-                    ["Reconciliation Pull", "11 Nov", "In progress", "#D97706"],
-                    ["Outward Filing", "13 Nov", "Ready", "#16A34A"],
-                    ["Summary Return", "20 Nov", "Blocked", "#DC2626"],
-                    ["Document Generation", "22 Nov", "Scheduled", "#6B7280"],
-                    ["Inward Record Action", "24 Nov", "Needs review", "#D97706"],
+                    ["Reconciliation Pull", "09 Nov", "In progress", "#D97706"],
+                    ["Outward Filing", "12 Nov", "Ready", "#16A34A"],
+                    ["Summary Return", "18 Nov", "Blocked", "#DC2626"],
+                    ["Document Generation", "21 Nov", "Scheduled", "#6B7280"],
+                    ["Inward Record Action", "23 Nov", "Needs review", "#D97706"],
                   ].map(([t, d, s, c]) => (
                     <li key={t} className="flex items-center gap-3 px-4 py-2.5">
                       <span className="flex-1 font-medium">{t}</span>
@@ -416,10 +416,10 @@ export function LedgerDemo({
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Bulk Action Center</h3>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <Stat label="Accepted Credit" value="₹4.6 Cr" tone="#16A34A" />
-                <Stat label="Pending / Review" value="₹48 L" tone="#D97706" />
-                <Stat label="Rejected Credit" value="₹12 L" tone="#DC2626" />
-                <Stat label="Risk Mitigation" value="92%" tone="#12213B" />
+                <Stat label="Accepted Credit" value="₹3.1 Cr" tone="#16A34A" />
+                <Stat label="Pending / Review" value="₹36 L" tone="#D97706" />
+                <Stat label="Rejected Credit" value="₹9 L" tone="#DC2626" />
+                <Stat label="Risk Mitigation" value="88%" tone="#12213B" />
               </div>
 
               <div className="grid lg:grid-cols-2 gap-3">
@@ -429,9 +429,9 @@ export function LedgerDemo({
                   </div>
                   <ul className="mt-3 space-y-2 text-xs">
                     {[
-                      ["Auto-Accept Candidates", "4,420", "#16A34A"],
-                      ["Manual Review Recommended", "280", "#D97706"],
-                      ["Likely Non-Compliant / Mismatched", "50", "#DC2626"],
+                      ["Auto-Accept Candidates", "4,180", "#16A34A"],
+                      ["Manual Review Recommended", "508", "#D97706"],
+                      ["Likely Non-Compliant / Mismatched", "84", "#DC2626"],
                     ].map(([l, v, c]) => (
                       <li key={l} className="flex items-center justify-between rounded-lg border bg-[#F7F8FA] px-3 py-2">
                         <span>{l}</span>
@@ -440,10 +440,10 @@ export function LedgerDemo({
                     ))}
                   </ul>
                   <div className="mt-3 text-[11px] text-[#6B7280]">
-                    Confidence threshold: <span className="font-semibold text-[#111827]">90% — Strict Mode</span>
+                    Confidence threshold: <span className="font-semibold text-[#111827]">92% — Strict Mode</span>
                   </div>
                   <div className="mt-1 h-1.5 rounded-full bg-black/10">
-                    <div className="h-full rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899]" style={{ width: "90%" }} />
+                    <div className="h-full rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899]" style={{ width: "92%" }} />
                   </div>
                 </div>
 
@@ -452,8 +452,8 @@ export function LedgerDemo({
                   <div className="mt-2 text-3xl font-semibold text-[#12213B]">{staged}</div>
                   <div className="text-xs text-[#6B7280]">actions carried over from the Record Workbench</div>
                   <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
-                    <div className="rounded-lg border p-2"><div className="text-[#6B7280]">Confidence</div><div className="font-semibold text-[#16A34A]">97% High</div></div>
-                    <div className="rounded-lg border p-2"><div className="text-[#6B7280]">Est. time saved</div><div className="font-semibold">4h 25m</div></div>
+                    <div className="rounded-lg border p-2"><div className="text-[#6B7280]">Confidence</div><div className="font-semibold text-[#16A34A]">95% High</div></div>
+                    <div className="rounded-lg border p-2"><div className="text-[#6B7280]">Est. time saved</div><div className="font-semibold">3h 40m</div></div>
                   </div>
                   <button
                     onClick={() => setModal(true)}
@@ -481,7 +481,7 @@ export function LedgerDemo({
                   <div className="w-full max-w-md rounded-2xl border bg-white p-5">
                     <div className="text-base font-semibold">Confirm Bulk Action</div>
                     <dl className="mt-4 space-y-2 text-xs">
-                      {[["Records", "6"], ["Impact", "₹7,22,702"], ["Groups", "Accept"], ["Estimated time saved", "25 min"]].map(([k, v]) => (
+                      {[["Records", "6"], ["Impact", "₹10,74,950"], ["Groups", "Accept"], ["Estimated time saved", "18 min"]].map(([k, v]) => (
                         <div key={k} className="flex justify-between border-b pb-1.5">
                           <dt className="text-[#6B7280]">{k}</dt><dd className="font-semibold">{v}</dd>
                         </div>
@@ -510,20 +510,20 @@ export function LedgerDemo({
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Error Resolution Center</h3>
               <div className="grid grid-cols-3 gap-3">
-                <Stat label="Success" value="2,145" tone="#16A34A" />
-                <Stat label="Failed" value={String(failedOpen.length + 15)} tone="#DC2626" />
-                <Stat label="Requires Action" value={String(failedOpen.length + 15)} tone="#D97706" />
+                <Stat label="Success" value="1,684" tone="#16A34A" />
+                <Stat label="Failed" value={String(failedOpen.length + 12)} tone="#DC2626" />
+                <Stat label="Requires Action" value={String(failedOpen.length + 12)} tone="#D97706" />
               </div>
               <div className="rounded-xl border bg-white p-4">
                 <div className="flex items-center gap-2 text-sm font-semibold">
                   <Sparkles className="h-4 w-4 text-[#8B5CF6]" /> AI Root Cause Analysis
                 </div>
                 <ul className="mt-3 space-y-2 text-xs">
-                  {[["Vendor ID inactive or suspended", 9], ["Place of Supply state-code mismatch", 5], ["Duplicate submission detected", 4]].map(([l, v]) => (
+                  {[["Vendor ID inactive or suspended", 7], ["Place of Supply state-code mismatch", 3], ["Duplicate submission detected", 2]].map(([l, v]) => (
                     <li key={String(l)} className="flex items-center gap-3">
                       <span className="w-64 shrink-0">{l}</span>
                       <span className="h-2 flex-1 rounded-full bg-black/10">
-                        <span className="block h-full rounded-full bg-[#DC2626]/70" style={{ width: `${(Number(v) / 9) * 100}%` }} />
+                        <span className="block h-full rounded-full bg-[#DC2626]/70" style={{ width: `${(Number(v) / 7) * 100}%` }} />
                       </span>
                       <span className="w-6 text-right font-semibold">{v}</span>
                     </li>
@@ -557,7 +557,7 @@ export function LedgerDemo({
                     ))}
                   </ol>
                   <div className="mt-3 rounded-lg bg-[#16A34A]/10 p-2 text-[11px] text-[#16A34A]">
-                    Success probability after fix: <span className="font-semibold">98%</span>
+                    Success probability after fix: <span className="font-semibold">96%</span>
                   </div>
                   <div className="mt-3 grid gap-1.5">
                     <button
@@ -615,12 +615,12 @@ export function LedgerDemo({
                     </thead>
                     <tbody className="divide-y">
                       {[
-                        ["REQ-90211", "Accept batch", "1,840", "SUCCESS"],
-                        ["REQ-90212", "Accept batch", "1,610", "SUCCESS"],
-                        ["REQ-90213", "Reject batch", "306", "SUCCESS"],
-                        ["REQ-90214", "Pending batch", "652", "SUCCESS"],
-                        ["REQ-90215", "Accept batch", "1,190", "SUCCESS"],
-                        ["REQ-90216", "Accept batch", "18", "FAILED"],
+                        ["REQ-77401", "Accept batch", "1,420", "SUCCESS"],
+                        ["REQ-77402", "Accept batch", "1,380", "SUCCESS"],
+                        ["REQ-77403", "Reject batch", "84", "SUCCESS"],
+                        ["REQ-77404", "Pending batch", "508", "SUCCESS"],
+                        ["REQ-77405", "Accept batch", "1,368", "SUCCESS"],
+                        ["REQ-77406", "Accept batch", "12", "FAILED"],
                       ].map((r) => (
                         <tr key={r[0]}>
                           <td className="p-2 font-mono">{r[0]}</td><td className="p-2">{r[1]}</td><td className="p-2">{r[2]}</td>
@@ -647,10 +647,10 @@ export function LedgerDemo({
                 Several actions changed during this session, so the previous draft is stale.
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <Stat label="Credit Available" value="₹1.25 Cr" tone="#16A34A" />
-                <Stat label="Credit Not Available" value="₹4.86 L" tone="#DC2626" />
-                <Stat label="Credit Reversal" value="₹2.14 L" tone="#D97706" />
-                <Stat label="Net Claimable Credit" value="₹1.23 Cr" tone="#12213B" />
+                <Stat label="Credit Available" value="₹96.4 L" tone="#16A34A" />
+                <Stat label="Credit Not Available" value="₹3.2 L" tone="#DC2626" />
+                <Stat label="Credit Reversal" value="₹1.6 L" tone="#D97706" />
+                <Stat label="Net Claimable Credit" value="₹94.8 L" tone="#12213B" />
               </div>
               <div className="rounded-xl border bg-white p-4">
                 <div className="flex items-center justify-between">
@@ -688,11 +688,11 @@ export function LedgerDemo({
                   </thead>
                   <tbody className="divide-y">
                     {[
-                      ["B2B Invoices", "8,921", "₹1.08 Cr"],
-                      ["B2B Amendments", "412", "₹6.4 L"],
-                      ["Credit/Debit Notes", "1,204", "₹9.2 L"],
-                      ["CDN Amendments", "188", "₹1.8 L"],
-                      ["ISD Credits", "97", "₹2.1 L"],
+                      ["B2B Invoices", "6,742", "₹84.2 L"],
+                      ["B2B Amendments", "318", "₹4.1 L"],
+                      ["Credit/Debit Notes", "948", "₹5.6 L"],
+                      ["CDN Amendments", "142", "₹1.3 L"],
+                      ["ISD Credits", "64", "₹1.2 L"],
                     ].map((r) => (
                       <tr key={r[0]}><td className="p-2">{r[0]}</td><td className="p-2">{r[1]}</td><td className="p-2">{r[2]}</td>
                         <td className="p-2"><Pill tone="ok"><ShieldCheck className="h-3 w-3" /> Reconciled</Pill></td></tr>

@@ -421,8 +421,8 @@ function LedgerCase() {
           <p className="text-sm text-[#6B7280]">AI-assisted compliance &amp; reconciliation workbench</p>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B7280]">Portfolio POC · 2026</p>
           <div className="mt-10 flex flex-wrap justify-between gap-4 border-t border-[#E5E7EB] pt-6 text-sm">
-            <Link to="/case-studies/sponsorsphere" className="inline-flex items-center gap-2 hover:text-[#2DD4BF]">
-              <ArrowLeft className="h-4 w-4" /> Previous case · SponsorSphere
+            <Link to="/" className="inline-flex items-center gap-2 hover:text-[#2DD4BF]">
+              <ArrowLeft className="h-4 w-4" /> Back to portfolio
             </Link>
             <Link to="/case-studies/glumate" className="inline-flex items-center gap-2 hover:text-[#2DD4BF]">
               Next case · Glumate <ArrowRight className="h-4 w-4" />

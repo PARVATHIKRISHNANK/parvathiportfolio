@@ -5,7 +5,7 @@ import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
 import sponsorsphereCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
-import ledgerCard from "@/assets/ledger-card.jpg.asset.json";
+import ledgerCard from "@/assets/ledger-card-v2.jpg";
 import resume from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
 });
 
 const caseStudies = [
-  { n: "01", title: "Ledger", tag: "AI · Professional Services · Compliance", year: "2026", href: "/case-studies/ledger" as const, image: ledgerCard.url },
+  { n: "01", title: "Ledger", tag: "AI · Professional Services · Compliance", year: "2026", href: "/case-studies/ledger" as const, image: ledgerCard },
   { n: "02", title: "Glumate", tag: "Healthcare · AI · Mobile App", year: "2025", href: "/case-studies/glumate" as const, image: t1dHero.url },
   { n: "03", title: "SponsorSphere", tag: "AI · Motorsport Sponsorship", year: "2024", href: "/case-studies/sponsorsphere" as const, image: sponsorsphereCar.url },
 ];

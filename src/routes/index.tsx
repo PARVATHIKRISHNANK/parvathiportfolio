@@ -5,7 +5,7 @@ import talentai from "@/assets/talentai.png";
 import uxindia from "@/assets/uxindia.jpg";
 import sponsorsphereCar from "@/assets/sponsorsphere-hero-car.png.asset.json";
 import t1dHero from "@/assets/t1d-hero.jpg.asset.json";
-import ledgerCard from "@/assets/ledger-card-v2.jpg";
+import ledgerCard from "@/assets/ledger-card-v3.jpg";
 import resume from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({

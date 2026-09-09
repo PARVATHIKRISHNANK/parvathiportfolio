@@ -121,7 +121,7 @@ export function LedgerDemo({
           ledger.app{routeFor[screen]}
         </div>
         <span className="rounded-full border border-[#2DD4BF]/40 bg-[#2DD4BF]/15 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[#2DD4BF]">
-          Interactive POC
+          Interactive prototype
         </span>
       </div>
 
@@ -163,7 +163,7 @@ export function LedgerDemo({
           {screen === "dashboard" && (
             <div className="space-y-5">
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#6B7280]">
-                Returns / Record Matching / Dashboard
+                 Ledger Management System / Record Matching / Dashboard
               </div>
               <div>
                 <h3 className="font-display text-2xl italic text-[#111827]">Good morning, Meera.</h3>

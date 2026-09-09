@@ -10,13 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CaseStudiesSponsorsphereRouteImport } from './routes/case-studies.sponsorsphere'
-import { Route as CaseStudiesLedgerRouteImport } from './routes/case-studies.ledger'
 import { Route as CaseStudiesGlumateRouteImport } from './routes/case-studies.glumate'
+import { Route as CaseStudiesLedgerRouteImport } from './routes/case-studies.ledger'
+import { Route as CaseStudiesSponsorsphereRouteImport } from './routes/case-studies.sponsorsphere'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesGlumateRoute = CaseStudiesGlumateRouteImport.update({
+  id: '/case-studies/glumate',
+  path: '/case-studies/glumate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesLedgerRoute = CaseStudiesLedgerRouteImport.update({
+  id: '/case-studies/ledger',
+  path: '/case-studies/ledger',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesSponsorsphereRoute =
@@ -25,16 +35,6 @@ const CaseStudiesSponsorsphereRoute =
     path: '/case-studies/sponsorsphere',
     getParentRoute: () => rootRouteImport,
   } as any)
-const CaseStudiesLedgerRoute = CaseStudiesLedgerRouteImport.update({
-  id: '/case-studies/ledger',
-  path: '/case-studies/ledger',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudiesGlumateRoute = CaseStudiesGlumateRouteImport.update({
-  id: '/case-studies/glumate',
-  path: '/case-studies/glumate',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -92,11 +92,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/case-studies/sponsorsphere': {
-      id: '/case-studies/sponsorsphere'
-      path: '/case-studies/sponsorsphere'
-      fullPath: '/case-studies/sponsorsphere'
-      preLoaderRoute: typeof CaseStudiesSponsorsphereRouteImport
+    '/case-studies/glumate': {
+      id: '/case-studies/glumate'
+      path: '/case-studies/glumate'
+      fullPath: '/case-studies/glumate'
+      preLoaderRoute: typeof CaseStudiesGlumateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/ledger': {
@@ -106,11 +106,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesLedgerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/case-studies/glumate': {
-      id: '/case-studies/glumate'
-      path: '/case-studies/glumate'
-      fullPath: '/case-studies/glumate'
-      preLoaderRoute: typeof CaseStudiesGlumateRouteImport
+    '/case-studies/sponsorsphere': {
+      id: '/case-studies/sponsorsphere'
+      path: '/case-studies/sponsorsphere'
+      fullPath: '/case-studies/sponsorsphere'
+      preLoaderRoute: typeof CaseStudiesSponsorsphereRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

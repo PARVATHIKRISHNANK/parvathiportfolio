@@ -115,7 +115,7 @@ function Hero() {
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
               </a>
               <a
-                href={resume.url}
+                href="/Parvathi_Krishnan_Resume.pdf"
                 download="Parvathi_Krishnan_Resume.pdf"
                 className="inline-flex items-center gap-2 border border-foreground/80 px-6 py-3.5 rounded-full text-sm font-medium hover:bg-foreground hover:text-background transition"
               >

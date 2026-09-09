@@ -14,7 +14,7 @@ export const Route = createFileRoute("/case-studies/ledger")({
       {
         name: "description",
         content:
-          "A portfolio POC case study: designing an AI-assisted compliance and reconciliation workbench where AI recommends and the analyst decides.",
+          "Designing an AI-assisted compliance and reconciliation workbench where AI recommends and the analyst decides.",
       },
       { property: "og:title", content: "Ledger — AI-Assisted Compliance Workbench" },
       {
@@ -61,6 +61,7 @@ function LedgerCase() {
   const [active, setActive] = useState("context");
   const [screen, setScreen] = useState<ScreenKey>("dashboard");
   const [stage, setStage] = useState(0);
+  const currentStage = journey[stage] ?? journey[0];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,9 +88,7 @@ function LedgerCase() {
           <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium text-[#6B7280] hover:text-[#111827]">
             <ArrowLeft className="h-3.5 w-3.5" /> Back to portfolio
           </Link>
-          <span className="rounded-full border border-[#8B5CF6]/30 bg-gradient-to-r from-[#8B5CF6]/10 to-[#EC4899]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[#8B5CF6]">
-            Portfolio POC
-          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#6B7280]">Ledger Management System</span>
         </div>
         {/* mobile section nav */}
         <nav className="lg:hidden flex gap-1.5 overflow-x-auto border-t border-[#E5E7EB] px-4 py-2">
@@ -256,13 +255,13 @@ function LedgerCase() {
         </h2>
         <BeforeAfter />
         <h3 className="mt-24 font-display text-2xl md:text-3xl" data-story>The workflow becomes a decision journey.</h3>
-        <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
-          <ol className="flex gap-2 overflow-x-auto lg:block lg:space-y-2 lg:overflow-visible">
+        <div className="mt-8">
+          <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {journey.map((j, i) => (
-              <li key={j.n} className="shrink-0 lg:w-full">
+              <li key={j.n}>
                 <button
                   onClick={() => { setStage(i); setScreen(j.screen as ScreenKey); }}
-                  className={`w-64 lg:w-full rounded-xl border p-4 text-left transition ${
+                  className={`h-full w-full rounded-xl border p-4 text-left transition ${
                     stage === i ? "border-[#2DD4BF] bg-white shadow-[0_12px_40px_-24px_rgba(18,33,59,0.6)]" : "border-[#E5E7EB] bg-white/60 hover:bg-white"
                   }`}
                 >
@@ -273,21 +272,25 @@ function LedgerCase() {
               </li>
             ))}
           </ol>
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 lg:sticky lg:top-24">
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#6B7280]">
-              Stage {journey[stage]!.n} · {journey[stage]!.title}
+          {currentStage && (
+            <div className="mt-4 grid items-center gap-5 rounded-2xl border border-[#E5E7EB] bg-white p-5 md:grid-cols-[minmax(0,1fr)_auto] md:p-6">
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#6B7280]">
+                  Stage {currentStage.n} · {currentStage.title}
+                </div>
+                <p className="mt-2 max-w-3xl text-base leading-relaxed md:text-lg">{currentStage.desc}</p>
+                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#8B5CF6]/25 bg-[#8B5CF6]/8 px-3 py-1.5 text-xs text-[#8B5CF6]">
+                  <Sparkles className="h-3.5 w-3.5" /> {currentStage.ai}
+                </div>
+              </div>
+              <button
+                onClick={() => goto("product")}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#12213B] px-4 py-2.5 text-xs font-semibold text-white"
+              >
+                Open in prototype <ArrowRight className="h-3.5 w-3.5" />
+              </button>
             </div>
-            <p className="mt-3 text-lg leading-relaxed">{journey[stage]!.desc}</p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#8B5CF6]/25 bg-[#8B5CF6]/8 px-3 py-1.5 text-xs text-[#8B5CF6]">
-              <Sparkles className="h-3.5 w-3.5" /> {journey[stage]!.ai}
-            </div>
-            <button
-              onClick={() => goto("product")}
-              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#12213B] px-4 py-2.5 text-xs font-semibold text-white"
-            >
-              Open this screen in the prototype <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          )}
         </div>
       </Section>
 
@@ -419,7 +422,7 @@ function LedgerCase() {
         <div className="mx-auto max-w-[1200px] px-6 md:px-10 py-14">
           <div className="font-display text-2xl">Ledger</div>
           <p className="text-sm text-[#6B7280]">AI-assisted compliance &amp; reconciliation workbench</p>
-          <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B7280]">Portfolio POC · 2026</p>
+          <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B7280]">Ledger Management System · 2026</p>
           <div className="mt-10 flex flex-wrap justify-between gap-4 border-t border-[#E5E7EB] pt-6 text-sm">
             <Link to="/" className="inline-flex items-center gap-2 hover:text-[#2DD4BF]">
               <ArrowLeft className="h-4 w-4" /> Back to portfolio
@@ -441,8 +444,7 @@ function Hero({ onExplore, onPrinciple, onProduct }: { onExplore: () => void; on
       <div className="mx-auto grid max-w-[1200px] gap-12 px-6 md:px-10 py-20 md:py-28 lg:grid-cols-[1fr_460px] lg:items-center">
         <div>
           <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#6B7280]">
-            Case 02 · 2026 <span className="mx-2 text-[#E5E7EB]">|</span>
-            <span className="text-[#8B5CF6]">Portfolio POC</span>
+            Case 01 · 2026
           </div>
           <h1 className="mt-6 font-display text-[clamp(3.5rem,9vw,7rem)] leading-[0.92] tracking-tight">Ledger</h1>
           <p className="mt-8 max-w-2xl text-xl md:text-3xl leading-snug">
@@ -454,10 +456,9 @@ function Hero({ onExplore, onPrinciple, onProduct }: { onExplore: () => void; on
             high-volume indirect-tax workflows.
           </p>
 
-          <dl className="mt-10 grid gap-4 sm:grid-cols-4 border-t border-[#E5E7EB] pt-6">
+          <dl className="mt-10 grid gap-4 sm:grid-cols-3 border-t border-[#E5E7EB] pt-6">
             {[
-              ["Role", "Product Designer"],
-              ["Type", "Concept / Portfolio POC"],
+              ["Role", "UX/UI Designer"],
               ["Domain", "Professional Services · Tax · Enterprise"],
               ["Focus", "AI-assisted workflows · Enterprise UX · Decision support"],
             ].map(([k, v]) => (
@@ -732,7 +733,7 @@ function Impact() {
           Designed around measurable operational impact.
         </h2>
         <span className="rounded-full border border-[#D97706]/30 bg-[#D97706]/8 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#D97706]">
-          Target / POC impact
+          Target impact
         </span>
       </div>
 
@@ -747,7 +748,7 @@ function Impact() {
         </div>
       </div>
       <p className="mt-4 text-xs text-[#6B7280]">
-        Illustrative POC impact targets based on the proposed workflow and a 380 batches/month scenario — not measured
+        Illustrative impact targets based on the proposed workflow and a 380 batches/month scenario — not measured
         production results.
       </p>
 

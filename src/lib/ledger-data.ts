@@ -112,7 +112,7 @@ export const failedRecords = [
 ];
 
 export const journey = [
-  { n: "01", title: "IMS Dashboard", ai: "AI prioritises work", desc: "The analyst opens the cycle and sees what needs attention first — not a list of everything.", screen: "dashboard" },
+  { n: "01", title: "LMS Dashboard", ai: "AI prioritises work", desc: "The analyst opens the Ledger Management System cycle and sees what needs attention first — not a list of everything.", screen: "dashboard" },
   { n: "02", title: "Record Workbench", ai: "AI recommends invoice actions", desc: "Each record carries a recommendation, a confidence score, a rationale and an exposure figure.", screen: "records" },
   { n: "03", title: "Bulk Action Center", ai: "AI processes high-volume batches", desc: "Confident groups are handled together, with a business-impact preview before anything is staged.", screen: "bulk" },
   { n: "04", title: "Error Resolution Center", ai: "AI diagnoses and suggests fixes", desc: "Failures are grouped by root cause, with a recommended fix sequence the analyst confirms.", screen: "errors" },

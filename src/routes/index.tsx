@@ -508,10 +508,10 @@ function Contact() {
                 icon: Mail,
                 label: "Email",
                 value: "parvathikrishnamohan01@gmail.com",
-                href: "mailto:parvathikrishnamohan01@gmail.com",
+                href: "https://mail.google.com/mail/?view=cm&to=parvathikrishnamohan01@gmail.com",
               },
               { icon: Phone, label: "Phone", value: "+91 93609 82121", href: "tel:+919360982121" },
-              { icon: Linkedin, label: "LinkedIn", value: "Parvathi Krishnan K", href: "https://www.linkedin.com/in/parvathi-krishnan-k-0ab4b81ba" },
+              { icon: Linkedin, label: "LinkedIn", value: "Parvathi Krishnan K", href: "https://www.linkedin.com/in/parvathi-krishnan-k-0ab4b81ba/" },
               { icon: ArrowUpRight, label: "Behance", value: "Parvathi Krishnan K", href: "https://www.behance.net/parvathkrishna" },
             ].map((c) => (
               <a
